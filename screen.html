@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Card Screen</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237a5cfa'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Inter,sans-serif' font-size='18' font-weight='700' fill='white'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1c1c; --ink-2:#393939; --ink-3:#555; --ink-4:#717171; --ink-5:#8e8e8e;
+  --line:#e3e3e3; --line-soft:#eef0f1; --pane:#f9fafb; --tint:#f8f9fa; --white:#fff;
+  --purple:#7a5cfa; --purple-deep:#5b3fd6; --purple-wash:#f4f1ff;
+  --amber:#f0a32e; --amber-ink:#a85321; --amber-wash:#fdf6ec;
+  --green:#17864f; --green-wash:#eef7f1;
+  --red:#b3402a; --red-wash:#fbf1ee;
+  --r:12px; --r-sm:8px; --r-lg:16px;
+  --shadow:0 4px 24px rgba(0,0,0,.08); --shadow-lg:0 16px 40px rgba(0,0,0,.10);
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:var(--font);background:var(--pane);color:var(--ink);
+     -webkit-font-smoothing:antialiased;font-size:14px;line-height:21px;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer}
+a{color:var(--purple-deep)}
+:focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:4px}
+::selection{background:var(--purple-wash)}
+
+.topnav{position:sticky;top:0;z-index:50;background:rgba(249,250,251,.92);backdrop-filter:blur(12px);
+        border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;
+        padding:12px 24px;overflow-x:auto;white-space:nowrap}
+.topnav .b{font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px;margin-right:14px}
+.topnav .b i{width:20px;height:20px;border-radius:6px;background:var(--purple);color:#fff;display:grid;
+             place-items:center;font-style:normal;font-size:12px;font-weight:700}
+.topnav a{font-size:12.5px;font-weight:500;color:var(--ink-3);text-decoration:none;
+          padding:6px 11px;border-radius:99px;border:1px solid transparent}
+.topnav a:hover{background:var(--white);border-color:var(--line)}
+.topnav a.back{color:var(--purple-deep);font-weight:600}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 120px}
+
+.pagenav{display:flex;margin:24px 0 -20px;border:1px solid var(--line);border-radius:12px;overflow:hidden;
+         width:fit-content;max-width:100%;background:var(--white);box-shadow:var(--shadow)}
+.pagenav a{padding:11px 18px;font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ink-3);line-height:18px}
+.pagenav a small{display:block;font-size:11px;line-height:15px;font-weight:400;color:var(--ink-5);margin-top:1px}
+.pagenav a+a{border-left:1px solid var(--line)}
+.pagenav a.on{background:var(--purple-wash);color:var(--purple-deep)}
+.pagenav a.on small{color:var(--purple-deep);opacity:.75}
+.hero{padding:44px 0 6px;max-width:860px}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-deep)}
+.hero h1{font-size:29px;line-height:37px;font-weight:700;letter-spacing:-.45px;margin-top:10px;text-wrap:balance}
+.hero .lede{margin-top:12px;font-size:15px;line-height:23px;color:var(--ink-3);max-width:66ch}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:500;
+      color:var(--ink-4);background:var(--white);border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+.hero .meta{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+
+.changes{margin-top:22px;background:var(--purple-wash);border:1px solid #e2d9ff;border-radius:var(--r);padding:14px 18px}
+.changes .dh{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple-deep)}
+.changes ul{margin:9px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:5px 22px}
+.changes li{font-size:12.5px;line-height:18px;color:var(--ink-2);padding-left:16px;position:relative}
+.changes li::before{content:"✓";position:absolute;left:0;color:var(--purple-deep);font-weight:700;font-size:11px}
+.changes li b{font-weight:600;color:var(--ink)}
+
+section{margin-top:56px}
+.shead{display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.shead .no{font-size:12px;font-weight:700;color:var(--ink-5);letter-spacing:.06em}
+.shead h2{font-size:21px;line-height:28px;font-weight:600;letter-spacing:-.25px}
+.shead .q{margin-left:auto;font-size:12.5px;color:var(--ink-4);font-style:italic}
+.intro{margin-top:14px;font-size:14.5px;line-height:22px;color:var(--ink-3);max-width:74ch}
+.intro b{color:var(--ink)}
+
+.variants{margin-top:24px;display:flex;gap:30px;flex-wrap:wrap;align-items:flex-start}
+.variant{flex:1 1 340px;max-width:420px;min-width:0;overflow:hidden}
+.vhead{display:flex;align-items:center;gap:10px;margin-bottom:3px}
+.vletter{min-width:28px;height:28px;padding:0 9px;border-radius:9px;display:grid;place-items:center;
+         font-size:12px;font-weight:700;flex-shrink:0;background:var(--ink);color:#fff;letter-spacing:.03em}
+.variant.rec .vletter{background:var(--purple)}
+.vhead h3{font-size:15px;font-weight:600;letter-spacing:-.15px}
+.vhead .rectag{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+               color:var(--purple-deep);background:var(--purple-wash);border:1px solid #e2d9ff;
+               padding:3px 8px;border-radius:6px}
+.vsub{font-size:12.5px;line-height:18px;color:var(--ink-4);margin-bottom:14px;max-width:46ch}
+
+.phone{width:375px;background:var(--white);border-radius:34px;border:1px solid var(--line);
+       box-shadow:var(--shadow-lg);overflow:hidden;transform:scale(.94);transform-origin:top left;
+       margin-bottom:-40px}
+.status{height:54px;display:flex;align-items:flex-end;justify-content:space-between;
+        padding:0 28px 8px;font-size:14px;font-weight:600}
+.status .icons{display:flex;gap:5px;align-items:center}
+.status .icons i{display:block;background:var(--ink);border-radius:1.5px}
+.pahead{height:48px;display:flex;align-items:center;gap:10px;padding:0 16px;border-bottom:1px solid var(--line-soft)}
+.pahead .bk{width:28px;height:28px;border:none;background:none;display:grid;place-items:center;color:var(--ink-3);font-size:17px}
+.pahead .t{font-size:15px;font-weight:600;letter-spacing:-.2px}
+.pahead .stp{margin-left:auto;font-size:12px;color:var(--ink-5);font-weight:500}
+.pbody{padding:24px 20px 28px;display:flex;flex-direction:column;gap:16px;min-height:540px}
+
+.ptitle{font-size:23px;line-height:29px;font-weight:700;letter-spacing:-.35px}
+.psub{font-size:13.5px;line-height:20px;color:var(--ink-3);margin-top:-8px}
+.psub b{color:var(--ink);font-weight:600}
+.cardbox{border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.cardbox .row1{display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white)}
+.cardbox .row2{display:flex;border-top:1px solid var(--line-soft)}
+.cardbox .row2 div{flex:1;padding:13px 14px;background:var(--white);color:var(--ink-5);font-size:14px}
+.cardbox .row2 div+div{border-left:1px solid var(--line-soft)}
+.cardbox .ph2{color:var(--ink-5);font-size:14px}
+.ccicon{width:26px;height:18px;border-radius:3px;background:linear-gradient(135deg,#5b3fd6,#7a5cfa);flex-shrink:0}
+.pcta{height:48px;border-radius:12px;background:var(--purple);color:#fff;border:none;width:100%;
+      font-size:15px;font-weight:600;letter-spacing:-.1px}
+.plegal{font-size:11px;line-height:16px;color:var(--ink-5);text-align:center;padding:0 6px}
+.onlyif{background:var(--tint);border:1px solid var(--line-soft);border-radius:10px;padding:12px 14px;
+        font-size:12.5px;line-height:18px;color:var(--ink-2)}
+.onlyif b{font-weight:600}
+
+.notes{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.note{display:flex;gap:10px;font-size:12.5px;line-height:18px;color:var(--ink-2)}
+.note .nd{width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;display:grid;
+          place-items:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.note b{font-weight:600}
+.winrisk{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.winrisk .w,.winrisk .r{font-size:12.5px;line-height:18px;padding-left:20px;position:relative;color:var(--ink-2)}
+.winrisk .w::before{content:"▲";position:absolute;left:0;color:var(--green);font-size:10px;top:2px}
+.winrisk .r::before{content:"▼";position:absolute;left:0;color:var(--red);font-size:10px;top:2px}
+
+.kit{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:880px){.kit{grid-template-columns:1fr}}
+.kcard{background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.kcard .kh{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line-soft);background:var(--tint)}
+.kcard .kh b{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.kcard .kh button{margin-left:auto;border:1px solid var(--line);background:var(--white);border-radius:7px;
+                  font-size:11.5px;font-weight:600;padding:4px 10px;color:var(--ink-3)}
+.kcard .kh button:hover{background:var(--purple-wash);border-color:#e2d9ff;color:var(--purple-deep)}
+.kcard pre{padding:13px 15px;font-family:var(--font);font-size:12.5px;line-height:19px;color:var(--ink-2);
+           white-space:pre-wrap;overflow-x:auto}
+
+.sh{margin-top:20px;display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+@media(max-width:900px){.sh{grid-template-columns:1fr}}
+.shcard{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.shcard h3{font-size:14.5px;font-weight:600}
+.shcard ol{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.shcard li{font-size:13px;line-height:19px;color:var(--ink-2);padding-left:26px;position:relative}
+.shcard li .n{position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:var(--purple-wash);
+              color:var(--purple-deep);display:grid;place-items:center;font-size:10px;font-weight:700}
+.shcard li b{font-weight:600;color:var(--ink)}
+.shquote{margin-top:12px;border-left:3px solid var(--purple);background:var(--purple-wash);border-radius:0 10px 10px 0;
+         padding:12px 14px;font-size:13px;line-height:19px;color:var(--ink-2)}
+.shquote i{display:block;margin-top:6px;font-size:11.5px;color:var(--ink-4);font-style:normal}
+.gshot{background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.gshot img{width:100%;display:block;border-bottom:1px solid var(--line-soft)}
+.gshot figcaption{padding:10px 13px 12px;font-size:12px;line-height:17px;color:var(--ink-2)}
+.gshot .prov{display:block;margin-top:5px;font-size:10px;color:var(--ink-5);text-transform:uppercase;
+             letter-spacing:.06em;font-weight:700}
+
+footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-5);
+       display:flex;gap:16px;flex-wrap:wrap}
+@media(max-width:480px){.wrap{padding:0 16px 90px}.hero h1{font-size:24px;line-height:31px}}
+@media(max-width:430px){.phone{transform:scale(.82);margin-bottom:-110px}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="b"><i>B</i>The card screen</span>
+  <a class="back" href="index.html">← Full study</a>
+  <a href="#screens">The screen</a>
+  <a href="#copy">Copy for Tony</a>
+  <a href="#stubhub">The StubHub voice</a>
+  <a href="#others">The other possibilities</a>
+</nav>
+
+<div class="wrap">
+
+<nav class="pagenav" aria-label="Study pages">
+  <a data-xlink href="index.html">← The ghosting study<small>research · evidence · the test plan</small></a>
+  <a class="on" href="screen.html">The card screen &amp; copy<small>decided screen + options, for Tony's review</small></a>
+</nav>
+
+<header class="hero">
+  <div class="kicker">Creator ghosting · the card screen · revision 3</div>
+  <h1>Commitment hold — the decided screen, plus its human twin</h1>
+  <p class="lede">Julia locked the structure on Aug 18: "Commitment hold" is the title, her subtitle under it, the gray explainer box stays, and "Save card &amp; confirm my spot" is the CTA. Two versions remain for Tony's copy pass — the decided platform voice, and a warmer human voice where the hold is a handshake between the creator and the brand, with Katie's team in the room.</p>
+  <div class="meta">
+    <span class="chip">Aug 18, 2026</span>
+    <span class="chip">structure decided · voice → Tony</span>
+    <span class="chip">2 screens</span>
+  </div>
+  <div class="changes">
+    <div class="dh">Locked by Julia · Aug 18 review, round 2</div>
+    <ul>
+      <li><b>Title: "Commitment hold"</b> — decided</li>
+      <li><b>Subtitle: Julia's copy</b> (cleaned from dictation, shown verbatim in the copy block)</li>
+      <li><b>The gray explainer box stays</b> — it carries the exact trigger</li>
+      <li><b>Nothing about running late</b> — the extension story lives in the reminder ladder, not here</li>
+      <li><b>CTA: "Save card &amp; confirm my spot"</b> — decided</li>
+      <li><b>No "Why a card?" link</b> — the screen already explains itself</li>
+      <li><b>Plus one human-voice version</b> — "Katie's team," "the brand," a deal between you two, less platformy</li>
+    </ul>
+  </div>
+</header>
+
+<section id="screens">
+  <div class="shead"><span class="no">01</span><h2>The screen</h2>
+  <span class="q">same structure twice — only the voice changes</span></div>
+  <p class="intro">Both versions share the decided skeleton: <b>title → subtitle → card fields → gray box → CTA → legal.</b> Six blocks, nothing else. V1 is Julia's copy — the platform explaining itself plainly. V2 says the same facts as a person would: the brand is a party you shook hands with, and Katie's team are the humans who'd rather hear from you than ever use the card.</p>
+
+  <div class="variants">
+
+    <!-- V1 decided -->
+    <div class="variant rec">
+      <div class="vhead"><span class="vletter">V1</span><h3>The decided screen — Julia's copy</h3><span class="rectag">Structure locked</span></div>
+      <p class="vsub">Platform voice: states what the card is for, promises the default outcome, and lets the gray box carry the precise trigger.</p>
+      <div class="phone" role="img" aria-label="Decided commitment hold screen with Julia's copy">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="ptitle">Commitment hold</div>
+          <p class="psub">A card holds your commitment. You won't be charged unless you fail to deliver your post — we only use it to avoid ghosting, covering the brand's <b>$62 product cost</b> if you don't post.</p>
+          <div class="cardbox">
+            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
+            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
+          </div>
+          <div class="onlyif"><b>The only way this card is ever used:</b> the campaign ends with the product kept, nothing posted, and no reply to us. Then it covers the $62 product cost. Post — even late — and it simply expires.</div>
+          <button class="pcta">Save card &amp; confirm my spot</button>
+          <p class="plegal">Secured by Stripe — Benable never sees your number. You authorize only the single charge described above. Nothing else, ever.</p>
+        </div>
+      </div>
+      <div class="winrisk">
+        <span class="w">Subtitle answers "what is this and why" in one breath; gray box makes the trigger contractual-precise.</span>
+        <span class="r">Subtitle and gray box overlap on the trigger — if Tony wants it tighter, the subtitle can drop its final clause and lean on the box.</span>
+      </div>
+    </div>
+
+    <!-- V2 human -->
+    <div class="variant">
+      <div class="vhead"><span class="vletter">V2</span><h3>The human voice — for Tony</h3></div>
+      <p class="vsub">Same six blocks, zero platform grammar: the brand is a person you made a deal with, Katie's team are the humans holding it.</p>
+      <div class="phone" role="img" aria-label="Human voice commitment hold screen">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="ptitle">Commitment hold</div>
+          <p class="psub">A deal's a deal: MD Solar Sciences ships you <b>$62 of product</b>, you post about it. Your card is just the handshake — <b>$0 today.</b></p>
+          <div class="cardbox">
+            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
+            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
+          </div>
+          <div class="onlyif"><b>MD Solar is trusting you with their product</b> — the card only comes into it if the campaign ends and Katie's team never saw a post or heard a word from you. Then it covers their $62. Post, or just reply to us, and it's never touched.</div>
+          <button class="pcta">Save card &amp; confirm my spot</button>
+          <p class="plegal">Secured by Stripe — Benable never sees your number. You authorize only the single charge described above. Nothing else, ever.</p>
+        </div>
+      </div>
+      <div class="winrisk">
+        <span class="w">Names real parties — "MD Solar is trusting you," "Katie's team never heard a word" — accountability to people beats accountability to a system.</span>
+        <span class="w">"A deal's a deal" frames posting as reciprocity, not compliance — matches the trade-not-gift truth without C's coldness.</span>
+        <span class="r">Warmth costs precision: "never saw a post or heard a word" is the trigger stated socially, not contractually — the receipt email must still cite the exact conditions.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes" style="max-width:880px">
+    <div class="note"><span class="nd">1</span><span><b>Julia's subtitle, handled:</b> her dictated line self-corrected mid-sentence ("you will never be charged… unless"), so V1 carries the cleaned merge. The raw dictation and the cleaned line sit side by side in the copy block below — Tony edits from there.</span></div>
+    <div class="note"><span class="nd">2</span><span><b>The extension story moved out entirely.</b> Nothing about running late on this screen; one-tap extensions live in the deadline flow and the reminder ladder, where lateness actually happens.</span></div>
+    <div class="note"><span class="nd">3</span><span><b>Both versions keep "post — even late — and it expires / it's never touched."</b> That's the load-bearing reassurance; whatever voice wins, that clause survives.</span></div>
+  </div>
+</section>
+
+<section id="copy">
+  <div class="shead"><span class="no">02</span><h2>Copy for Tony</h2>
+  <span class="q">structure locked — voice is the open question</span></div>
+
+  <div class="kit">
+    <div class="kcard"><div class="kh"><b>V1 · decided — Julia's copy</b><button data-copy>Copy</button></div>
+<pre>Title: Commitment hold
+
+Subtitle (Julia, as dictated): "A card holds your
+commitment. You will never be charged. You will not
+be charged unless you fail to deliver the post. We
+only use it to avoid ghosting and to make sure that
+it covers the brand's $62 product cost in case you
+don't post."
+
+Subtitle (cleaned, on the screen): A card holds
+your commitment. You won't be charged unless you
+fail to deliver your post — we only use it to avoid
+ghosting, covering the brand's $62 product cost if
+you don't post.
+
+Gray box: The only way this card is ever used: the
+campaign ends with the product kept, nothing
+posted, and no reply to us. Then it covers the $62
+product cost. Post — even late — and it simply
+expires.
+
+CTA: Save card &amp; confirm my spot
+Legal: Secured by Stripe — Benable never sees your
+number. You authorize only the single charge
+described above. Nothing else, ever.</pre></div>
+
+    <div class="kcard"><div class="kh"><b>V2 · human voice</b><button data-copy>Copy</button></div>
+<pre>Title: Commitment hold
+
+Subtitle: A deal's a deal: MD Solar Sciences ships
+you $62 of product, you post about it. Your card is
+just the handshake — $0 today.
+
+Gray box: MD Solar is trusting you with their
+product — the card only comes into it if the
+campaign ends and Katie's team never saw a post or
+heard a word from you. Then it covers their $62.
+Post, or just reply to us, and it's never touched.
+
+CTA: Save card &amp; confirm my spot
+Legal: (same as V1)
+
+Alt subtitle, warmer still: This is between you and
+MD Solar — they're betting $62 of product on you.
+The card seals your side. $0 today.
+
+Alt gray box, Katie-forward: Katie's team would
+always rather hear from you than use this. It only
+matters if a campaign ends with no post and no
+reply — then it covers the brand's $62. A single
+text keeps it asleep.</pre></div>
+  </div>
+</section>
+
+<section id="stubhub">
+  <div class="shead"><span class="no">03</span><h2>What StubHub actually says — the voice Tony cited</h2>
+  <span class="q">"process, not personal," dissected</span></div>
+  <div class="sh">
+    <div class="shcard">
+      <h3>Their seller-penalty copy, move by move</h3>
+      <ol>
+        <li><span class="n">1</span><b>Flat conditional grammar, no adjectives.</b> The page opens by listing the trigger events plainly — fail to deliver the tickets you sold, deliver wrong or invalid tickets, change a listing after sale. If X, then Y. No "unfortunately," no blame words.</li>
+        <li><span class="n">2</span><b>The failure is priced, precisely.</b> Two named recovery paths — the cost of replacement tickets for the buyer, or a 40% deduction from the sale — plus a $25 administrative fee per order. Numbers, not vibes: you can compute your worst case before you sell.</li>
+        <li><span class="n">3</span><b>The money has a destination.</b> Charges are framed as covering the cost of making the buyer whole (their FanProtect guarantee: the buyer gets comparable-or-better replacement tickets). It's restitution with a receipt, not a punishment.</li>
+        <li><span class="n">4</span><b>Collection is mechanical.</b> The charge goes to the payment method on the seller's account, and unpaid amounts offset future payouts. Stated as plumbing, not threat.</li>
+        <li><span class="n">5</span><b>Agreed in advance.</b> All of it lives in seller terms the seller accepted at listing time — which is why Tony feels "upset at the process, not at them" when it fires.</li>
+      </ol>
+      <div class="shquote">The one line worth quoting on the replacement path: penalties can include "a comparable replacement ticket (which can exceed the original ticket price)."<i>StubHub UK seller support, fetched Aug 18, 2026 — full text at support.stubhub.co.uk, article 80001014186</i></div>
+    </div>
+    <div>
+      <figure class="gshot"><img src="shots/g-policy-stubhub-penalties.jpg" alt="StubHub UK support article listing seller penalties for failing to deliver tickets"><figcaption><b>The page itself</b> — conditions, priced consequences, and mechanics in under a screen of text. Note what's absent: apology, moralizing, and any claim about the seller's character.<span class="prov">support.stubhub.co.uk · captured Aug 18, 2026</span></figcaption></figure>
+      <div class="shcard" style="margin-top:18px">
+        <h3>What we borrow vs. soften</h3>
+        <ol>
+          <li><span class="n">✓</span><b>Borrow:</b> if-then grammar, the priced worst case ($62, once), the money's destination ("covers the brand's product cost"), agreed-in-advance framing.</li>
+          <li><span class="n">✓</span><b>Borrow:</b> mechanical collection language in the receipt email — timeline of facts, no adjectives.</li>
+          <li><span class="n">~</span><b>Soften:</b> StubHub has no mercy door; we add post-and-refund (post within 7 days → full refund) and the always-an-exit line, because our relationship is repeat-collaboration, theirs is transactional.</li>
+          <li><span class="n">~</span><b>Soften:</b> no administrative fee, ever — the charge is the product cost exactly, or it's nothing. A fee is where "process" starts smelling like "profit."</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="others">
+  <div class="shead"><span class="no">04</span><h2>The other possibilities — still on the table</h2>
+  <span class="q">kept for Tony's review; the locked decisions above apply to whichever wins</span></div>
+  <p class="intro">The decided structure is V1/V2 above, but these three framings from the earlier round stay reviewable: <b>R1</b> bundles the hold with payout collection, <b>R2·A</b> is the warm reservation voice with "Lock in your spot" as the title, and <b>C</b> is the strict guarantee with the trade drawn as a strip. Julia's global vetoes are applied here too — no Apple Pay, no product-confirmed tick, nothing about running late, no "Why a card?" link.</p>
+
+  <div class="variants">
+
+    <div class="variant">
+      <div class="vhead"><span class="vletter">R1</span><h3>Payment details — hold bundled</h3></div>
+      <p class="vsub">The route where they give us payments: Venmo for money in, the hold beside it. One "money" moment, two fields.</p>
+      <div class="phone" role="img" aria-label="Route 1 mockup — payment details with bundled commitment hold">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="ptitle">Payment details</div>
+          <p class="psub">How money reaches you — and the hold that makes your spot official. <b>$0 charged today.</b></p>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4)">Get paid</div>
+            <div style="border:1px solid var(--line);border-radius:11px;background:var(--white);padding:13px 14px;font-size:14px;display:flex;gap:10px;margin-top:8px"><b style="font-weight:500">Venmo</b> <span style="color:var(--ink-5)">@your-handle — bonuses &amp; rewards</span></div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4)">Commitment hold</div>
+            <div class="cardbox" style="margin-top:8px">
+              <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
+              <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
+            </div>
+          </div>
+          <div class="onlyif"><b>$0 today.</b> Only ever used if a campaign ends with the product kept, nothing posted, and no reply — it covers the brand's $62 product cost.</div>
+          <button class="pcta">Save payment details</button>
+          <p class="plegal">Secured by Stripe — Benable never sees your number. You authorize only the single charge described above. Nothing else, ever.</p>
+        </div>
+      </div>
+      <div class="winrisk">
+        <span class="w">One combined "money" step; we need Venmo for paid campaigns anyway.</span>
+        <span class="r">Two asks on one screen — each gives the other a reason to stall.</span>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="vhead"><span class="vletter">R2·A</span><h3>Lock in your spot — warm voice</h3></div>
+      <p class="vsub">The reservation metaphor as the title and subtitle; the hold explained by analogy before it's explained by rule.</p>
+      <div class="phone" role="img" aria-label="Warm mockup — lock in your spot">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="ptitle">Lock in your spot</div>
+          <p class="psub">A card holds your commitment — like a restaurant reservation. <b>$0 today,</b> and it expires the moment you post.</p>
+          <div class="cardbox">
+            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
+            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
+          </div>
+          <div class="onlyif"><b>Never charged for being late.</b> It's only used if the campaign ends with the product kept, nothing posted, and no word from you — covering the brand's $62 product cost.</div>
+          <button class="pcta">Add card &amp; lock my spot</button>
+          <p class="plegal">Secured by Stripe — Benable never sees your number. You authorize only the single charge described above. Nothing else, ever.</p>
+        </div>
+      </div>
+      <div class="winrisk">
+        <span class="w">The metaphor replaces a paragraph; "never charged for being late" kills the scariest misreading in four words.</span>
+        <span class="r">Action-verb title tested weaker with Julia than naming the mechanism — "Commitment hold" won the round.</span>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="vhead"><span class="vletter">C</span><h3>The content guarantee — slim</h3></div>
+      <p class="vsub">Tony's strict route: the trade drawn as a strip, sealed with an agree checkbox. Same teeth, least warmth.</p>
+      <div class="phone" role="img" aria-label="Slim content guarantee mockup with trade strip">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="ptitle">The content guarantee</div>
+          <p class="psub">Free product is a trade. Your card backs your side of it. <b>$0 today.</b></p>
+          <div style="display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden">
+            <div style="flex:1;padding:13px 14px;background:var(--white)"><span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-5)">You get</span><p style="margin-top:4px;font-size:12.5px;line-height:18px"><b>$62 of product</b> — yours to keep, on the house.</p></div>
+            <div style="flex:1;padding:13px 14px;background:var(--white);border-left:1px solid var(--line-soft)"><span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--purple-deep)">You give</span><p style="margin-top:4px;font-size:12.5px;line-height:18px"><b>Your post by Fri, Sep 4</b> — or the card covers the product.</p></div>
+          </div>
+          <div class="cardbox">
+            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
+            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start"><span style="width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line);flex-shrink:0"></span><p style="font-size:12.5px;line-height:18px;color:var(--ink-2)">I agree to the guarantee — charged only if nothing posts and I never reply.</p></div>
+          <button class="pcta">Agree &amp; add my card</button>
+          <p class="plegal">Secured by Stripe — Benable never sees your number. Always with notice first, never automatic.</p>
+        </div>
+      </div>
+      <div class="winrisk">
+        <span class="w">The trade strip says in 14 words what a paragraph said in 60; the checkbox keeps StubHub-grade defensibility.</span>
+        <span class="r">Bluntest framing at the happiest beat — highest stall risk of the set.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit">
+    <div class="kcard"><div class="kh"><b>R1 · copy</b><button data-copy>Copy</button></div>
+<pre>Title: Payment details
+Subtitle: How money reaches you — and the hold that
+makes your spot official. $0 charged today.
+GET PAID: Venmo · @your-handle — bonuses &amp; rewards
+COMMITMENT HOLD: [card fields]
+Gray box: $0 today. Only ever used if a campaign
+ends with the product kept, nothing posted, and no
+reply — it covers the brand's $62 product cost.
+CTA: Save payment details</pre></div>
+    <div class="kcard"><div class="kh"><b>R2·A · copy</b><button data-copy>Copy</button></div>
+<pre>Title: Lock in your spot
+Subtitle: A card holds your commitment — like a
+restaurant reservation. $0 today, and it expires
+the moment you post.
+Gray box: Never charged for being late. It's only
+used if the campaign ends with the product kept,
+nothing posted, and no word from you — covering
+the brand's $62 product cost.
+CTA: Add card &amp; lock my spot</pre></div>
+    <div class="kcard"><div class="kh"><b>C · copy</b><button data-copy>Copy</button></div>
+<pre>Title: The content guarantee
+Subtitle: Free product is a trade. Your card backs
+your side of it. $0 today.
+Trade strip: YOU GET — $62 of product, yours to
+keep, on the house. / YOU GIVE — your post by
+Fri, Sep 4 — or the card covers the product.
+Checkbox: I agree to the guarantee — charged only
+if nothing posts and I never reply.
+CTA: Agree &amp; add my card</pre></div>
+  </div>
+</section>
+
+<footer>
+  <span>The card screen · revision 3 · Aug 18, 2026</span>
+  <span>Part of the creator-ghosting study — <a href="index.html">full research here</a> · supersedes rev 2's four-option exploration (captures in shots/rev2-*)</span>
+  <span>Fixtures: MD Solar Sciences, $62 — swap per campaign</span>
+</footer>
+</div>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const pre=btn.closest('.kcard').querySelector('pre');
+    const done=()=>{btn.textContent='Copied ✓';setTimeout(()=>btn.textContent='Copy',1400)};
+    const fallback=()=>{
+      const ta=document.createElement('textarea');ta.value=pre.textContent;
+      ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);
+      ta.select();try{document.execCommand('copy');done()}catch(e){btn.textContent='Select manually'}
+      document.body.removeChild(ta);
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(pre.textContent).then(done).catch(fallback);
+    }else{fallback()}
+  });
+});
+</script>
+</body>
+</html>

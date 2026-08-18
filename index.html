@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Commitment Hold</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237a5cfa'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Inter,sans-serif' font-size='18' font-weight='700' fill='white'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ══ Benable tokens ═══════════════════════════════════════════ */
+:root{
+  --ink:#1c1c1c; --ink-2:#393939; --ink-3:#555; --ink-4:#717171; --ink-5:#8e8e8e;
+  --line:#e3e3e3; --line-soft:#eef0f1; --pane:#f9fafb; --tint:#f8f9fa; --white:#fff;
+  --purple:#7a5cfa; --purple-deep:#5b3fd6; --purple-wash:#f4f1ff;
+  --amber:#f0a32e; --amber-ink:#a85321; --amber-wash:#fdf6ec;
+  --green:#17864f; --green-wash:#eef7f1;
+  --red:#b3402a; --red-wash:#fbf1ee;
+  --r:12px; --r-sm:8px; --r-lg:16px;
+  --shadow:0 4px 24px rgba(0,0,0,.08); --shadow-lg:0 16px 40px rgba(0,0,0,.10);
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:var(--font);background:var(--pane);color:var(--ink);
+     -webkit-font-smoothing:antialiased;font-size:14px;line-height:21px;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer}
+a{color:var(--purple-deep)}
+:focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:4px}
+::selection{background:var(--purple-wash)}
+
+/* ══ Page chrome ══════════════════════════════════════════════ */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(249,250,251,.92);backdrop-filter:blur(12px);
+        border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;
+        padding:12px 24px;overflow-x:auto;white-space:nowrap}
+.topnav .b{font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px;margin-right:14px}
+.topnav .b i{width:20px;height:20px;border-radius:6px;background:var(--purple);color:#fff;display:grid;
+             place-items:center;font-style:normal;font-size:12px;font-weight:700}
+.topnav a{font-size:12.5px;font-weight:500;color:var(--ink-3);text-decoration:none;
+          padding:6px 11px;border-radius:99px;border:1px solid transparent}
+.topnav a:hover{background:var(--white);border-color:var(--line)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px 120px}
+
+/* ══ Header ═══════════════════════════════════════════════════ */
+.pagenav{display:flex;margin:24px 0 -20px;border:1px solid var(--line);border-radius:12px;overflow:hidden;
+         width:fit-content;max-width:100%;background:var(--white);box-shadow:var(--shadow)}
+.pagenav a{padding:11px 18px;font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ink-3);line-height:18px}
+.pagenav a small{display:block;font-size:11px;line-height:15px;font-weight:400;color:var(--ink-5);margin-top:1px}
+.pagenav a+a{border-left:1px solid var(--line)}
+.pagenav a.on{background:var(--purple-wash);color:var(--purple-deep)}
+.pagenav a.on small{color:var(--purple-deep);opacity:.75}
+.hero{padding:52px 0 8px;max-width:820px}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-deep)}
+.hero h1{font-size:30px;line-height:38px;font-weight:700;letter-spacing:-.45px;margin-top:10px;text-wrap:balance}
+.hero .lede{margin-top:12px;font-size:15.5px;line-height:24px;color:var(--ink-3);max-width:64ch}
+.hero .meta{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:500;
+      color:var(--ink-4);background:var(--white);border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+.chip b{color:var(--ink);font-weight:600}
+
+/* ══ Sections ═════════════════════════════════════════════════ */
+section{margin-top:64px}
+.shead{display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.shead .no{font-size:12px;font-weight:700;color:var(--ink-5);letter-spacing:.06em}
+.shead h2{font-size:21px;line-height:28px;font-weight:600;letter-spacing:-.25px}
+.shead .q{margin-left:auto;font-size:12.5px;color:var(--ink-4);font-style:italic}
+.intro{margin-top:14px;font-size:14.5px;line-height:22px;color:var(--ink-3);max-width:72ch}
+.intro b{color:var(--ink)}
+
+/* verdict panel */
+.verdict{margin-top:20px;background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);
+         box-shadow:var(--shadow);overflow:hidden}
+.verdict .vh{padding:18px 22px;border-bottom:1px solid var(--line-soft);display:flex;gap:12px;align-items:center}
+.vbadge{flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+        padding:5px 10px;border-radius:6px}
+.vbadge.no{background:var(--red-wash);color:var(--red)}
+.vbadge.yes{background:var(--green-wash);color:var(--green)}
+.vbadge.warn{background:var(--amber-wash);color:var(--amber-ink)}
+.verdict .vh p{font-size:15px;line-height:22px;font-weight:600}
+.verdict .vb{padding:16px 22px 20px;color:var(--ink-3);max-width:78ch}
+.verdict .vb p+p{margin-top:10px}
+.verdict .vb b{color:var(--ink)}
+
+/* pattern cards */
+.patterns{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr));gap:14px}
+.pat{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;
+     display:flex;flex-direction:column;gap:8px}
+.pat .ph{display:flex;align-items:center;gap:10px}
+.pat .pn{width:26px;height:26px;border-radius:8px;background:var(--purple-wash);color:var(--purple-deep);
+         display:grid;place-items:center;font-size:12.5px;font-weight:700;flex-shrink:0}
+.pat h3{font-size:14.5px;font-weight:600;letter-spacing:-.1px}
+.pat .who{font-size:12px;line-height:17px;color:var(--ink-4)}
+.pat .who b{color:var(--ink-2);font-weight:600}
+.pat p{font-size:13px;line-height:19px;color:var(--ink-3)}
+.pat .take{margin-top:auto;padding-top:8px;border-top:1px dashed var(--line);font-size:12.5px;line-height:18px}
+.pat .take b{color:var(--purple-deep)}
+
+/* receipts table */
+.tblwrap{margin-top:20px;background:var(--white);border:1px solid var(--line);border-radius:var(--r);
+         overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:900px}
+th{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-4);
+   text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--tint)}
+td{padding:12px 14px;border-bottom:1px solid var(--line-soft);font-size:13px;line-height:19px;
+   vertical-align:top;color:var(--ink-2)}
+tr:last-child td{border-bottom:none}
+td.plat{font-weight:600;color:var(--ink);white-space:nowrap}
+td.plat span{display:block;font-size:11px;line-height:15px;font-weight:500;color:var(--ink-5);margin-top:2px}
+td .src{display:block;margin-top:5px;font-size:11.5px;line-height:16px}
+.mech{display:inline-block;font-size:11px;line-height:15px;font-weight:600;padding:3px 8px;border-radius:6px;
+      background:var(--tint);border:1px solid var(--line);color:var(--ink-3);margin:0 4px 4px 0;white-space:nowrap}
+.mech.hot{background:var(--red-wash);border-color:#eed6cd;color:var(--red)}
+.mech.rep{background:var(--purple-wash);border-color:#e2d9ff;color:var(--purple-deep)}
+.mech.gate{background:var(--amber-wash);border-color:#f3e2c4;color:var(--amber-ink)}
+.mech.pay{background:var(--green-wash);border-color:#d7ecdf;color:var(--green)}
+
+/* evidence cards */
+.evgrid{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:14px}
+.ev{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.ev .tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ev .tag.works{color:var(--green)} .ev .tag.backfires{color:var(--red)} .ev .tag.frame{color:var(--purple-deep)}
+.ev h3{font-size:14.5px;line-height:20px;font-weight:600;margin-top:6px;letter-spacing:-.1px}
+.ev p{margin-top:6px;font-size:13px;line-height:19px;color:var(--ink-3)}
+.ev .so{margin-top:10px;padding:9px 12px;background:var(--tint);border-radius:var(--r-sm);
+        font-size:12.5px;line-height:18px;color:var(--ink-2)}
+.ev .so b{color:var(--purple-deep)}
+.ev .cite{display:block;margin-top:8px;font-size:11.5px;color:var(--ink-5)}
+
+/* plan section */
+.plan{margin-top:20px;display:grid;grid-template-columns:1.25fr .75fr;gap:14px}
+@media(max-width:900px){.plan{grid-template-columns:1fr}}
+.plancard{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.plancard h3{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.plancard h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--purple)}
+.plancard ul{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.plancard li{font-size:13px;line-height:19px;color:var(--ink-2);padding-left:18px;position:relative}
+.plancard li::before{content:"";position:absolute;left:2px;top:7px;width:5px;height:5px;border-radius:50%;
+                     background:var(--line);outline:2px solid var(--white)}
+.plancard li b{font-weight:600}
+.plancard li.warn::before{background:var(--amber)}
+.plancard .foot{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);
+                font-size:12px;line-height:17px;color:var(--ink-4)}
+.decided{background:var(--purple-wash);border:1px solid #e2d9ff;border-radius:var(--r);padding:16px 20px;margin-top:20px}
+.decided .dh{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple-deep)}
+.decided ul{margin:10px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:6px 24px}
+.decided li{font-size:13px;line-height:19px;color:var(--ink-2);padding-left:16px;position:relative}
+.decided li::before{content:"✓";position:absolute;left:0;color:var(--purple-deep);font-weight:700;font-size:11px}
+.decided li b{font-weight:600;color:var(--ink)}
+
+/* ══ Prototype section ════════════════════════════════════════ */
+.variants{margin-top:24px;display:flex;gap:22px;flex-wrap:wrap;align-items:flex-start}
+.variant{flex:1 1 340px;max-width:400px;min-width:0;overflow:hidden}
+.vhead{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.vletter{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;
+         font-size:13px;font-weight:700;flex-shrink:0;background:var(--ink);color:#fff}
+.variant.rec .vletter{background:var(--purple)}
+.vhead h3{font-size:15px;font-weight:600;letter-spacing:-.15px}
+.vhead .rectag{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+               color:var(--purple-deep);background:var(--purple-wash);border:1px solid #e2d9ff;
+               padding:3px 8px;border-radius:6px}
+.vsub{font-size:12.5px;line-height:18px;color:var(--ink-4);margin-bottom:14px;max-width:44ch}
+.winrisk{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.winrisk .w,.winrisk .r{font-size:12.5px;line-height:18px;padding-left:20px;position:relative;color:var(--ink-2)}
+.winrisk .w::before{content:"▲";position:absolute;left:0;color:var(--green);font-size:10px;top:2px}
+.winrisk .r::before{content:"▼";position:absolute;left:0;color:var(--red);font-size:10px;top:2px}
+
+/* phone frame — 375 logical, scaled */
+.phone{width:375px;background:var(--white);border-radius:34px;border:1px solid var(--line);
+       box-shadow:var(--shadow-lg);overflow:hidden;transform:scale(.92);transform-origin:top left;
+       margin-bottom:calc(-812px * .08)}
+@media(max-width:420px){.phone{transform:scale(.82);margin-bottom:calc(-812px * .18)}}
+.status{height:54px;display:flex;align-items:flex-end;justify-content:space-between;
+        padding:0 28px 8px;font-size:14px;font-weight:600}
+.status .icons{display:flex;gap:5px;align-items:center}
+.status .icons i{display:block;background:var(--ink);border-radius:1.5px}
+.pahead{height:48px;display:flex;align-items:center;gap:10px;padding:0 16px;border-bottom:1px solid var(--line-soft)}
+.pahead .bk{width:28px;height:28px;border:none;background:none;display:grid;place-items:center;color:var(--ink-3);font-size:17px}
+.pahead .t{font-size:15px;font-weight:600;letter-spacing:-.2px}
+.pahead .stp{margin-left:auto;font-size:12px;color:var(--ink-5);font-weight:500}
+.pbody{padding:18px 20px 24px;display:flex;flex-direction:column;gap:14px;min-height:640px}
+
+.okline{display:flex;align-items:center;gap:10px;background:var(--green-wash);border:1px solid #d7ecdf;
+        border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:17px;color:var(--ink-2)}
+.okline .ok{width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;display:grid;
+            place-items:center;font-size:11px;font-weight:700;flex-shrink:0}
+.okline b{font-weight:600}
+.ptitle{font-size:22px;line-height:28px;font-weight:700;letter-spacing:-.35px}
+.psub{font-size:13.5px;line-height:20px;color:var(--ink-3);margin-top:-6px}
+.psub b{color:var(--ink);font-weight:600}
+
+.facts{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.fact{display:flex;gap:12px;padding:12px 14px;align-items:flex-start;background:var(--white)}
+.fact+.fact{border-top:1px solid var(--line-soft)}
+.fact .fi{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;
+          background:var(--purple-wash);color:var(--purple-deep);font-size:13px;font-weight:700}
+.fact .fx{font-size:12.5px;line-height:18px;color:var(--ink-3)}
+.fact .fx b{display:block;font-size:13px;color:var(--ink);font-weight:600;margin-bottom:1px}
+
+.steps{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.step{display:flex;gap:12px;padding:11px 14px;background:var(--white);align-items:flex-start}
+.step+.step{border-top:1px solid var(--line-soft)}
+.step .sn{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);color:var(--ink-4);
+          display:grid;place-items:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.step .sx{font-size:12.5px;line-height:18px;color:var(--ink-3)}
+.step .sx b{color:var(--ink);font-weight:600}
+
+.applepay{height:46px;border-radius:11px;background:var(--ink);color:#fff;border:none;width:100%;
+          font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
+.orline{display:flex;align-items:center;gap:12px;color:var(--ink-5);font-size:11.5px;font-weight:500}
+.orline::before,.orline::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+.cardbox{border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.cardbox .row1{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--white)}
+.cardbox .row2{display:flex;border-top:1px solid var(--line-soft)}
+.cardbox .row2 div{flex:1;padding:12px 14px;background:var(--white);color:var(--ink-5);font-size:14px}
+.cardbox .row2 div+div{border-left:1px solid var(--line-soft)}
+.cardbox .ph2{color:var(--ink-5);font-size:14px}
+.ccicon{width:26px;height:18px;border-radius:3px;background:linear-gradient(135deg,#5b3fd6,#7a5cfa);flex-shrink:0}
+.pcta{height:48px;border-radius:12px;background:var(--purple);color:#fff;border:none;width:100%;
+      font-size:15px;font-weight:600;letter-spacing:-.1px}
+.pcta:active{background:var(--purple-deep)}
+.plegal{font-size:11px;line-height:16px;color:var(--ink-5);text-align:center;padding:0 8px}
+.pwhy{font-size:12.5px;font-weight:500;color:var(--ink-4);text-align:center;text-decoration:underline;
+      text-underline-offset:3px;cursor:pointer}
+.payrow{display:flex;flex-direction:column;gap:8px}
+.field{border:1px solid var(--line);border-radius:11px;background:var(--white);padding:12px 14px;
+       font-size:14px;color:var(--ink-5);display:flex;align-items:center;gap:10px}
+.field b{color:var(--ink);font-weight:500}
+.flabel{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4)}
+.agreerow{display:flex;gap:10px;align-items:flex-start;padding:2px 2px 0}
+.agreerow .cb{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line);flex-shrink:0;margin-top:1px}
+.agreerow p{font-size:12px;line-height:17px;color:var(--ink-3)}
+
+/* annotation notes under phones */
+.notes{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.note{display:flex;gap:10px;font-size:12.5px;line-height:18px;color:var(--ink-2)}
+.note .nd{width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;display:grid;
+          place-items:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.note b{font-weight:600}
+.ndot{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--ink);
+      color:#fff;font-size:9.5px;font-weight:700;vertical-align:2px;margin-left:4px}
+
+/* thread mockups */
+.threads{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr));gap:22px;align-items:start}
+.thread{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.thread .th{padding:13px 16px;border-bottom:1px solid var(--line-soft);display:flex;align-items:center;gap:10px}
+.thread .th .av{width:30px;height:30px;border-radius:50%;background:var(--purple);color:#fff;display:grid;
+                place-items:center;font-size:13px;font-weight:700}
+.thread .th b{font-size:13.5px;display:block}
+.thread .th span{font-size:11.5px;color:var(--ink-5)}
+.thread .tb{padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--tint)}
+.day{align-self:center;font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+     color:var(--ink-5);margin-top:6px}
+.day:first-child{margin-top:0}
+.bub{max-width:88%;background:var(--white);border:1px solid var(--line);border-radius:16px;border-top-left-radius:5px;
+     padding:10px 13px;font-size:12.5px;line-height:18px;color:var(--ink-2);align-self:flex-start;position:relative}
+.bub b{font-weight:600;color:var(--ink)}
+.bub.new{border-color:#e2d9ff;box-shadow:0 0 0 2px var(--purple-wash)}
+.bub .btag{position:absolute;top:-9px;right:10px;font-size:9px;font-weight:800;letter-spacing:.08em;
+           background:var(--purple);color:#fff;border-radius:5px;padding:2px 6px}
+.bub.final{border-color:#f3e2c4;background:#fffdf8}
+.bub .alt{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:11.5px;line-height:17px;color:var(--ink-4)}
+.bub .alt b{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-ink);display:block;margin-bottom:2px}
+
+/* email cards */
+.emails{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:22px;align-items:start}
+.email{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.email .eh{padding:14px 18px;border-bottom:1px solid var(--line-soft)}
+.email .eh .etag{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-5)}
+.email .eh .etag.fire{color:var(--red)}
+.email .eh h4{font-size:14px;font-weight:600;margin-top:4px;letter-spacing:-.1px}
+.email .eh span{font-size:11.5px;color:var(--ink-5)}
+.email .eb{padding:16px 18px;font-size:13px;line-height:20px;color:var(--ink-2)}
+.email .eb p+p{margin-top:10px}
+.email .eb b{font-weight:600}
+.email .eb .sig{margin-top:12px;color:var(--ink-4)}
+.email .en{padding:10px 18px 14px;border-top:1px dashed var(--line);font-size:11.5px;line-height:17px;color:var(--ink-4)}
+
+/* copy kit */
+.kit{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.kit{grid-template-columns:1fr}}
+.kcard{background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.kcard .kh{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line-soft);background:var(--tint)}
+.kcard .kh b{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.kcard .kh button{margin-left:auto;border:1px solid var(--line);background:var(--white);border-radius:7px;
+                  font-size:11.5px;font-weight:600;padding:4px 10px;color:var(--ink-3)}
+.kcard .kh button:hover{background:var(--purple-wash);border-color:#e2d9ff;color:var(--purple-deep)}
+.kcard pre{padding:13px 15px;font-family:var(--font);font-size:12.5px;line-height:19px;color:var(--ink-2);
+           white-space:pre-wrap;overflow-x:auto}
+.words{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.words{grid-template-columns:1fr}}
+.wcol{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.wcol h4{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.wcol.never h4{color:var(--red)} .wcol.always h4{color:var(--green)}
+.wcol ul{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.wcol li{font-size:12.5px;line-height:17px;border:1px solid var(--line);border-radius:8px;padding:5px 10px;color:var(--ink-2);background:var(--tint)}
+.wcol li s{color:var(--ink-4)}
+.wcol li b{font-weight:600}
+.wcol p{margin-top:9px;font-size:12px;line-height:17px;color:var(--ink-4)}
+
+/* evidence gallery */
+.galh{margin-top:34px;display:flex;align-items:baseline;gap:12px}
+.galh h3{font-size:16px;font-weight:600;letter-spacing:-.2px}
+.galh span{font-size:12.5px;color:var(--ink-4);font-style:italic}
+.gal{columns:3 300px;column-gap:14px;margin-top:16px}
+.gshot{break-inside:avoid;margin:0 0 14px;background:var(--white);border:1px solid var(--line);
+       border-radius:var(--r);overflow:hidden}
+.gshot img{width:100%;display:block;border-bottom:1px solid var(--line-soft);background:#fff}
+.gshot figcaption{padding:10px 13px 12px;font-size:12px;line-height:17px;color:var(--ink-2)}
+.gshot figcaption b{color:var(--purple-deep);font-weight:600}
+.gshot .prov{display:block;margin-top:5px;font-size:10px;color:var(--ink-5);text-transform:uppercase;
+             letter-spacing:.06em;font-weight:700}
+
+/* sources + fill stubs */
+.srcs{margin-top:18px;columns:2;column-gap:32px;font-size:12.5px;line-height:19px}
+@media(max-width:800px){.srcs{columns:1}}
+.srcs li{margin:0 0 8px;color:var(--ink-3);break-inside:avoid}
+.pending{margin-top:20px;border:1.5px dashed var(--line);border-radius:var(--r);padding:22px;
+         color:var(--ink-5);font-size:13px;text-align:center}
+.caveat{margin-top:18px;background:var(--amber-wash);border:1px solid #f3e2c4;border-radius:var(--r);
+        padding:13px 16px;font-size:12.5px;line-height:19px;color:var(--amber-ink)}
+.caveat b{font-weight:700}
+@media(max-width:480px){.wrap{padding:0 16px 90px}.hero h1{font-size:25px;line-height:32px}.hero{padding-top:36px}}
+footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-5);
+       display:flex;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="b"><i>B</i>Ghosting study</span>
+  <a href="#answer">The answer</a>
+  <a href="#field">The field</a>
+  <a href="#evidence">Why holds work</a>
+  <a href="#plan">Our test</a>
+  <a href="#screen">The screen</a>
+  <a href="#ladder">The ladder</a>
+  <a href="#kit">Copy kit</a>
+  <a href="#sources">Sources</a>
+</nav>
+
+<div class="wrap">
+
+<nav class="pagenav" aria-label="Study pages">
+  <a class="on" href="index.html">The ghosting study<small>research · evidence · the test plan</small></a>
+  <a data-xlink href="screen.html">The card screen &amp; copy →<small>decided screen + options, for Tony's review</small></a>
+</nav>
+
+<header class="hero">
+  <div class="kicker">Creator ghosting · research + prototype</div>
+  <h1>The commitment hold: does anyone charge the card — and what should ours say?</h1>
+  <p class="lede">From the Aug 18 call: we're testing a credit-card screen after product selection, on roughly half of creators in the next 10–20 campaigns, used as a commitment device — never auto-charged. Part I checks whether anyone else in the industry does this and what the field does instead. Part II draws the screen and writes the copy — the part that decides whether this reads as StubHub-style process or as Benable fining its own creators.</p>
+  <div class="meta">
+    <span class="chip">Aug 18, 2026</span>
+    <span class="chip"><b>Part I</b> field research</span>
+    <span class="chip"><b>Part II</b> screen + copy</span>
+    <span class="chip">for Julia · Tony · Katie · Des</span>
+  </div>
+</header>
+
+<!-- ═══════════════════ PART I ═══════════════════ -->
+
+<section id="answer">
+  <div class="shead"><span class="no">01</span><h2>The straight answer on the credit-card trick</h2>
+  <span class="q">"Do other platforms also do this?"</span></div>
+  <div class="fill-answer">
+  <div class="verdict">
+    <div class="vh"><span class="vbadge no">No</span><p>No gifting or UGC platform stores a creator's card and charges it for not posting. If we run this, we're first in the category.</p></div>
+    <div class="vb">
+      <p>Across every platform checked — the gifting services, the commerce sample programs (TikTok Shop, Amazon Vine, Creator Connections, Walmart), and the paid UGC marketplaces (Insense, Billo, JoinBrands, Collabstr, Stack Influence) — <b>zero store a payment card to charge on a no-post.</b> Katie's instinct on the call was right: nobody in the industry does this. But three mechanisms get close, and they matter for how we frame ours:</p>
+      <p><b>① Insense's creator ToS is the nearest cousin</b> (updated May 29, 2026): if a creator fails to deliver after "every effort" to solicit the content, the brand "reserves the right to charge the Creator for the product by sending an invoice," and the creator owes return-or-value. It's an after-the-fact invoice, not a stored card — and the medical no-show literature below suggests invoices like that mostly go unpaid.</p>
+      <p><b>② Stack Influence flips the payment order:</b> creators buy the product with their own money and get reimbursed only after a verified post; no post, no reimbursement. Economically that's a 100% deposit — real creator money at risk, and their whole model runs on it (~$39/successful post to brands). TikTok Shop's "refundable samples" work the same way. <b>③ StubHub does charge the card on file</b> — replacement-ticket cost plus a $25 fee when a seller fails to deliver — which is exactly the "process, not personal" feeling Tony cited; but that's a resale marketplace, not creator gifting.</p>
+      <p>So the honest positioning: <b>the mechanism is proven, the placement is novel.</b> Card-at-commitment is table stakes in restaurants, hotels, and ticket resale — it just hasn't been tried on gifted creator campaigns. Being first means the screen's copy carries the entire explanatory burden: there's no industry habit to lean on, only the restaurant-reservation mental model every creator already has.</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="field">
+  <div class="shead"><span class="no">02</span><h2>What the field actually does about ghosting</h2>
+  <span class="q">seven mechanisms, from softest to hardest</span></div>
+  <div class="fill-field">
+  <p class="intro">Seven distinct mechanisms are in production across the industry, and they form a clean severity ladder. Every platform combines two or three — none uses a stored card. Benable today runs almost entirely on ⑦ (human chase), which is exactly why ghosting feels unsolved: it's the only rung with no <i>structural</i> consequence.</p>
+
+  <div class="patterns">
+    <div class="pat"><div class="ph"><span class="pn">①</span><h3>Pure relationship — no obligation by design</h3></div>
+      <p class="who"><b>LTK · ShopMy</b> — gifting marketed to brands as "no-obligation"; creators can even decline the gift.</p>
+      <p>The enforcement is invisible: delivery tracking + who-posted analytics tell the brand exactly who ghosted, and ghosts quietly stop getting gifted. Real-world post rate with zero enforcement: a skincare brand gifting 60 serums via ShopMy Lookbooks got ~25 pieces back (~40%).</p>
+      <p class="take"><b>Steal:</b> nothing — this is the world Benable is trying to beat. ~40% is what "no stick at all" buys, and it's roughly Tony's ⅓-post-on-time number.</p>
+    </div>
+    <div class="pat"><div class="ph"><span class="pn">②</span><h3>Gate future free product on past completion</h3></div>
+      <p class="who"><b>TikTok Shop · Amazon Vine · Skeepers/Octoly</b> — the platform-run sample programs, and the industry default.</p>
+      <p>TikTok Shop: post within <b>14 days</b> of delivery (one 7-day self-serve extension), or your seller-visible fulfillment rate drops and sample access gets restricted or removed. Vine: review <b>90%</b> of orders (60% program floor) or land in "Vine jail" → removal. Octoly: a missed deadline expires the product's credit; <b>3 expired credits = account disabled</b>.</p>
+      <p class="take"><b>Steal:</b> the hard day-count + the visible rate. This is the control arm's spine — "incomplete campaigns are what brands see when they pick creators."</p>
+    </div>
+    <div class="pat"><div class="ph"><span class="pn">③</span><h3>Public reliability scores &amp; badges</h3></div>
+      <p class="who"><b>Billo · Collabstr · Fiverr · Upwork</b> — reputation as the asset creators protect.</p>
+      <p>Billo computes an <b>On-Time Delivery Score</b> (% of last 3–20 videos delivered inside the 5-day window) and shows it to brands on every application. Fiverr tracks a 60-day Late Deliveries indicator and lets buyers review canceled orders; Upwork's JSS folds completion + timeline adherence into one number that decides who gets hired. Collabstr expirations "may negatively impact your profile ranking."</p>
+      <p class="take"><b>Steal:</b> Tony's Upwork instinct, confirmed — but every one of these platforms pairs the score with a fairness valve (Billo excludes delays that weren't the creator's fault). This is Brian's v2 creator-memory work, already on the roadmap.</p>
+    </div>
+    <div class="pat"><div class="ph"><span class="pn">④</span><h3>Escrow &amp; forfeited earnings</h3></div>
+      <p class="who"><b>Collabstr · Billo · JoinBrands · Amazon Creator Connections</b> — paid-marketplace standard.</p>
+      <p>Brand money is held until delivery (Collabstr releases on approval or a 10-day silence timer); non-delivery refunds the brand and the creator forfeits the payout. Creator Connections adds strikes plus forfeited bonus commission. The creator's stake is money they <i>would have earned</i> — never money they already have.</p>
+      <p class="take"><b>Steal:</b> nothing yet — it needs a payout to withhold. Becomes Benable-relevant the day paid campaigns ship (and it's the argument for holding bonuses until content is live).</p>
+    </div>
+    <div class="pat"><div class="ph"><span class="pn">⑤</span><h3>Creator pays first, reimbursed on post</h3></div>
+      <p class="who"><b>Stack Influence · JoinBrands reimbursement jobs · TikTok "refundable samples"</b> — the only models with real creator money at risk.</p>
+      <p>The creator buys the product with their own money; a verified post triggers reimbursement (product + shipping + fees). No post, no reimbursement — Stack's help center says it plainly, and the brand is never charged. A de facto 100% deposit, and Stack's entire ~$39-per-successful-post business runs on it.</p>
+      <p class="take"><b>Steal:</b> the existence proof. Creators demonstrably accept money-at-risk gifting at scale — the psychology of our card hold, with worse cash-flow for the creator than ours.</p>
+    </div>
+    <div class="pat"><div class="ph"><span class="pn">⑥</span><h3>Invoice-the-ghost clauses</h3></div>
+      <p class="who"><b>Insense creator ToS</b> (May 2026) — the industry's hardest written policy.</p>
+      <p>After deadline + "every effort" to solicit content, the brand "reserves the right to charge the Creator for the product by sending an invoice," and the creator owes return-or-value. But it's paper: an invoice after the fact, with no stored payment method — and the no-show literature (§03) shows ~79% of after-the-fact fines simply go unpaid.</p>
+      <p class="take"><b>Steal:</b> the ToS language pattern (ours needs an equivalent clause) — but the lesson is that without a card secured upfront, the clause is theater. Insense wrote the threat; we'd be the first to make it collectable.</p>
+    </div>
+    <div class="pat"><div class="ph"><span class="pn">⑦</span><h3>Managed make-goods — absorb the risk</h3></div>
+      <p class="who"><b>minisocial · Twirl · (Benable today)</b> — the agency answer.</p>
+      <p>No public penalty touches the creator; the service eats it — content credits, re-runs with a new creator, human chasing. Nothing published passes cost to the creator; the brand just never sees the failure. This is Katie's blue-bubble text chain as a business model.</p>
+      <p class="take"><b>Steal:</b> the brand-facing line ("we're still following up with the creators who haven't posted") is already right — the call confirmed it. What's missing is any structure underneath it, which is what ②, ③ and the card test add.</p>
+    </div>
+  </div>
+
+  <div class="tblwrap">
+  <table>
+    <thead><tr><th>Platform</th><th>Mechanisms</th><th>When a creator doesn't post</th><th>Creator money at risk?</th></tr></thead>
+    <tbody>
+      <tr><td class="plat">TikTok Shop samples<span>commerce sample program</span></td><td><span class="mech gate">future access</span><span class="mech rep">visible rate</span></td><td>14 days to post (one 7-day extension). Fulfillment rate drops — sellers see it and reject future sample requests; repeat misses restrict or remove sample access. Explicitly no charge.</td><td>No — samples stay free</td></tr>
+      <tr><td class="plat">Amazon Vine<span>review program</span></td><td><span class="mech gate">future access</span></td><td>Keep ≥60% of all orders reviewed (Gold: 90% + 80 items/6 mo) or ordering is disabled ("Vine jail"), then account closure ~30 days later, no appeal.</td><td>Only the tax on the item's declared value</td></tr>
+      <tr><td class="plat">Amazon Creator Connections<span>brand campaigns</span></td><td><span class="mech gate">strikes</span><span class="mech pay">forfeits</span></td><td>No content link by campaign end → forfeited bonus commission + a strike (official creator guide).</td><td>Earnings forfeited, never charged</td></tr>
+      <tr><td class="plat">LTK / ShopMy<span>gifting marketplaces</span></td><td><span class="mech">relationship only</span></td><td>Nothing — gifting is explicitly no-obligation. Who-posted analytics quietly decide who gets gifted again. (~40% post rate in one tracked ShopMy case.)</td><td>No</td></tr>
+      <tr><td class="plat">Skeepers / Octoly<span>gifted reviews — strictest gifting platform</span></td><td><span class="mech gate">future access</span><span class="mech rep">brand-visible</span></td><td>Credit-escrow: each order locks 1 credit, refunded only when you post. 21 days from shipment (28 for YouTube), content must stay live 30 days, chatbot gives a self-serve +3-day extension. 3 expired credits = account deactivated, and it "may also harm your reputation with brands." ToS says services are "free of charge" to creators — the old Octoly charge rumor could not be substantiated anywhere.</td><td>No — access is the currency</td></tr>
+      <tr><td class="plat">Stack Influence<span>micro-influencer gifting</span></td><td><span class="mech hot">creator pays first</span></td><td>Creator bought the product with their own money; no compliant post = no reimbursement, brand never charged.</td><td><b>Yes — the full product price</b></td></tr>
+      <tr><td class="plat">Insense<span>UGC marketplace</span></td><td><span class="mech hot">invoice clause</span><span class="mech gate">suspension</span></td><td>ToS: after deadline + solicitation efforts, brand may invoice the creator for the product's value (return-or-pay). Plus discretionary suspension + per-brand blocklists. Real-world enforcement unverified.</td><td>On paper yes — via invoice, not card</td></tr>
+      <tr><td class="plat">JoinBrands<span>UGC marketplace</span></td><td><span class="mech pay">refund + forfeits</span></td><td>Late status → brand cancels for refund; creator risks account restriction and forfeiture of pending jobs. Product-return failures "reviewed internally."</td><td>Earnings forfeited; reimbursement jobs mirror Stack</td></tr>
+      <tr><td class="plat">Billo<span>UGC marketplace</span></td><td><span class="mech rep">on-time score</span><span class="mech pay">deductions</span></td><td>5-day window from delivery; On-Time Delivery Score (last 3–20 videos) shown to brands on every application; payout deductions → pause → removal. Delay-not-your-fault exclusions exist.</td><td>Payout deductions only</td></tr>
+      <tr><td class="plat">Collabstr<span>paid marketplace</span></td><td><span class="mech pay">escrow</span><span class="mech rep">ranking</span></td><td>Brand paid into escrow; order expiry (72h + one extension) refunds the brand and "may negatively impact profile ranking." Top Creator badge = top 1% on completed orders + feedback.</td><td>Loses the job, never own cash</td></tr>
+      <tr><td class="plat">Fiverr / Upwork<span>the analogue Tony cited</span></td><td><span class="mech rep">JSS / levels</span><span class="mech gate">auto-cancel</span></td><td>Fiverr: 24h+ late → buyer can cancel unilaterally, rating damage, 60-day late indicator, level demotion. Upwork: completion + timeline adherence feed JSS; below ~79% visibly kills win rate; Top Rated needs 90%+ for 13 of 16 weeks.</td><td>No — future income only</td></tr>
+      <tr><td class="plat">minisocial / Twirl<span>managed UGC</span></td><td><span class="mech">make-goods</span></td><td>Agency absorbs it: content credits, re-runs, replacement creators. No published creator penalty at all.</td><td>No</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="intro" style="margin-top:14px;font-size:13px">Severity legend: <span class="mech">relationship</span> softest · <span class="mech gate">future access</span> the industry default · <span class="mech rep">visible reputation</span> Tony's Upwork play · <span class="mech pay">escrow / forfeits</span> needs paid campaigns · <span class="mech hot">creator money at risk</span> only Stack (upfront) and Insense (on paper) — and no one anywhere stores a card.</p>
+
+  <div class="galh"><h3>The receipts, in pixels</h3><span>policy pages captured Aug 18 · app UI from our Aug 7 teardown library</span></div>
+  <p class="intro" style="margin-top:10px;font-size:13px">What to notice across the field: consequences are named <b>at the moment of commitment</b> (Cohley's checkbox, Skeepers' store listing), statuses are calm words with dates, extensions are a first-class product — and <b>no UI anywhere shows a dollar penalty</b>. Our card screen would be the first interface in the category to put money on the glass, which is exactly why its words have to work this hard.</p>
+  <div class="gal">
+    <figure class="gshot"><img src="shots/g-skeepers-3.jpg" alt="Skeepers App Store screen: Submit your review by the deadline so you can order more products, above an orders list with Published and Archived states"><figcaption><b>Skeepers</b> says the quiet part in its own App Store pitch: submit by the deadline <i>so you can order more products</i>. Future access is the stated stick.<span class="prov">App Store listing · teardown library</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-policy-skeepers-goldenrules.jpg" alt="Skeepers Golden Rules help article showing the 3 expired credits deactivation rule"><figcaption><b>Skeepers' Golden Rules</b>: 21 days from shipment, content live ≥30 days, and "3 expired credits or more" deactivates the account — the strictest gifting platform is still only access-loss.<span class="prov">help.im.skeepers.com · captured Aug 18, 2026</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-policy-insense-invoice-clause.jpg" alt="Insense creator terms of service with the invoice clause highlighted in purple"><figcaption><b>Insense's creator ToS</b>, the invoice clause highlighted — the industry's hardest written policy: the brand may invoice a ghosting creator for the product's value. Unsecured, after-the-fact, enforcement unverified.<span class="prov">insense.pro/terms-of-service-for-creators · captured Aug 18, 2026</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-policy-tiktok-14days.jpg" alt="TikTok Shop Academy Sample Integrity Policy page showing the 14 day posting rule"><figcaption><b>TikTok Shop's Sample Integrity Policy</b>: "expected to post within 14 days," one 7-day extension, and a seller-visible fulfillment rate as the consequence.<span class="prov">TikTok Shop Academy · captured Aug 18, 2026</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-policy-stack-reimburse.jpg" alt="Stack Influence platform overview page with the reimbursed only after verified social posts line"><figcaption><b>Stack Influence's</b> brand pitch: creators "buy from your online store and get reimbursed only after verified social posts." Creator cash at risk <i>is</i> the product.<span class="prov">stackinfluence.com · captured Aug 18, 2026</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-policy-stubhub-penalties.jpg" alt="StubHub UK seller penalties support article"><figcaption><b>StubHub's seller penalties</b>: comparable-replacement cost (can exceed what you sold for) or a 40% deduction, plus an admin fee — Tony's "process, not personal" in its natural habitat.<span class="prov">support.stubhub.co.uk · captured Aug 18, 2026</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-policy-resy-noshow.jpg" alt="Resy helpdesk article on charging cancellation and no-show fees"><figcaption><b>Resy's card-hold grammar</b>: tokenized at booking with no charge or auth; the fee fires only per the policy the diner explicitly saw. Variant B borrows this sentence structure wholesale.<span class="prov">helpdesk.resy.com · captured Aug 18, 2026</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-billo-ontime-score-explainer.jpg" alt="Billo creator profile showing Videos on-time 88 percent with explainer bottom sheet"><figcaption><b>Billo's On-Time score</b> on the creator profile ("Videos on-time: 88%") with its explainer sheet — the reliability number brands see on every application.<span class="prov">Billo creator app · teardown library</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-billo-appstore-ontime-stat.jpg" alt="Billo App Store listing highlighting on-time delivery statistics"><figcaption><b>Billo leads its store listing</b> with the on-time stat — reliability marketed as the product itself.<span class="prov">App Store listing · teardown library</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-insense-overdue-cards.jpg" alt="Insense campaigns tab with a card showing 1 day overdue in orange"><figcaption><b>Insense's surface stays calm</b> — "1 day overdue" as orange words on a quiet card. The teeth live in the ToS, not the UI.<span class="prov">Insense creator app · teardown library</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-fiverr-todos-late.jpg" alt="Fiverr mobile to-dos showing late delivery warning copy"><figcaption><b>Fiverr names the consequence and the exit in one line</b>: "You're a bit late — deliver now to avoid negative rating." Our +2-day rung uses this exact shape.<span class="prov">Fiverr app · teardown library</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-fiverr-extension-modal.jpg" alt="Fiverr extend delivery date modal with days to add and reason field"><figcaption><b>Fiverr's extension-as-product</b>: days-to-add, new-date preview, buyer approval — the grown-up version of our one-tap extend.<span class="prov">Fiverr app · teardown library</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-joinbrands-late-extend-modal.jpg" alt="JoinBrands brand view of a late job with red countdown and cancel or extend deadline buttons"><figcaption><b>JoinBrands' Late state, brand side</b>: flame icon, red countdown, and the brand chooses Cancel vs Extend — what a ghost looks like from the other end.<span class="prov">JoinBrands web · teardown library</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-joinbrands-speed-badges.jpg" alt="JoinBrands creator marketplace grid with Fast and On time delivery badges"><figcaption><b>"Fast" and "On time delivery" badges</b> on JoinBrands creator cards — reliability as a browse filter, the carrot side of the same coin.<span class="prov">JoinBrands marketplace · teardown library</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-aspire-outstanding-duechip.jpg" alt="Aspire creator portal Outstanding Deliverables card with clock chip"><figcaption><b>Aspire's quiet clock chip</b> — "Outstanding Deliverables · before Mar 9." Dates, not day-counts; calm until it isn't.<span class="prov">Aspire creator portal · teardown library</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g-cohley-now-apply-obligations.jpg" alt="Cohley apply modal with obligations paragraph and consent checkbox above the apply button"><figcaption><b>Cohley collects commitment at the door</b>: obligations paragraph + consent checkbox above the Apply button — the closest ancestor of our card screen in gifting today.<span class="prov">Cohley web · teardown library</span></figcaption></figure>
+  </div>
+  </div>
+</section>
+
+<section id="evidence">
+  <div class="shead"><span class="no">03</span><h2>Why card-holds work — and when fines backfire</h2>
+  <span class="q">the behavioral evidence behind the copy choices</span></div>
+  <div class="fill-evidence">
+  <p class="intro">The card idea sits on real behavioral science — but the same science says a badly-worded version <b>increases</b> ghosting. Six findings, each with a direct consequence for the copy in Part II.</p>
+  <div class="evgrid">
+    <div class="ev"><span class="tag works">Works</span>
+      <h3>Card-at-commitment cuts no-shows — the restaurant numbers</h3>
+      <p>OpenTable's own data: a card hold makes diners up to 16% less likely to no-show and 15% less likely to cancel late; upfront deposits cut no-shows 57% on average. Tock's deposit-taking restaurants average a 1.7% no-show rate — "even a nominal $5 deposit" gets under 3%. One SevenRooms case: 15% → 1% with prepayment.</p>
+      <div class="so"><b>For us:</b> secure the card at the moment of commitment (the accept flow), never later. The hold works at booking time; nothing works retroactively.</div>
+      <span class="cite">OpenTable payment-strategies + deposits pages · Tock resources · SevenRooms (vendor-published stats)</span>
+    </div>
+    <div class="ev"><span class="tag backfires">Backfires</span>
+      <h3>"A fine is a price" — the daycare study</h3>
+      <p>Ten Haifa daycares introduced a small (~$3) fine for late pickup. Late pickups roughly <b>doubled</b> — and stayed high after the fine was removed. The fine converted a moral obligation into a purchasable service: "worst case, it costs 10 NIS."</p>
+      <div class="so"><b>For us:</b> a token charge ($20/week, Tony's floor idea) would let creators <i>buy</i> ghosting guilt-free. If a charge exists it must be the full product value, and the words "fine/fee/penalty" must never appear — they're the price-tag framing.</div>
+      <span class="cite">Gneezy &amp; Rustichini, J. Legal Studies 2000 (verified from paper PDF)</span>
+    </div>
+    <div class="ev"><span class="tag backfires">Backfires</span>
+      <h3>After-the-fact fines don't deter — and don't collect</h3>
+      <p>A Danish RCT (6,746 patients) announced a €34 no-show fine: attendance didn't move, and <b>79% of the fines levied were never paid</b>. A 61-study meta-analysis found fines "did not appear to reduce non-attendance" while small incentives did.</p>
+      <div class="so"><b>For us:</b> this is why Insense's invoice clause is a paper tiger, and why "we'll invoice you" isn't a real alternative to the card. Either the card is secured upfront via Stripe, or the threat is theater.</div>
+      <span class="cite">BMC Health Services Research meta-analysis, Oct 2023 · Israel J Health Policy Research 2023</span>
+    </div>
+    <div class="ev"><span class="tag frame">Framing</span>
+      <h3>Restitution feels fair; commitment language deters</h3>
+      <p>A field experiment on lateness fines found "covers our costs" framing deterred <i>less</i> than framing the act as breaking a commitment — but observers consistently rate restitution (make the harmed party whole) as fairer than punishment.</p>
+      <div class="so"><b>For us:</b> use both halves — restitution for where the money goes ("covers the brand's $62 product cost") and commitment for why ("per the commitment you agreed to on Aug 25"). That's the StubHub voice: neutral process, buyer made whole, receipts not blame.</div>
+      <span class="cite">Kurz, Thomas &amp; Fonseca, JESP 2014 · Theory and Decision 2019</span>
+    </div>
+    <div class="ev"><span class="tag works">Works</span>
+      <h3>Deposit contracts work — when they're the default</h3>
+      <p>Smokers offered a forfeit-on-failure deposit were 3.3–5.8pp more likely to quit — but only 11% opted in. Loss-framed deposits reliably beat equivalent rewards per participant; uptake is the weak link.</p>
+      <div class="so"><b>For us:</b> the card step must be a default step in the flow for the test arm — presented as how it works, not an opt-in checkbox nobody would tick. (The escape hatch stays, quietly, ops-side.)</div>
+      <span class="cite">Giné, Karlan &amp; Zinman, AEJ Applied 2010 · JMIR 2022 deposit RCTs</span>
+    </div>
+    <div class="ev"><span class="tag frame">Framing</span>
+      <h3>The industry's real stick is the permanent record</h3>
+      <p>Airbnb fines flaking hosts (10–50% scaled, $50 min, $1,000 cap) <b>and</b> posts an unremovable automated review on their listing; Rover posts auto-records of late cancellations to sitter profiles; DoorDash deactivates below 90% completion. Fees come with documented-hardship waivers — the legitimacy valve.</p>
+      <div class="so"><b>For us:</b> the control arm's consequence ("marked incomplete — that's what brands see") borrows this, and it's the consequence we keep forever even if the card test loses. Katie's manual waiver = our legitimacy valve.</div>
+      <span class="cite">Airbnb Host Cancellation Policy (article 990, verified) · Rover help center · DoorDash ratings pages</span>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="shead"><span class="no">04</span><h2>The Benable test, specced</h2>
+  <span class="q">what we decided · what to hold constant · what to measure</span></div>
+
+  <div class="decided">
+    <div class="dh">Decided on the Aug 18 call — the prototype below builds on these</div>
+    <ul>
+      <li><b>Placement:</b> after product selection — we already have everything we need from them</li>
+      <li><b>Split:</b> ~half of creators across the next 10–20 campaigns see the card step</li>
+      <li><b>Threat only:</b> nothing automated ever pulls money; any charge would be a manual, human call</li>
+      <li><b>Escape hatch:</b> stall at the card step → Katie emails "we've removed that step for you," order stands</li>
+      <li><b>Carve-out:</b> proven repeat creators shouldn't meet the hammer (Katie), relax it wherever needed (Tony)</li>
+      <li><b>Alongside:</b> stricter "school-teacher" messaging for everyone — the card is only one arm of the test</li>
+    </ul>
+  </div>
+
+  <div class="plan">
+    <div class="plancard">
+      <h3><span class="dot"></span>The fairness spec — when a charge could ever fire</h3>
+      <ul>
+        <li>Product marked <b>delivered</b> (courier-confirmed, not shipped) and the campaign has <b>closed</b></li>
+        <li><b>Nothing posted and no draft submitted</b> — a late draft in review is never chargeable</li>
+        <li><b>No reply on any channel</b> across at least 3 touches on 2+ channels (text, email, DM)</li>
+        <li>An <b>extension was offered</b> in writing and ignored — one tap, no reason needed</li>
+        <li><b>Katie approves manually.</b> No cron job ever charges a card</li>
+        <li>Amount = <b>product retail value only</b>, charged once, receipt sent immediately</li>
+        <li class="warn"><b>Post-and-refund:</b> if they post within 7 days of the charge, refund it in full. The goal was always the content, and it turns the charge into a deposit, not a fine</li>
+      </ul>
+      <div class="foot">This list is the product. If we can't honestly print every line of it on the screen, we shouldn't collect the card.</div>
+    </div>
+    <div class="plancard">
+      <h3><span class="dot"></span>Measure — the test is two funnels, not one</h3>
+      <ul>
+        <li><b>Card arm:</b> product-pick → card-screen completion rate; stall rate; back-out rate after seeing it</li>
+        <li><b>Both arms:</b> delivered → posted-on-time rate, delivered → posted-ever rate, days-late median</li>
+        <li><b>Quality guard:</b> accept rate on the <i>next</i> invite for creators who saw the card screen</li>
+        <li><b>Ops load:</b> Katie escalation touches per campaign, before vs. after</li>
+        <li>Kill criteria upfront: if card-screen stalls &gt; ~25% and post-rate lift &lt; ~10pts, the hold loses to messaging-only</li>
+      </ul>
+      <div class="foot">Half the value of the test is honest control-arm copy: the no-card cohort gets the same stricter ladder, minus the hold — so we learn whether words alone close the gap.</div>
+    </div>
+  </div>
+
+  <div class="caveat"><b>Two compliance notes.</b> ① Automated escalation texts only go to creators who ticked the SMS box in the portal (the TCPA opt-in) — everyone else gets the same copy from Katie's phone, manually. ② Charging a stored card requires the cardholder agreement language on-screen at collection time (the fine-print line under the CTA) — Stripe's SetupIntent flow covers this, but the words must actually appear.</div>
+</section>
+
+<!-- ═══════════════════ PART II ═══════════════════ -->
+
+<section id="screen">
+  <div class="shead"><span class="no">05</span><h2>The screen: three ways to ask for a card</h2>
+  <span class="q">same step, three framings — copy is the design</span></div>
+  <div class="caveat" style="margin-top:16px"><b>Superseded — revision 2 lives on its own page.</b> After Julia's Aug 18 review (no Apple Pay, no green product-confirmed tick, no numbered 1-2-3 tables, "Commitment hold" + subtitle, C slimmed), the screens and copy moved to <a href="screen.html"><b>screen.html — The card screen &amp; its copy</b></a>, set up for Tony's copy review. The versions below are kept as the v1 exploration record.</div>
+  <p class="intro">All three sit in the same slot: the creator just accepted, picked their products, and confirmed their address — the happiest beat of the flow, which is exactly why the words matter. Every variant must answer three questions within one screen-glance: <b>am I paying money now</b> (no), <b>when exactly would I ever be charged</b> (spelled out), and <b>who's in control of that</b> (you are — post or just reply, and it never happens).</p>
+
+  <div class="variants">
+
+    <!-- ── Variant A ───────────────────────────── -->
+    <div class="variant">
+      <div class="vhead"><span class="vletter">A</span><h3>Payment details</h3></div>
+      <p class="vsub">The setup framing — card collected alongside payout details, like Airbnb holding both ways to pay and be paid.</p>
+      <div class="phone" role="img" aria-label="Variant A mockup — payment details screen">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="okline"><span class="ok">✓</span><span><b>Products confirmed</b> — Daily Mineral Kit + SPF 30 Lotion · $62 retail</span></div>
+          <div class="ptitle">Payment details</div>
+          <p class="psub">Where money reaches you — and the card that holds your commitment. <b>$0 charged today.</b></p>
+          <div class="flabel">How you get paid</div>
+          <div class="payrow">
+            <div class="field"><b>Venmo</b> <span style="color:var(--ink-5)">@your-handle — for bonuses &amp; rewards</span></div>
+          </div>
+          <div class="flabel">Commitment hold</div>
+          <div class="cardbox">
+            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
+            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
+          </div>
+          <div class="agreerow"><span class="cb"></span><p>Only if this campaign ends with the product kept and nothing posted, my card covers the $62 product cost.</p></div>
+          <button class="pcta">Save payment details</button>
+          <p class="plegal">Secured by Stripe. Benable never sees or stores your card number.</p>
+        </div>
+      </div>
+      <div class="notes">
+        <div class="note"><span class="nd">1</span><span><b>Benefit leads:</b> Venmo-for-bonuses comes first, so the screen's headline act is money flowing <i>to</i> the creator — and we need payout details for paid campaigns anyway.</span></div>
+        <div class="note"><span class="nd">2</span><span>The hold is one labeled section among two, not the event. The checkbox carries the entire legal weight in one sentence.</span></div>
+      </div>
+      <div class="winrisk">
+        <span class="w">Kills two birds: payout collection (needed for paid campaigns regardless) normalizes the card ask.</span>
+        <span class="w">Least scary framing — reads as account setup, not enforcement.</span>
+        <span class="r">Mixing get-paid and get-charged in one screen can taint the get-paid moment — and if a charge ever fires, "it was buried in setup" becomes the creator's story.</span>
+        <span class="r">Two asks = two reasons to stall. Venmo alone would convert better.</span>
+      </div>
+    </div>
+
+    <!-- ── Variant B ───────────────────────────── -->
+    <div class="variant rec">
+      <div class="vhead"><span class="vletter">B</span><h3>Hold my spot</h3><span class="rectag">Recommended</span></div>
+      <p class="vsub">The reservation framing — restaurant/hotel card-hold language. The charge is the brand recovering product cost, never Benable fining you.</p>
+      <div class="phone" role="img" aria-label="Variant B mockup — hold my spot screen">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="okline"><span class="ok">✓</span><span><b>Products confirmed</b> — Daily Mineral Kit + SPF 30 Lotion · $62 retail</span></div>
+          <div class="ptitle">Lock in your spot</div>
+          <p class="psub">A card holds your commitment — like a restaurant reservation. <b>$0 today,</b> and nothing to do later.</p>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span><span class="sx"><b>MD Solar ships you $62 of product</b> — yours to keep, on the house.</span></div>
+            <div class="step"><span class="sn">2</span><span class="sx"><b>You post by Fri, Sep 4.</b> Running late? Extending takes one tap — no reason needed.</span></div>
+            <div class="step"><span class="sn">3</span><span class="sx"><b>The hold expires the moment you post.</b> It's only ever used if the campaign ends with the product kept, nothing posted, and no reply to us — it covers the brand's $62 product cost.</span></div>
+          </div>
+          <button class="applepay"> Pay — set up with Apple&nbsp;Pay</button>
+          <div class="orline">or add a card</div>
+          <div class="cardbox">
+            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
+            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
+          </div>
+          <button class="pcta">Add card &amp; lock my spot</button>
+          <p class="plegal">Secured by Stripe — Benable never sees your number. By continuing you authorize the one charge described in step 3, and nothing else, ever.</p>
+          <p class="pwhy">Why do we ask for this?</p>
+        </div>
+      </div>
+      <div class="notes">
+        <div class="note"><span class="nd">1</span><span><b>The reservation metaphor does the explaining.</b> Every creator has handed a card to a restaurant or hotel — the mental model "hold, not charge" already exists; we just borrow it.</span></div>
+        <div class="note"><span class="nd">2</span><span><b>Step 3 is the entire policy in creator-speak</b> — the three-condition trigger (kept + nothing posted + no reply) matches the fairness spec word for word. Nothing lives only in fine print.</span></div>
+        <div class="note"><span class="nd">3</span><span><b>Apple Pay first:</b> one thumb-tap beats typing 16 digits — the step should cost seconds, because friction here reads as gravity ("this must be a big deal").</span></div>
+        <div class="note"><span class="nd">4</span><span><b>"Why do we ask?"</b> opens one honest paragraph (in the copy kit below) — creators who tap it are the ones deciding whether to trust us; that paragraph converts them.</span></div>
+      </div>
+      <div class="winrisk">
+        <span class="w">Familiar consumer pattern = lowest perceived punitiveness for the same actual policy.</span>
+        <span class="w">Restitution framing ("covers the brand's product cost") — the StubHub principle: process, not personal.</span>
+        <span class="r">Softness cuts both ways: a creator skimming past step 3 can still be surprised later — the reminder ladder must re-surface the hold before any charge.</span>
+      </div>
+    </div>
+
+    <!-- ── Variant C ───────────────────────────── -->
+    <div class="variant">
+      <div class="vhead"><span class="vletter">C</span><h3>The content guarantee</h3></div>
+      <p class="vsub">The policy framing — Tony's strict version. Institutional, terms-forward, signed like an agreement.</p>
+      <div class="phone" role="img" aria-label="Variant C mockup — content guarantee screen">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="okline"><span class="ok">✓</span><span><b>Products confirmed</b> — Daily Mineral Kit + SPF 30 Lotion · $62 retail</span></div>
+          <div class="ptitle">The content guarantee</div>
+          <p class="psub">Free product isn't a gift — it's a trade. Your card backs your side of it.</p>
+          <div class="facts">
+            <div class="fact"><span class="fi">1</span><span class="fx"><b>The trade</b>MD Solar Sciences ships you $62 of product. You publish the content you agreed to by Fri, Sep 4.</span></div>
+            <div class="fact"><span class="fi">2</span><span class="fx"><b>The guarantee</b>If the campaign closes with product delivered, nothing posted, and no response to reminders, your card is charged the $62 product cost.</span></div>
+            <div class="fact"><span class="fi">3</span><span class="fx"><b>The outs</b>Post — even late. Or extend your deadline (one tap). Or just reply to any reminder. Any of these stops the charge.</span></div>
+          </div>
+          <div class="cardbox">
+            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
+            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
+          </div>
+          <div class="agreerow"><span class="cb"></span><p>I understand and agree to the content guarantee above.</p></div>
+          <button class="pcta">Agree &amp; add my card</button>
+          <p class="plegal">Secured by Stripe. Charged only per the guarantee — never automatically, always with notice first.</p>
+        </div>
+      </div>
+      <div class="notes">
+        <div class="note"><span class="nd">1</span><span><b>"A trade, not a gift"</b> is the honest sentence the whole industry avoids — it reframes the relationship at the moment stakes are highest.</span></div>
+        <div class="note"><span class="nd">2</span><span>The explicit <b>agree checkbox</b> makes the later charge defensible ("you signed the guarantee") — StubHub's exact move.</span></div>
+      </div>
+      <div class="winrisk">
+        <span class="w">Zero ambiguity — nobody who completes this screen can claim surprise. Strongest deterrent per square inch.</span>
+        <span class="w">Self-selects: creators unwilling to sign were the flight risks anyway (Tony's 10%-chance-it-just-works bet).</span>
+        <span class="r">Reads punitive at the happiest beat of the flow — most likely of the three to stall the step and dent how the brand's gift feels.</span>
+        <span class="r">"Guarantee" + checkbox smells like a contract → more screenshots to group chats, more support pings.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ladder">
+  <div class="shead"><span class="no">06</span><h2>After the deadline: the ladder that makes the hold fair</h2>
+  <span class="q">strict school teacher — warm words, hard structure</span></div>
+  <p class="intro">The card is only defensible if the road to it is paved with easy exits. This is the past-due ladder for the card arm — each rung offers the extension before it mentions the hold, and the control arm gets the same rungs with standing-based consequences instead <span class="ndot">A</span>. Today's system goes quiet after day 0; every message below the first is new. <b>Automated sends only to SMS-consented creators — everyone else gets the same words from Katie's phone.</b></p>
+
+  <div class="threads">
+    <div class="thread">
+      <div class="th"><span class="av">B</span><div><b>Benable</b><span>SMS · card arm (A/B) vs control (alt)</span></div></div>
+      <div class="tb">
+        <div class="day">Deadline day — Fri, Sep 4</div>
+        <div class="bub">Today's the day! 🎬 Your MD Solar Sciences content is due tonight. Upload here: benable.co/u/x1x1 — need a few more days? Extend in one tap: benable.co/e/x1x1</div>
+        <div class="day">2 days past due</div>
+        <div class="bub new"><span class="btag">New</span>Hey — it's Katie at Benable. Your MD Solar post is 2 days past due and the brand's asking me for a date. <b>Extending takes 10 seconds, no reason needed:</b> benable.co/e/x1x1. If I don't hear anything by Thu, the commitment hold from your sign-up kicks in.
+          <div class="alt"><b>Control arm</b>…If I don't hear anything by Thu, this campaign gets marked incomplete on your account — that's what brands see when they pick creators.</div>
+        </div>
+        <div class="day">5 days past due</div>
+        <div class="bub new final"><span class="btag">New</span><b>Final notice</b> — the MD Solar campaign closes Mon, Sep 14. If it closes with nothing posted and no word from you, your card covers the $62 product cost, per the commitment you agreed to on Aug 25. <b>Posting or simply replying to this stops that — always.</b>
+          <div class="alt"><b>Control arm</b><b>Final notice</b> — the campaign closes Mon, Sep 14. If it closes with nothing posted and no word from you, your account is paused for new campaigns. Posting or simply replying stops that — always.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="thread">
+      <div class="th"><span class="av">B</span><div><b>Ladder rules</b><span>why each rung is shaped this way</span></div></div>
+      <div class="tb" style="background:var(--white);gap:12px">
+        <div class="note"><span class="nd">A</span><span><b>Both arms escalate identically.</b> Same days, same structure — only the named consequence differs (hold vs. standing). Otherwise the test measures copy, not the card.</span></div>
+        <div class="note"><span class="nd">1</span><span><b>The extension always comes before the consequence</b> — in the same message, earlier in the sentence. The ladder's job is replies, not charges; a charge is the ladder failing.</span></div>
+        <div class="note"><span class="nd">2</span><span><b>Katie appears at +2, the process voice at +5.</b> Human warmth in the middle rung ("the brand's asking me for a date" — she's on your side, managing up), institutional voice for the final notice. Good cop is a person; bad cop is a system.</span></div>
+        <div class="note"><span class="nd">3</span><span><b>Dates, not day-counts.</b> "Closes Mon, Sep 14" is checkable and calm; "5 days!!" is a nag. Every consequence has a date, every date has an exit.</span></div>
+        <div class="note"><span class="nd">4</span><span><b>"Posting or simply replying stops this — always"</b> closes every hard message. It's the pressure-release valve that makes the strictness feel fair, and it's literally true per the fairness spec.</span></div>
+        <div class="note"><span class="nd">5</span><span><b>Nothing sends on holidays/weekends</b> — rungs shift to the next weekday morning. Being berated on Christmas Day is how a policy becomes a screenshot.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="emails">
+    <div class="email">
+      <div class="eh"><span class="etag">Katie's escape hatch · stalled &gt; 48h at card step</span><h4>You're all set — no card needed</h4><span>from Katie · katie@benable.com</span></div>
+      <div class="eb">
+        <p>Hi {name} — Katie from Benable here. Great news: you're confirmed for the MD Solar Sciences campaign and your products are on the way. 📦</p>
+        <p><b>One less thing:</b> we've removed the card step from your checklist — nothing needed there. Your only to-do is the fun part: post by {date}.</p>
+        <p class="sig">Excited to see what you make,<br>Katie</p>
+      </div>
+      <div class="en">Never mentions *why* it was removed and never apologizes for the ask — it simply vanishes. The order already went through Shopify, so nothing else changes. Log the stall as a data point in the test.</div>
+    </div>
+    <div class="email">
+      <div class="eh"><span class="etag fire">If a charge ever fires · manual, Katie-approved</span><h4>Receipt: $62 — MD Solar Sciences campaign</h4><span>from Benable · receipts@benable.com</span></div>
+      <div class="eb">
+        <p>On Aug 25 you accepted the MD Solar Sciences campaign and agreed that if it closed with product delivered and no content posted, your card would cover the $62 product cost. The campaign closed Sep 14 with no post and no reply to our 5 reminders (Sep 4–12), so that charge went through today.</p>
+        <p><b>You can still turn this into a refund:</b> post within 7 days and reply with the link — we'll refund the full $62. The content was always the point.</p>
+        <p class="sig">Questions? Reply here — a human reads this inbox.</p>
+      </div>
+      <div class="en">StubHub voice: timeline of facts, zero blame adjectives, and the post-and-refund door left open. If we won't send this email proudly, we shouldn't take the card.</div>
+    </div>
+  </div>
+</section>
+
+<section id="kit">
+  <div class="shead"><span class="no">07</span><h2>Copy kit — lift-ready</h2>
+  <span class="q">every string from the screens above, plus the ones around them</span></div>
+
+  <div class="kit">
+    <div class="kcard"><div class="kh"><b>Screen B — full copy</b><button data-copy>Copy</button></div>
+<pre>Title: Lock in your spot
+Sub: A card holds your commitment — like a restaurant
+reservation. $0 today, and nothing to do later.
+
+1. MD Solar ships you $62 of product — yours to keep,
+   on the house.
+2. You post by Fri, Sep 4. Running late? Extending
+   takes one tap — no reason needed.
+3. The hold expires the moment you post. It's only
+   ever used if the campaign ends with the product
+   kept, nothing posted, and no reply to us — it
+   covers the brand's $62 product cost.
+
+[  Pay — set up with Apple Pay]
+— or add a card —
+CTA: Add card & lock my spot
+Legal: Secured by Stripe — Benable never sees your
+number. By continuing you authorize the one charge
+described in step 3, and nothing else, ever.
+Link: Why do we ask for this?</pre></div>
+
+    <div class="kcard"><div class="kh"><b>"Why do we ask?" explainer</b><button data-copy>Copy</button></div>
+<pre>Honest answer: a small number of creators keep the
+product and never post, and the brand eats the cost.
+The hold keeps campaigns free-product for everyone
+else. If you post — even late, even after extending —
+it never becomes a charge. Most creators never think
+about this screen again, and that's the idea.</pre></div>
+
+    <div class="kcard"><div class="kh"><b>SMS ladder — card arm</b><button data-copy>Copy</button></div>
+<pre>[Day 0] Today's the day! 🎬 Your {brand} content is
+due tonight. Upload: {link} — need a few more days?
+Extend in one tap: {link}
+
+[+2d] Hey — it's Katie at Benable. Your {brand} post
+is 2 days past due and the brand's asking me for a
+date. Extending takes 10 seconds, no reason needed:
+{link}. If I don't hear anything by {day}, the
+commitment hold from your sign-up kicks in.
+
+[+5d] Final notice — the {brand} campaign closes
+{date}. If it closes with nothing posted and no word
+from you, your card covers the {$amt} product cost,
+per the commitment you agreed to on {accept_date}.
+Posting or simply replying to this stops that —
+always.</pre></div>
+
+    <div class="kcard"><div class="kh"><b>SMS ladder — control arm</b><button data-copy>Copy</button></div>
+<pre>[Day 0] (same as card arm)
+
+[+2d] …If I don't hear anything by {day}, this
+campaign gets marked incomplete on your account —
+that's what brands see when they pick creators.
+
+[+5d] Final notice — the {brand} campaign closes
+{date}. If it closes with nothing posted and no word
+from you, your account is paused for new campaigns.
+Posting or simply replying stops that — always.</pre></div>
+
+    <div class="kcard"><div class="kh"><b>Katie's escape-hatch email</b><button data-copy>Copy</button></div>
+<pre>Subject: You're all set — no card needed ✨
+
+Hi {name} — Katie from Benable here. Great news:
+you're confirmed for the {brand} campaign and your
+products are on the way. 📦
+
+One less thing: we've removed the card step from
+your checklist — nothing needed there. Your only
+to-do is the fun part: post by {date}.
+
+Excited to see what you make,
+Katie</pre></div>
+
+    <div class="kcard"><div class="kh"><b>Charge receipt email (manual only)</b><button data-copy>Copy</button></div>
+<pre>Subject: Receipt: {$amt} — {brand} campaign
+
+On {accept_date} you accepted the {brand} campaign
+and agreed that if it closed with product delivered
+and no content posted, your card would cover the
+{$amt} product cost. The campaign closed {close_date}
+with no post and no reply to our {n} reminders
+({date_range}), so that charge went through today.
+
+You can still turn this into a refund: post within
+7 days and reply with the link — we'll refund the
+full {$amt}. The content was always the point.
+
+Questions? Reply here — a human reads this inbox.</pre></div>
+  </div>
+
+  <div class="words">
+    <div class="wcol never">
+      <h4>Words that never ship</h4>
+      <ul><li><s>penalty</s></li><li><s>fine</s></li><li><s>fee</s></li><li><s>violation</s></li><li><s>failure to comply</s></li><li><s>we will charge you</s></li><li><s>strike</s></li><li><s>blacklist</s></li><li><s>deposit</s>*</li></ul>
+      <p>*"Deposit" implies we're holding their money now — factually wrong for a $0 hold. The daycare study is the deeper reason to avoid fine-words: a named "fine" becomes a price, and a price makes ghosting purchasable.</p>
+    </div>
+    <div class="wcol always">
+      <h4>Words that do the work</h4>
+      <ul><li><b>hold</b></li><li><b>commitment</b></li><li><b>covers the brand's product cost</b></li><li><b>expires when you post</b></li><li><b>$0 today</b></li><li><b>one tap to extend</b></li><li><b>no reason needed</b></li><li><b>replying stops this — always</b></li></ul>
+      <p>Restitution grammar throughout: the money, if it ever moves, goes to make the brand whole — Benable never profits from a charge. Say that anywhere trust wobbles.</p>
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="shead"><span class="no">08</span><h2>Sources &amp; caveats</h2></div>
+  <div class="fill-sources">
+  <p class="intro">Verified by four parallel research passes on Aug 18, 2026 — official help centers, ToS and policy pages first; creator-community sources only as labeled secondaries. Key primary sources:</p>
+  <ul class="srcs">
+    <li><b>TikTok Shop</b> — Sample Integrity Policy + Guide to Samples, TikTok Shop Academy (seller-us.tiktok.com, docs dated May/Jul 2026): 14-day rule, extension, fulfillment-rate consequences, refundable samples.</li>
+    <li><b>Amazon</b> — Vine tier/quota mechanics (Wikipedia + Vine-member secondaries; member FAQ is login-walled → thresholds marked secondary), Creator Connections official creator guide PDF (m.media-amazon.com, Dec 2022): forfeited bonus + strikes.</li>
+    <li><b>LTK / ShopMy</b> — LTK Connect gifting-only page; ShopMy gifting blog + Lookbooks docs; influencergiftform.com case data (secondary).</li>
+    <li><b>Skeepers / Octoly</b> — "Octoly golden rules," official influencer help center (intercom.help/octoly): credit expiry, 3-strikes account disable.</li>
+    <li><b>Stack Influence</b> — platform-overview + help center (intercom.help/stackinfluence): "influencers who do not complete a post will not receive a reimbursement"; 2025 pricing post.</li>
+    <li><b>Insense</b> — Terms of Service for Creators (insense.pro, updated May 29, 2026): invoice clause, return-or-value obligation; refund policy; blocklist help article.</li>
+    <li><b>JoinBrands</b> — refund policy, creator do's-and-don'ts, reimbursement-delivery articles (help.joinbrands.com).</li>
+    <li><b>Billo</b> — On-Time Delivery Score, rules &amp; responsibilities, refund policy (help.billo.app + billo.app ToS 2026).</li>
+    <li><b>Collabstr</b> — managing-orders, profile &amp; ranking articles (collabstr.crisp.help).</li>
+    <li><b>Fiverr / Upwork</b> — cancellations + canceled-order reviews + levels (help.fiverr.com); JSS + Top Rated (support.upwork.com; fetched via search excerpts, help centers block direct fetch).</li>
+    <li><b>Restaurants</b> — OpenTable no-show/payment-strategy resources (16% / 57% stats, vendor-published), Resy no-show-fee helpdesk, Tock deposit resources (1.7% no-show), SevenRooms deposit guide ($52 avg fee; 15%→1% case).</li>
+    <li><b>StubHub</b> — official seller-penalty policy (support.stubhub.co.uk / .com): $25 fee + replacement cost or 40% deduction, charged to the card on the seller account.</li>
+    <li><b>Airbnb</b> — Host Cancellation Policy, help article 990 (10/25/50% scaled, $50 min, $1,000 cap, calendar block); auto-review documented via host secondaries.</li>
+    <li><b>Gig platforms</b> — DoorDash ratings/deactivation help pages (90% completion floor), Uber cancellation-rate policy pages, Rover sitter-cancellation + automated-records help articles.</li>
+    <li><b>Behavioral evidence</b> — Gneezy &amp; Rustichini, "A Fine Is a Price," J. Legal Studies 2000 (paper PDF); BMC Health Services Research systematic review, Oct 2023 (61 studies); Danish €34 fine RCT via Israel J. Health Policy Research 2023 (79% unpaid); Kurz, Thomas &amp; Fonseca, JESP 2014 (framing); Giné, Karlan &amp; Zinman, AEJ: Applied 2010 (deposit contracts).</li>
+  </ul>
+  <div class="caveat" style="margin-top:16px"><b>Caveats.</b> Vendor effectiveness stats (OpenTable's 16%/57%, Tock's 1.7%) are marketing-published, not peer-reviewed — treat as directional. Vine thresholds and Fiverr level cutoffs verified only against consistent secondaries (official pages login-walled). Insense's invoice clause is verified ToS text, but no evidence of real-world enforcement was found. The deep gifting pass verified Skeepers/Octoly (golden rules + credit system, exact quotes) and Influenster (future-box gating, snippet-level); <b>the Octoly "you may be charged" rumor could not be substantiated in any era</b> — the documented penalty was always frozen credits → disabled account. Social Cat, Tomoson, Statusphere, Trend.io and BrandBacker went unverified at publish time; nothing found contradicts the lost-future-access pattern.</div>
+  </div>
+</section>
+
+<footer>
+  <span>Creator ghosting study · Aug 18, 2026</span>
+  <span>Prototype fixtures: MD Solar Sciences, $62 kit, Sep 4 deadline — swap per campaign</span>
+  <span>Builds on: deadline/reminder teardown (4215) · creator campaigns prototype (4212)</span>
+</footer>
+</div>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const pre=btn.closest('.kcard').querySelector('pre');
+    const done=()=>{const t='Copy';btn.textContent='Copied ✓';setTimeout(()=>btn.textContent=t,1400)};
+    const fallback=()=>{
+      const ta=document.createElement('textarea');ta.value=pre.textContent;
+      ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);
+      ta.select();try{document.execCommand('copy');done()}catch(e){btn.textContent='Select manually'}
+      document.body.removeChild(ta);
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(pre.textContent).then(done).catch(fallback);
+    }else{fallback()}
+  });
+});
+</script>
+</body>
+</html>
