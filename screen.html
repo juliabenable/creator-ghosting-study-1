@@ -16,6 +16,7 @@
   --amber:#f0a32e; --amber-ink:#a85321; --amber-wash:#fdf6ec;
   --green:#17864f; --green-wash:#eef7f1;
   --red:#b3402a; --red-wash:#fbf1ee;
+  --mark:#fff3c4;
   --r:12px; --r-sm:8px; --r-lg:16px;
   --shadow:0 4px 24px rgba(0,0,0,.08); --shadow-lg:0 16px 40px rgba(0,0,0,.10);
   --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
@@ -38,20 +39,13 @@ a{color:var(--purple-deep)}
 .topnav a{font-size:12.5px;font-weight:500;color:var(--ink-3);text-decoration:none;
           padding:6px 11px;border-radius:99px;border:1px solid transparent}
 .topnav a:hover{background:var(--white);border-color:var(--line)}
-.topnav a.back{color:var(--purple-deep);font-weight:600}
+.topnav a.on{background:var(--white);border-color:var(--line);color:var(--ink);font-weight:600}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px 120px}
 
-.pagenav{display:flex;margin:24px 0 -20px;border:1px solid var(--line);border-radius:12px;overflow:hidden;
-         width:fit-content;max-width:100%;background:var(--white);box-shadow:var(--shadow)}
-.pagenav a{padding:11px 18px;font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ink-3);line-height:18px}
-.pagenav a small{display:block;font-size:11px;line-height:15px;font-weight:400;color:var(--ink-5);margin-top:1px}
-.pagenav a+a{border-left:1px solid var(--line)}
-.pagenav a.on{background:var(--purple-wash);color:var(--purple-deep)}
-.pagenav a.on small{color:var(--purple-deep);opacity:.75}
-.hero{padding:44px 0 6px;max-width:860px}
+.hero{padding:44px 0 6px;max-width:880px}
 .kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-deep)}
 .hero h1{font-size:29px;line-height:37px;font-weight:700;letter-spacing:-.45px;margin-top:10px;text-wrap:balance}
-.hero .lede{margin-top:12px;font-size:15px;line-height:23px;color:var(--ink-3);max-width:66ch}
+.hero .lede{margin-top:12px;font-size:15px;line-height:23px;color:var(--ink-3);max-width:70ch}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:500;
       color:var(--ink-4);background:var(--white);border:1px solid var(--line);border-radius:99px;padding:5px 11px}
 .hero .meta{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
@@ -62,13 +56,14 @@ a{color:var(--purple-deep)}
 .changes li{font-size:12.5px;line-height:18px;color:var(--ink-2);padding-left:16px;position:relative}
 .changes li::before{content:"✓";position:absolute;left:0;color:var(--purple-deep);font-weight:700;font-size:11px}
 .changes li b{font-weight:600;color:var(--ink)}
+mark{background:var(--mark);border-radius:3px;padding:0 2px;color:inherit}
 
 section{margin-top:56px}
 .shead{display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .shead .no{font-size:12px;font-weight:700;color:var(--ink-5);letter-spacing:.06em}
 .shead h2{font-size:21px;line-height:28px;font-weight:600;letter-spacing:-.25px}
 .shead .q{margin-left:auto;font-size:12.5px;color:var(--ink-4);font-style:italic}
-.intro{margin-top:14px;font-size:14.5px;line-height:22px;color:var(--ink-3);max-width:74ch}
+.intro{margin-top:14px;font-size:14.5px;line-height:22px;color:var(--ink-3);max-width:76ch}
 .intro b{color:var(--ink)}
 
 .variants{margin-top:24px;display:flex;gap:30px;flex-wrap:wrap;align-items:flex-start}
@@ -78,14 +73,11 @@ section{margin-top:56px}
          font-size:12px;font-weight:700;flex-shrink:0;background:var(--ink);color:#fff;letter-spacing:.03em}
 .variant.rec .vletter{background:var(--purple)}
 .vhead h3{font-size:15px;font-weight:600;letter-spacing:-.15px}
-.vhead .rectag{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-               color:var(--purple-deep);background:var(--purple-wash);border:1px solid #e2d9ff;
-               padding:3px 8px;border-radius:6px}
 .vsub{font-size:12.5px;line-height:18px;color:var(--ink-4);margin-bottom:14px;max-width:46ch}
 
 .phone{width:375px;background:var(--white);border-radius:34px;border:1px solid var(--line);
        box-shadow:var(--shadow-lg);overflow:hidden;transform:scale(.94);transform-origin:top left;
-       margin-bottom:-40px}
+       margin-bottom:-40px;position:relative}
 .status{height:54px;display:flex;align-items:flex-end;justify-content:space-between;
         padding:0 28px 8px;font-size:14px;font-weight:600}
 .status .icons{display:flex;gap:5px;align-items:center}
@@ -94,11 +86,15 @@ section{margin-top:56px}
 .pahead .bk{width:28px;height:28px;border:none;background:none;display:grid;place-items:center;color:var(--ink-3);font-size:17px}
 .pahead .t{font-size:15px;font-weight:600;letter-spacing:-.2px}
 .pahead .stp{margin-left:auto;font-size:12px;color:var(--ink-5);font-weight:500}
-.pbody{padding:24px 20px 28px;display:flex;flex-direction:column;gap:16px;min-height:540px}
+.pbody{padding:22px 20px 28px;display:flex;flex-direction:column;gap:15px;min-height:560px}
 
 .ptitle{font-size:23px;line-height:29px;font-weight:700;letter-spacing:-.35px}
-.psub{font-size:13.5px;line-height:20px;color:var(--ink-3);margin-top:-8px}
+.psub{font-size:13.5px;line-height:20px;color:var(--ink-3);margin-top:-6px}
 .psub b{color:var(--ink);font-weight:600}
+.appay{height:48px;border-radius:12px;background:#000;color:#fff;border:none;width:100%;
+       font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px}
+.ordv{display:flex;align-items:center;gap:12px;color:var(--ink-5);font-size:12px}
+.ordv::before,.ordv::after{content:"";height:1px;background:var(--line-soft);flex:1}
 .cardbox{border:1px solid var(--line);border-radius:11px;overflow:hidden}
 .cardbox .row1{display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--white)}
 .cardbox .row2{display:flex;border-top:1px solid var(--line-soft)}
@@ -109,30 +105,60 @@ section{margin-top:56px}
 .pcta{height:48px;border-radius:12px;background:var(--purple);color:#fff;border:none;width:100%;
       font-size:15px;font-weight:600;letter-spacing:-.1px}
 .plegal{font-size:11px;line-height:16px;color:var(--ink-5);text-align:center;padding:0 6px}
-.onlyif{background:var(--tint);border:1px solid var(--line-soft);border-radius:10px;padding:12px 14px;
-        font-size:12.5px;line-height:18px;color:var(--ink-2)}
-.onlyif b{font-weight:600}
+
+.sheetdim{position:absolute;inset:0;background:rgba(28,28,28,.44);z-index:2}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:3;background:var(--white);border-radius:22px 22px 0 0;
+       padding:14px 20px 24px;box-shadow:0 -12px 40px rgba(0,0,0,.18)}
+.sheet .grab{width:44px;height:4px;border-radius:99px;background:var(--line);margin:0 auto 14px}
+.sheet .sht{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.sheet .sht h4{font-size:19px;font-weight:700;letter-spacing:-.3px}
+.sheet .sht .x{margin-left:auto;width:26px;height:26px;border-radius:50%;background:var(--tint);border:none;
+               color:var(--ink-4);font-size:13px;display:grid;place-items:center}
+.sheet .qa{padding:12px 0;border-bottom:1px solid var(--line-soft)}
+.sheet .qa:last-of-type{border-bottom:none}
+.sheet .qa h5{font-size:14px;font-weight:700;margin-bottom:5px}
+.sheet .qa p{font-size:12.5px;line-height:18.5px;color:var(--ink-3)}
+.sheet .qa p b{color:var(--ink);font-weight:600}
 
 .notes{margin-top:16px;display:flex;flex-direction:column;gap:8px}
 .note{display:flex;gap:10px;font-size:12.5px;line-height:18px;color:var(--ink-2)}
 .note .nd{width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;display:grid;
           place-items:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
 .note b{font-weight:600}
-.winrisk{display:flex;flex-direction:column;gap:6px;margin-top:12px}
-.winrisk .w,.winrisk .r{font-size:12.5px;line-height:18px;padding-left:20px;position:relative;color:var(--ink-2)}
-.winrisk .w::before{content:"▲";position:absolute;left:0;color:var(--green);font-size:10px;top:2px}
-.winrisk .r::before{content:"▼";position:absolute;left:0;color:var(--red);font-size:10px;top:2px}
 
-.kit{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:880px){.kit{grid-template-columns:1fr}}
-.kcard{background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.kcard .kh{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line-soft);background:var(--tint)}
-.kcard .kh b{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
-.kcard .kh button{margin-left:auto;border:1px solid var(--line);background:var(--white);border-radius:7px;
-                  font-size:11.5px;font-weight:600;padding:4px 10px;color:var(--ink-3)}
-.kcard .kh button:hover{background:var(--purple-wash);border-color:#e2d9ff;color:var(--purple-deep)}
-.kcard pre{padding:13px 15px;font-family:var(--font);font-size:12.5px;line-height:19px;color:var(--ink-2);
-           white-space:pre-wrap;overflow-x:auto}
+.edgegrid{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(348px,100%),1fr));gap:14px}
+.egroup{background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.egroup .gh{padding:12px 16px;border-bottom:1px solid var(--line-soft);background:var(--tint);
+            display:flex;align-items:center;gap:8px}
+.egroup .gh .gn{width:22px;height:22px;border-radius:7px;background:var(--ink);color:#fff;display:grid;
+                place-items:center;font-size:11px;font-weight:700}
+.egroup .gh h3{font-size:13.5px;font-weight:700;letter-spacing:-.1px}
+.egroup .gh .ct{margin-left:auto;font-size:11px;color:var(--ink-5);font-weight:600}
+.edge{padding:11px 16px;border-bottom:1px solid var(--line-soft)}
+.edge:last-child{border-bottom:none}
+.edge .eh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.edge .eh b{font-size:12.5px;font-weight:600}
+.edge p{margin-top:3px;font-size:12px;line-height:17.5px;color:var(--ink-3)}
+.edge p b{color:var(--ink-2);font-weight:600}
+.tg{font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+.tg.dec{background:var(--green-wash);color:var(--green)}
+.tg.open{background:var(--amber-wash);color:var(--amber-ink)}
+.tg.eng{background:var(--purple-wash);color:var(--purple-deep)}
+.tg.ops{background:#eef3fb;color:#295a9e}
+.tg.legal{background:var(--red-wash);color:var(--red)}
+
+.warnspec{margin-top:22px;background:var(--white);border:1px solid var(--line);border-left:3px solid var(--amber);
+          border-radius:var(--r);padding:18px 20px;max-width:880px}
+.warnspec h3{font-size:15px;font-weight:700}
+.warnspec .steps{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.warnspec .st{display:flex;gap:12px;align-items:flex-start}
+.warnspec .st .t{min-width:86px;font-size:11px;font-weight:700;color:var(--amber-ink);letter-spacing:.04em;
+                 text-transform:uppercase;padding-top:2px}
+.warnspec .st p{font-size:13px;line-height:19px;color:var(--ink-2);flex:1}
+.warnspec .st p b{font-weight:600}
+.warnbub{margin-top:14px;background:var(--tint);border:1px solid var(--line-soft);border-radius:10px;
+         padding:12px 14px;font-size:12.5px;line-height:18.5px;color:var(--ink-2);max-width:56ch}
+.warnbub .from{font-size:10.5px;font-weight:700;color:var(--ink-5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
 
 .sh{margin-top:20px;display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
 @media(max-width:900px){.sh{grid-template-columns:1fr}}
@@ -152,182 +178,232 @@ section{margin-top:56px}
 .gshot .prov{display:block;margin-top:5px;font-size:10px;color:var(--ink-5);text-transform:uppercase;
              letter-spacing:.06em;font-weight:700}
 
+.kit{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:880px){.kit{grid-template-columns:1fr}}
+.kcard{background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.kcard .kh{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line-soft);background:var(--tint)}
+.kcard .kh b{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.kcard .kh button{margin-left:auto;border:1px solid var(--line);background:var(--white);border-radius:7px;
+                  font-size:11.5px;font-weight:600;padding:4px 10px;color:var(--ink-3)}
+.kcard .kh button:hover{background:var(--purple-wash);border-color:#e2d9ff;color:var(--purple-deep)}
+.kcard pre{padding:13px 15px;font-family:var(--font);font-size:12.5px;line-height:19px;color:var(--ink-2);
+           white-space:pre-wrap;overflow-x:auto}
+
 footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-5);
        display:flex;gap:16px;flex-wrap:wrap}
 @media(max-width:480px){.wrap{padding:0 16px 90px}.hero h1{font-size:24px;line-height:31px}}
-@media(max-width:430px){.phone{transform:scale(.82);margin-bottom:-110px}}
+@media(max-width:430px){.phone{transform:scale(.82);margin-bottom:-120px}}
 </style>
 </head>
 <body>
 
 <nav class="topnav">
-  <span class="b"><i>B</i>The card screen</span>
-  <a class="back" href="index.html">← Full study</a>
-  <a href="#screens">The screen</a>
-  <a href="#copy">Copy for Tony</a>
-  <a href="#stubhub">The StubHub voice</a>
-  <a href="#others">The other possibilities</a>
+  <span class="b"><i>B</i>Ghosting study</span>
+  <a href="index.html">The research</a>
+  <a class="on" href="screen.html">The card screen</a>
+  <a href="payfirst.html">Pay-first, up close</a>
+  <span style="flex:0 0 8px"></span>
+  <a href="#screens">Tony's screens</a>
+  <a href="#edges">Edge cases</a>
+  <a href="#stubhub">StubHub voice</a>
+  <a href="#archive">Copy archive</a>
 </nav>
 
 <div class="wrap">
 
-<nav class="pagenav" aria-label="Study pages">
-  <a href="index.html">← The ghosting study<small>research · evidence · the test plan</small></a>
-  <a class="on" href="screen.html">The card screen &amp; copy<small>decided screen + options, for Tony's review</small></a>
-  <a href="payfirst.html">Pay-first, up close<small>Stack &amp; TikTok refundable samples</small></a>
-</nav>
-
 <header class="hero">
-  <div class="kicker">Creator ghosting · the card screen · revision 3</div>
-  <h1>Commitment hold — the decided screen, plus its human twin</h1>
-  <p class="lede">Julia locked the structure on Aug 18: "Commitment hold" is the title, her subtitle under it, the gray explainer box stays, and "Save card &amp; confirm my spot" is the CTA. Two versions remain for Tony's copy pass — the decided platform voice, and a warmer human voice where the hold is a handshake between the creator and the brand, with Katie's team in the room.</p>
+  <div class="kicker">Creator ghosting · the card screen · revision 4</div>
+  <h1>Tony's design, with Katie's edits — and every edge case before we polish</h1>
+  <p class="lede">Tony's "Credit or debit card" screen + Content Guarantee sheet is the direction. This page rebuilds it in the prototype system with Katie's two changes applied (<mark>highlighted</mark>), then walks every edge case we should think through while polishing — grouped by where in the lifecycle it bites, tagged by whether it's already decided, needs a decision, or is an engineering/ops detail.</p>
   <div class="meta">
-    <span class="chip">Aug 18, 2026</span>
-    <span class="chip">structure decided · voice → Tony</span>
-    <span class="chip">2 screens</span>
+    <span class="chip">Aug 19, 2026</span>
+    <span class="chip">rev 4 · Tony's direction</span>
+    <span class="chip">2 screens · 31 edge cases</span>
   </div>
   <div class="changes">
-    <div class="dh">Locked by Julia · Aug 18 review, round 2</div>
+    <div class="dh">What changed in rev 4</div>
     <ul>
-      <li><b>Title: "Commitment hold"</b> — decided</li>
-      <li><b>Subtitle: Julia's copy</b> (cleaned from dictation, shown verbatim in the copy block)</li>
-      <li><b>The gray explainer box stays</b> — it carries the exact trigger</li>
-      <li><b>Nothing about running late</b> — the extension story lives in the reminder ladder, not here</li>
-      <li><b>CTA: "Save card &amp; confirm my spot"</b> — decided</li>
-      <li><b>No "Why a card?" link</b> — the screen already explains itself</li>
-      <li><b>Plus one human-voice version</b> — "Katie's team," "the brand," a deal between you two, less platformy</li>
+      <li><b>Tony's design adopted</b> — "Credit or debit card" title, Content Guarantee framing, Apple Pay express path, "Save card" CTA (supersedes rev 3's "Commitment hold" assembly; that copy lives in the archive below)</li>
+      <li><b>Katie's edit #1:</b> contact email is now <mark>kscalzo@benable.com</mark></li>
+      <li><b>Katie's edit #2:</b> <mark>final-warning-before-charge language</mark> added on both the screen and the sheet</li>
+      <li><b>New: the edge-case audit</b> — 31 cases across 6 groups, each tagged decided / needs-decision / eng / ops / legal</li>
+      <li><b>New: the final warning specced</b> — trigger, channels, timing, escape hatches, and the message draft</li>
     </ul>
   </div>
 </header>
 
 <section id="screens">
-  <div class="shead"><span class="no">01</span><h2>The screen</h2>
-  <span class="q">same structure twice — only the voice changes</span></div>
-  <p class="intro">Both versions share the decided skeleton: <b>title → subtitle → card fields → gray box → CTA → legal.</b> Six blocks, nothing else. V1 is Julia's copy — the platform explaining itself plainly. V2 says the same facts as a person would: the brand is a party you shook hands with, and Katie's team are the humans who'd rather hear from you than ever use the card.</p>
+  <div class="shead"><span class="no">01</span><h2>The screens — Tony's design, rebuilt with Katie's edits</h2>
+  <span class="q">highlighted = Katie's Aug 19 additions</span></div>
+  <p class="intro">Faithful to Tony's mock: his title, his body copy, Apple Pay on top, manual entry below, his sheet structure and Q&amp;A voice. Two things changed, both Katie's: the email, and the promise that a charge is never a surprise — <b>a final warning always comes first.</b> The warning language is deliberately in both places: one clause on the screen (where skimmers are), the full sentence on the sheet (where readers are).</p>
 
   <div class="variants">
 
-    <!-- V1 decided -->
     <div class="variant rec">
-      <div class="vhead"><span class="vletter">V1</span><h3>The decided screen — Julia's copy</h3><span class="rectag">Structure locked</span></div>
-      <p class="vsub">Platform voice: states what the card is for, promises the default outcome, and lets the gray box carry the precise trigger.</p>
-      <div class="phone" role="img" aria-label="Decided commitment hold screen with Julia's copy">
+      <div class="vhead"><span class="vletter">4·A</span><h3>The card screen</h3></div>
+      <p class="vsub">Tony's copy verbatim, plus the final-warning clause tucked where the eye already is — right after the trigger conditions.</p>
+      <div class="phone" role="img" aria-label="Rev 4 card screen — Tony's design with Katie's edits">
         <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
         <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
         <div class="pbody">
-          <div class="ptitle">Commitment hold</div>
-          <p class="psub">A card holds your commitment. You won't be charged unless you fail to deliver your post — we only use it to avoid ghosting, covering the brand's <b>$62 product cost</b> if you don't post.</p>
+          <div class="ptitle">Credit or debit card</div>
+          <p class="psub">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today. Charges are reserved for the rare case where a campaign ends with the product kept and no content posted, despite every reasonable attempt to reach the creator — <mark>and you'll always receive a final warning first.</mark> <a style="color:var(--purple-deep);font-weight:600;text-decoration:none">Learn more</a></p>
+          <button class="appay"> Pay</button>
+          <div class="ordv">or enter card manually</div>
           <div class="cardbox">
             <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
             <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
           </div>
-          <div class="onlyif"><b>The only way this card is ever used:</b> the campaign ends with the product kept, nothing posted, and no reply to us. Then it covers the $62 product cost. Post — even late — and it simply expires.</div>
-          <button class="pcta">Save card &amp; confirm my spot</button>
-          <p class="plegal">Secured by Stripe — Benable never sees your number. You authorize only the single charge described above. Nothing else, ever.</p>
+          <button class="pcta">Save card</button>
+          <p class="plegal">🔒 Payments secured by Stripe. Benable never sees your card number.</p>
         </div>
-      </div>
-      <div class="winrisk">
-        <span class="w">Subtitle answers "what is this and why" in one breath; gray box makes the trigger contractual-precise.</span>
-        <span class="r">Subtitle and gray box overlap on the trigger — if Tony wants it tighter, the subtitle can drop its final clause and lean on the box.</span>
       </div>
     </div>
 
-    <!-- V2 human -->
-    <div class="variant">
-      <div class="vhead"><span class="vletter">V2</span><h3>The human voice — for Tony</h3></div>
-      <p class="vsub">Same six blocks, zero platform grammar: the brand is a person you made a deal with, Katie's team are the humans holding it.</p>
-      <div class="phone" role="img" aria-label="Human voice commitment hold screen">
+    <div class="variant rec">
+      <div class="vhead"><span class="vletter">4·B</span><h3>The Content Guarantee sheet</h3></div>
+      <p class="vsub">Tony's three Q&amp;As with Katie's email fix and the final-warning promise inside the charge answer, where the anxious reader is looking.</p>
+      <div class="phone" role="img" aria-label="Content Guarantee bottom sheet with Katie's edits">
         <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
         <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
-        <div class="pbody">
-          <div class="ptitle">Commitment hold</div>
-          <p class="psub">A deal's a deal: MD Solar Sciences ships you <b>$62 of product</b>, you post about it. Your card is just the handshake — <b>$0 today.</b></p>
-          <div class="cardbox">
-            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
-            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
-          </div>
-          <div class="onlyif"><b>MD Solar is trusting you with their product</b> — the card only comes into it if the campaign ends and Katie's team never saw a post or heard a word from you. Then it covers their $62. Post, or just reply to us, and it's never touched.</div>
-          <button class="pcta">Save card &amp; confirm my spot</button>
-          <p class="plegal">Secured by Stripe — Benable never sees your number. You authorize only the single charge described above. Nothing else, ever.</p>
+        <div class="pbody" style="gap:12px">
+          <div class="ptitle">Credit or debit card</div>
+          <p class="psub">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today. Charges are reserved for the rare case where a campaign ends with the product kept…</p>
         </div>
-      </div>
-      <div class="winrisk">
-        <span class="w">Names real parties — "MD Solar is trusting you," "Katie's team never heard a word" — accountability to people beats accountability to a system.</span>
-        <span class="w">"A deal's a deal" frames posting as reciprocity, not compliance — matches the trade-not-gift truth without C's coldness.</span>
-        <span class="r">Warmth costs precision: "never saw a post or heard a word" is the trigger stated socially, not contractually — the receipt email must still cite the exact conditions.</span>
+        <div class="sheetdim"></div>
+        <div class="sheet">
+          <div class="grab"></div>
+          <div class="sht"><h4>The Content Guarantee</h4><button class="x" aria-hidden="true">✕</button></div>
+          <div class="qa"><h5>What is the Content Guarantee?</h5>
+            <p>Brands on Benable incur significant costs to provide creators with products and experiences, and Benable guarantees them that every collab results in content. We know each creator who participates is committed to that, and your card on file is what backs that guarantee.</p></div>
+          <div class="qa"><h5>When would my card be charged?</h5>
+            <p>Only if a campaign closes with the product kept, nothing posted, and no reply from you. <mark>Before any charge, you'll receive a final warning by text and email — with time to post or reply and put things right.</mark> It would cover the brand's actual cost, <b>$62 for this campaign</b>, with no additional fees.</p></div>
+          <div class="qa"><h5>Other questions?</h5>
+            <p>Shoot a note to <b><mark>kscalzo@benable.com</mark></b> or text us at <b>(XXX) XXX-XXXX</b> with any questions about the Content Guarantee.</p></div>
+          <button class="pcta" style="margin-top:10px">Got it!</button>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="notes" style="max-width:880px">
-    <div class="note"><span class="nd">1</span><span><b>Julia's subtitle, handled:</b> her dictated line self-corrected mid-sentence ("you will never be charged… unless"), so V1 carries the cleaned merge. The raw dictation and the cleaned line sit side by side in the copy block below — Tony edits from there.</span></div>
-    <div class="note"><span class="nd">2</span><span><b>The extension story moved out entirely.</b> Nothing about running late on this screen; one-tap extensions live in the deadline flow and the reminder ladder, where lateness actually happens.</span></div>
-    <div class="note"><span class="nd">3</span><span><b>Both versions keep "post — even late — and it expires / it's never touched."</b> That's the load-bearing reassurance; whatever voice wins, that clause survives.</span></div>
+    <div class="note"><span class="nd">1</span><span><b>Rebuild fidelity:</b> Tony's structure, order, and copy are untouched except the two highlighted Katie edits. His "Learn more" opens the sheet; "Got it!" closes it back to the card screen.</span></div>
+    <div class="note"><span class="nd">2</span><span><b>The phone number placeholder</b> (XXX) XXX-XXXX needs a real decision — see edge case E-29: which number receives replies, and does texting it count as "a reply" that blocks the charge? (It must.)</span></div>
+    <div class="note"><span class="nd">3</span><span><b>"$62 for this campaign"</b> is the one piece of dynamic copy on the sheet — it must always equal the creator's actual selected product value (edge cases E-12, E-13).</span></div>
   </div>
 </section>
 
-<section id="copy">
-  <div class="shead"><span class="no">02</span><h2>Copy for Tony</h2>
-  <span class="q">structure locked — voice is the open question</span></div>
+<section id="edges">
+  <div class="shead"><span class="no">02</span><h2>The edge cases — all of them, before polish</h2>
+  <span class="q">31 cases · 6 groups · tagged by status</span></div>
+  <p class="intro">Organized by where in the lifecycle each one bites. <span class="tg dec">Decided</span> means the Aug 18 call or the fairness spec already answers it — polish just has to implement the answer. <span class="tg open">Needs decision</span> is genuinely open — flagged for you, Tony, or Katie by name. <span class="tg eng">Eng</span> / <span class="tg ops">Ops</span> / <span class="tg legal">Legal</span> are execution details that will bite if nobody owns them.</p>
 
-  <div class="kit">
-    <div class="kcard"><div class="kh"><b>V1 · decided — Julia's copy</b><button data-copy>Copy</button></div>
-<pre>Title: Commitment hold
+  <div class="edgegrid">
 
-Subtitle (Julia, as dictated): "A card holds your
-commitment. You will never be charged. You will not
-be charged unless you fail to deliver the post. We
-only use it to avoid ghosting and to make sure that
-it covers the brand's $62 product cost in case you
-don't post."
+    <div class="egroup">
+      <div class="gh"><span class="gn">A</span><h3>Before the screen — who sees it at all</h3><span class="ct">5 cases</span></div>
+      <div class="edge"><div class="eh"><b>E-1 · The A/B split leaks</b><span class="tg ops">ops</span></div>
+        <p>Half of creators get the card step, half don't — and creators talk. Katie needs a one-line answer for "why me?": <b>"We're rolling the Content Guarantee out gradually — everyone will have it soon."</b> True, calm, no fairness debate.</p></div>
+      <div class="edge"><div class="eh"><b>E-2 · Proven-creator carve-out</b><span class="tg dec">decided</span><span class="tg ops">ops</span></div>
+        <p>Tony: repeat creators with clean records skip the screen. Needs a hard rule, not vibes — e.g. <b>2+ completed campaigns, zero charge-eligible incidents</b> — so Katie applies it consistently and the A/B stays clean.</p></div>
+      <div class="edge"><div class="eh"><b>E-3 · Minors</b><span class="tg legal">legal</span></div>
+        <p>A card agreement with a 17-year-old is voidable. If any creators are under 18 (ToS minimum is 18 — verify enforcement), the card arm must exclude them at eligibility, not at the charge.</p></div>
+      <div class="edge"><div class="eh"><b>E-4 · Experience campaigns</b><span class="tg open">needs decision</span></div>
+        <p>"$62 product cost" works for serums. For hotel-stay collabs (Trilogy-style), the "product" is a room night — is that chargeable, at what value, and does a no-show change the trigger? Recommend: <b>exclude experience campaigns from the card arm for now.</b></p></div>
+      <div class="edge"><div class="eh"><b>E-5 · Des's collective</b><span class="tg dec">decided</span></div>
+        <p>The beauty-sub cohort gets its own messaging and should ghost near 0% — keep them out of the A/B so their numbers don't pollute either arm.</p></div>
+    </div>
 
-Subtitle (cleaned, on the screen): A card holds
-your commitment. You won't be charged unless you
-fail to deliver your post — we only use it to avoid
-ghosting, covering the brand's $62 product cost if
-you don't post.
+    <div class="egroup">
+      <div class="gh"><span class="gn">B</span><h3>On the screen — adding the card</h3><span class="ct">6 cases</span></div>
+      <div class="edge"><div class="eh"><b>E-6 · Apple Pay for a future charge</b><span class="tg eng">eng</span></div>
+        <p>Saving via Apple Pay must run as a Stripe <b>SetupIntent with off_session usage</b> — and some issuers decline later merchant-initiated charges on tokenized cards. Works, but test the full save-then-charge loop in staging before trusting the AP path; hide the button where Apple Pay is unavailable (Android/web) and consider Google Pay parity.</p></div>
+      <div class="edge"><div class="eh"><b>E-7 · Card declined at save</b><span class="tg eng">eng</span></div>
+        <p>Failed SetupIntent (bad number, expired, AVS/ZIP mismatch, 3DS challenge) needs inline error states + retry. EU-issued cards may force a 3DS sheet — handle it at save time so the future charge is exempt, never at charge time.</p></div>
+      <div class="edge"><div class="eh"><b>E-8 · Prepaid & virtual cards</b><span class="tg open">needs decision</span></div>
+        <p>A Privacy.com virtual card can be killed seconds after saving — the hold becomes theater. Options: block prepaid BINs (Stripe exposes card funding type), or accept it because the device is psychological anyway. <b>Recommend: accept, don't block</b> — blocking adds friction for honest people to stop a fraction who'd ghost anyway.</p></div>
+      <div class="edge"><div class="eh"><b>E-9 · The stall</b><span class="tg dec">decided</span><span class="tg ops">ops</span></div>
+        <p>Creator reaches the screen and doesn't finish. Decided: order stands, Katie emails the waiver ("we've removed that step for you") after a stall window. Polish detail: define the window (<b>24h</b>), and make sure the reminder ladder doesn't fire "add your card" texts after the waiver.</p></div>
+      <div class="edge"><div class="eh"><b>E-10 · Back-button and re-entry</b><span class="tg eng">eng</span></div>
+        <p>Creator hits ‹ from the card step, or kills the app mid-entry: product selection must stay confirmed, and re-entering the portal should land them back on the card step (not a dead end, not a duplicate order).</p></div>
+      <div class="edge"><div class="eh"><b>E-11 · The sheet's reply channels</b><span class="tg ops">ops</span></div>
+        <p>The sheet invites questions to kscalzo@ and a text line. Both must be monitored, and <b>any inbound on either counts as "a reply from you"</b> — the charge trigger's "no reply" clause dies the moment they use the contact info we gave them.</p></div>
+    </div>
 
-Gray box: The only way this card is ever used: the
-campaign ends with the product kept, nothing
-posted, and no reply to us. Then it covers the $62
-product cost. Post — even late — and it simply
-expires.
+    <div class="egroup">
+      <div class="gh"><span class="gn">C</span><h3>While the campaign runs — the card sits</h3><span class="ct">6 cases</span></div>
+      <div class="edge"><div class="eh"><b>E-12 · The amount must track the selection</b><span class="tg eng">eng</span></div>
+        <p>"$62 for this campaign" is consent language. If product sets have unequal values or the creator swaps options after saving, the disclosed amount is stale — <b>recompute and re-disclose</b> (a quiet portal line + email: "your Content Guarantee amount is now $48").</p></div>
+      <div class="edge"><div class="eh"><b>E-13 · Charge &gt; disclosed amount is never OK</b><span class="tg legal">legal</span></div>
+        <p>Card-network rules for merchant-initiated charges require the charge to match the agreed terms. Charge exactly the disclosed number or less, never more — shipping, tax, and "admin fees" stay out (the StubHub $25 fee is where their goodwill dies; we decided no fees, ever).</p></div>
+      <div class="edge"><div class="eh"><b>E-14 · Card expires or is canceled mid-campaign</b><span class="tg eng">eng</span></div>
+        <p>Saved in August, expires September, campaign closes October. Stripe's card-account-updater catches most reissues on network tokens; still need a "card no longer valid" state — and a decision to <b>not</b> nag for a replacement (the hold's job is mostly done by then; a nag reads as "we're planning to charge you").</p></div>
+      <div class="edge"><div class="eh"><b>E-15 · Creator wants the card removed</b><span class="tg open">needs decision</span></div>
+        <p>Mid-campaign "please delete my card" request. Options: allow (hold is consent-based; refusing looks hostage-y) with Katie noting the account, or replace-only while a campaign is live. <b>Recommend: allow removal via Katie, treat it as a churn-risk signal, never as a fight.</b></p></div>
+      <div class="edge"><div class="eh"><b>E-16 · Backing out of the campaign</b><span class="tg dec">decided</span></div>
+        <p>Decided on the call: backing out after product selection is fine, card or no card — the order may still ship (Shopify automation), and we eat it. Polish: the release email ("your card was never charged and has been released") must fire on any exit path.</p></div>
+      <div class="edge"><div class="eh"><b>E-17 · Extensions pause everything</b><span class="tg dec">decided</span></div>
+        <p>An accepted extension moves the deadline — the warning clock, the charge eligibility, and the reminder ladder all recompute from the new date. One granted extension also voids "no reply" (they replied to get it).</p></div>
+    </div>
 
-CTA: Save card &amp; confirm my spot
-Legal: Secured by Stripe — Benable never sees your
-number. You authorize only the single charge
-described above. Nothing else, ever.</pre></div>
+    <div class="egroup">
+      <div class="gh"><span class="gn">D</span><h3>The warning &amp; the charge — Katie's moment</h3><span class="ct">6 cases</span></div>
+      <div class="edge"><div class="eh"><b>E-18 · "Posted but never told us"</b><span class="tg ops">ops</span></div>
+        <p>The known #1 false positive: content is live, link never submitted (the auto-detect fix is in NewSurge's backlog). Until it ships, the final warning IS the safety net — its copy must say <b>"already posted? just reply with the link."</b> Katie checks socials manually before any charge.</p></div>
+      <div class="edge"><div class="eh"><b>E-19 · Draft in review ≠ chargeable</b><span class="tg dec">decided</span></div>
+        <p>Fairness spec: a late draft sitting in review is never chargeable — the failure is ours or the brand's, not theirs. The trigger requires <i>nothing submitted</i>, not <i>nothing published</i>.</p></div>
+      <div class="edge"><div class="eh"><b>E-20 · TCPA on the warning text</b><span class="tg legal">legal</span></div>
+        <p>The final warning goes "by text and email" — but automated texts only to creators who ticked the SMS box. For non-opted-in creators: email + DM, and the sheet's promise should hold ("text and email" is fine — Katie can send the text manually, which is the carve-out Tony's confirming).</p></div>
+      <div class="edge"><div class="eh"><b>E-21 · Warning timing & holidays</b><span class="tg dec">decided</span><span class="tg ops">ops</span></div>
+        <p>From the call: don't berate people on Christmas. The warning window pauses over major holidays and fires on weekdays; the 72h grace never expires on a Sunday. (Full spec below.)</p></div>
+      <div class="edge"><div class="eh"><b>E-22 · The charge fails</b><span class="tg eng">eng</span></div>
+        <p>Insufficient funds, killed virtual card, closed account. One retry after 3 days, then stop — no dunning ladder, no collections. Account consequence (no future campaigns) replaces the money. We are not a debt collector; the write-off is the cost of the filter.</p></div>
+      <div class="edge"><div class="eh"><b>E-23 · Only Katie charges</b><span class="tg dec">decided</span><span class="tg ops">ops</span></div>
+        <p>No cron job ever charges a card. The charge is a human action with a checklist (fairness spec printed as UI), an audit log entry, and a receipt email sent the same minute. Two-person rule for the first ten charges.</p></div>
+    </div>
 
-    <div class="kcard"><div class="kh"><b>V2 · human voice</b><button data-copy>Copy</button></div>
-<pre>Title: Commitment hold
+    <div class="egroup">
+      <div class="gh"><span class="gn">E</span><h3>After the charge — money in motion</h3><span class="ct">4 cases</span></div>
+      <div class="edge"><div class="eh"><b>E-24 · Post-and-refund</b><span class="tg dec">decided</span></div>
+        <p>Post within 7 days of the charge → full refund, automatic, no negotiation. The receipt email leads with this: the goal was always the content, not the $62. Refund SLA: same-day initiation.</p></div>
+      <div class="edge"><div class="eh"><b>E-25 · Chargebacks</b><span class="tg legal">legal</span><span class="tg eng">eng</span></div>
+        <p>Some creators will dispute instead of replying. Evidence pack per charge, exported before filing: the saved-card consent screen, the sheet copy, contact-attempt timeline, the final warning, delivery confirmation. Budget to lose some anyway — and treat a dispute as relationship-over, not a fight to win.</p></div>
+      <div class="edge"><div class="eh"><b>E-26 · The brand's side of the money</b><span class="tg ops">ops</span></div>
+        <p>Call decision: we reimburse the brand (MD Solar) when we don't charge; when we do charge, the $62 passes through. Needs a ledger line per incident so wrap-up reporting and Katie's mental math agree.</p></div>
+      <div class="edge"><div class="eh"><b>E-27 · The relationship after</b><span class="tg open">needs decision</span></div>
+        <p>Charged creator wants back in next quarter. Blocked forever, cooling-off, or clean slate after one completed campaign? <b>Recommend: cooling-off + Katie's discretion</b> — the charge already settled the debt; permanent exile turns restitution back into punishment.</p></div>
+    </div>
 
-Subtitle: A deal's a deal: MD Solar Sciences ships
-you $62 of product, you post about it. Your card is
-just the handshake — $0 today.
+    <div class="egroup">
+      <div class="gh"><span class="gn">F</span><h3>Copy & comprehension — the quiet failures</h3><span class="ct">4 cases</span></div>
+      <div class="edge"><div class="eh"><b>E-28 · "Rare case" must stay true</b><span class="tg ops">ops</span></div>
+        <p>Tony's copy promises charges are rare. If the A/B works, they will be (&lt;2% of creators ever ghosted). Track it: the day charges stop being rare, the copy — and the program — is broken upstream.</p></div>
+      <div class="edge"><div class="eh"><b>E-29 · The placeholder phone number</b><span class="tg open">needs decision</span></div>
+        <p>(XXX) XXX-XXXX needs a real number before ship — presumably the existing SMS line — and inbound texts to it must be visible to Katie and logged as replies (see E-11).</p></div>
+      <div class="edge"><div class="eh"><b>E-30 · Screenshot-ability</b><span class="tg ops">ops</span></div>
+        <p>This screen will be screenshotted into creator group chats. Read 4·A cold as a skeptic: every sentence should survive being posted without context. (Tony's draft does — "you'll always receive a final warning first" is the line that defuses the thread.)</p></div>
+      <div class="edge"><div class="eh"><b>E-31 · The word "guarantee" cuts both ways</b><span class="tg legal">legal</span></div>
+        <p>"Content Guarantee" is a promise to brands. Brand-side copy must not overpromise ("guaranteed content from every creator") — we guarantee the <i>system</i> (card-backed commitment + make-goods), not each individual post. Legal pass on brand-facing use of the phrase.</p></div>
+    </div>
+  </div>
 
-Gray box: MD Solar is trusting you with their
-product — the card only comes into it if the
-campaign ends and Katie's team never saw a post or
-heard a word from you. Then it covers their $62.
-Post, or just reply to us, and it's never touched.
-
-CTA: Save card &amp; confirm my spot
-Legal: (same as V1)
-
-Alt subtitle, warmer still: This is between you and
-MD Solar — they're betting $62 of product on you.
-The card seals your side. $0 today.
-
-Alt gray box, Katie-forward: Katie's team would
-always rather hear from you than use this. It only
-matters if a campaign ends with no post and no
-reply — then it covers the brand's $62. A single
-text keeps it asleep.</pre></div>
+  <div class="warnspec">
+    <h3>Katie's final warning, specced</h3>
+    <div class="steps">
+      <div class="st"><span class="t">Trigger</span><p>Campaign closed + product delivered + nothing submitted + no reply on any channel across the whole campaign (text, email, DM — E-11 channels included).</p></div>
+      <div class="st"><span class="t">T+0</span><p><b>The final warning goes out</b> — text (opted-in or Katie-manual, per E-20) and email, from Katie by name. States the date it becomes chargeable, the exact amount, and the two exits.</p></div>
+      <div class="st"><span class="t">72h grace</span><p>Weekday-only clock, paused over major holidays (E-21). Any reply, draft, or post stops everything — <b>one reply is always enough.</b></p></div>
+      <div class="st"><span class="t">Then</span><p>Katie runs the fairness checklist (delivery confirmed · nothing submitted · no reply · extension offered · amount matches disclosure), charges manually, receipt email sends immediately with the 7-day post-and-refund path (E-24).</p></div>
+    </div>
+    <div class="warnbub">
+      <div class="from">Draft — the warning text/email body</div>
+      "Hi [name], it's Katie at Benable. [Brand]'s campaign has closed and I still don't see a post or a draft from you — and I haven't been able to reach you. Per the Content Guarantee you agreed to, your card will be charged [brand]'s $62 product cost on [date] unless you post or just reply to me before then. Already posted? Send me the link and you're all set. Need more time? Tell me — one reply is enough."
+    </div>
   </div>
 </section>
 
 <section id="stubhub">
-  <div class="shead"><span class="no">03</span><h2>What StubHub actually says — the voice Tony cited</h2>
+  <div class="shead"><span class="no">03</span><h2>What StubHub actually says — the voice for receipts &amp; warnings</h2>
   <span class="q">"process, not personal," dissected</span></div>
   <div class="sh">
     <div class="shcard">
@@ -346,119 +422,44 @@ text keeps it asleep.</pre></div>
       <div class="shcard" style="margin-top:18px">
         <h3>What we borrow vs. soften</h3>
         <ol>
-          <li><span class="n">✓</span><b>Borrow:</b> if-then grammar, the priced worst case ($62, once), the money's destination ("covers the brand's product cost"), agreed-in-advance framing.</li>
+          <li><span class="n">✓</span><b>Borrow:</b> if-then grammar, the priced worst case ($62, once), the money's destination ("covers the brand's actual cost" — Tony's sheet already does this), agreed-in-advance framing.</li>
           <li><span class="n">✓</span><b>Borrow:</b> mechanical collection language in the receipt email — timeline of facts, no adjectives.</li>
-          <li><span class="n">~</span><b>Soften:</b> StubHub has no mercy door; we add post-and-refund (post within 7 days → full refund) and the always-an-exit line, because our relationship is repeat-collaboration, theirs is transactional.</li>
-          <li><span class="n">~</span><b>Soften:</b> no administrative fee, ever — the charge is the product cost exactly, or it's nothing. A fee is where "process" starts smelling like "profit."</li>
+          <li><span class="n">~</span><b>Soften:</b> StubHub has no mercy door; we add the final warning (Katie's edit), post-and-refund, and "one reply is always enough" — because our relationship is repeat-collaboration, theirs is transactional.</li>
+          <li><span class="n">~</span><b>Soften:</b> no administrative fee, ever — Tony's "with no additional fees" line is the anti-StubHub move. The charge is the product cost exactly, or it's nothing.</li>
         </ol>
       </div>
     </div>
   </div>
 </section>
 
-<section id="others">
-  <div class="shead"><span class="no">04</span><h2>The other possibilities — still on the table</h2>
-  <span class="q">kept for Tony's review; the locked decisions above apply to whichever wins</span></div>
-  <p class="intro">The decided structure is V1/V2 above, but these three framings from the earlier round stay reviewable: <b>R1</b> bundles the hold with payout collection, <b>R2·A</b> is the warm reservation voice with "Lock in your spot" as the title, and <b>C</b> is the strict guarantee with the trade drawn as a strip. Julia's global vetoes are applied here too — no Apple Pay, no product-confirmed tick, nothing about running late, no "Why a card?" link.</p>
-
-  <div class="variants">
-
-    <div class="variant">
-      <div class="vhead"><span class="vletter">R1</span><h3>Payment details — hold bundled</h3></div>
-      <p class="vsub">The route where they give us payments: Venmo for money in, the hold beside it. One "money" moment, two fields.</p>
-      <div class="phone" role="img" aria-label="Route 1 mockup — payment details with bundled commitment hold">
-        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
-        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
-        <div class="pbody">
-          <div class="ptitle">Payment details</div>
-          <p class="psub">How money reaches you — and the hold that makes your spot official. <b>$0 charged today.</b></p>
-          <div>
-            <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4)">Get paid</div>
-            <div style="border:1px solid var(--line);border-radius:11px;background:var(--white);padding:13px 14px;font-size:14px;display:flex;gap:10px;margin-top:8px"><b style="font-weight:500">Venmo</b> <span style="color:var(--ink-5)">@your-handle — bonuses &amp; rewards</span></div>
-          </div>
-          <div>
-            <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4)">Commitment hold</div>
-            <div class="cardbox" style="margin-top:8px">
-              <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
-              <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
-            </div>
-          </div>
-          <div class="onlyif"><b>$0 today.</b> Only ever used if a campaign ends with the product kept, nothing posted, and no reply — it covers the brand's $62 product cost.</div>
-          <button class="pcta">Save payment details</button>
-          <p class="plegal">Secured by Stripe — Benable never sees your number. You authorize only the single charge described above. Nothing else, ever.</p>
-        </div>
-      </div>
-      <div class="winrisk">
-        <span class="w">One combined "money" step; we need Venmo for paid campaigns anyway.</span>
-        <span class="r">Two asks on one screen — each gives the other a reason to stall.</span>
-      </div>
-    </div>
-
-    <div class="variant">
-      <div class="vhead"><span class="vletter">R2·A</span><h3>Lock in your spot — warm voice</h3></div>
-      <p class="vsub">The reservation metaphor as the title and subtitle; the hold explained by analogy before it's explained by rule.</p>
-      <div class="phone" role="img" aria-label="Warm mockup — lock in your spot">
-        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
-        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
-        <div class="pbody">
-          <div class="ptitle">Lock in your spot</div>
-          <p class="psub">A card holds your commitment — like a restaurant reservation. <b>$0 today,</b> and it expires the moment you post.</p>
-          <div class="cardbox">
-            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
-            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
-          </div>
-          <div class="onlyif"><b>Never charged for being late.</b> It's only used if the campaign ends with the product kept, nothing posted, and no word from you — covering the brand's $62 product cost.</div>
-          <button class="pcta">Add card &amp; lock my spot</button>
-          <p class="plegal">Secured by Stripe — Benable never sees your number. You authorize only the single charge described above. Nothing else, ever.</p>
-        </div>
-      </div>
-      <div class="winrisk">
-        <span class="w">The metaphor replaces a paragraph; "never charged for being late" kills the scariest misreading in four words.</span>
-        <span class="r">Action-verb title tested weaker with Julia than naming the mechanism — "Commitment hold" won the round.</span>
-      </div>
-    </div>
-
-    <div class="variant">
-      <div class="vhead"><span class="vletter">C</span><h3>The content guarantee — slim</h3></div>
-      <p class="vsub">Tony's strict route: the trade drawn as a strip, sealed with an agree checkbox. Same teeth, least warmth.</p>
-      <div class="phone" role="img" aria-label="Slim content guarantee mockup with trade strip">
-        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
-        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
-        <div class="pbody">
-          <div class="ptitle">The content guarantee</div>
-          <p class="psub">Free product is a trade. Your card backs your side of it. <b>$0 today.</b></p>
-          <div style="display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden">
-            <div style="flex:1;padding:13px 14px;background:var(--white)"><span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-5)">You get</span><p style="margin-top:4px;font-size:12.5px;line-height:18px"><b>$62 of product</b> — yours to keep, on the house.</p></div>
-            <div style="flex:1;padding:13px 14px;background:var(--white);border-left:1px solid var(--line-soft)"><span style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--purple-deep)">You give</span><p style="margin-top:4px;font-size:12.5px;line-height:18px"><b>Your post by Fri, Sep 4</b> — or the card covers the product.</p></div>
-          </div>
-          <div class="cardbox">
-            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
-            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:flex-start"><span style="width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line);flex-shrink:0"></span><p style="font-size:12.5px;line-height:18px;color:var(--ink-2)">I agree to the guarantee — charged only if nothing posts and I never reply.</p></div>
-          <button class="pcta">Agree &amp; add my card</button>
-          <p class="plegal">Secured by Stripe — Benable never sees your number. Always with notice first, never automatic.</p>
-        </div>
-      </div>
-      <div class="winrisk">
-        <span class="w">The trade strip says in 14 words what a paragraph said in 60; the checkbox keeps StubHub-grade defensibility.</span>
-        <span class="r">Bluntest framing at the happiest beat — highest stall risk of the set.</span>
-      </div>
-    </div>
-  </div>
-
+<section id="archive">
+  <div class="shead"><span class="no">04</span><h2>Copy archive — the rounds that got us here</h2>
+  <span class="q">rev 1–3, kept for reference</span></div>
+  <p class="intro">Superseded by Tony's direction but kept reviewable: Julia's decided rev-3 assembly ("Commitment hold" + her subtitle), the human-voice twin, and the three earlier framings. Screens for all of these live in the chat captures and rev-3 deploy history.</p>
   <div class="kit">
-    <div class="kcard"><div class="kh"><b>R1 · copy</b><button data-copy>Copy</button></div>
-<pre>Title: Payment details
-Subtitle: How money reaches you — and the hold that
-makes your spot official. $0 charged today.
-GET PAID: Venmo · @your-handle — bonuses &amp; rewards
-COMMITMENT HOLD: [card fields]
-Gray box: $0 today. Only ever used if a campaign
-ends with the product kept, nothing posted, and no
-reply — it covers the brand's $62 product cost.
-CTA: Save payment details</pre></div>
-    <div class="kcard"><div class="kh"><b>R2·A · copy</b><button data-copy>Copy</button></div>
+    <div class="kcard"><div class="kh"><b>Rev 3 · V1 — "Commitment hold" (Julia's copy)</b><button data-copy>Copy</button></div>
+<pre>Title: Commitment hold
+Subtitle: A card holds your commitment. You won't be
+charged unless you fail to deliver your post — we
+only use it to avoid ghosting, covering the brand's
+$62 product cost if you don't post.
+Gray box: The only way this card is ever used: the
+campaign ends with the product kept, nothing posted,
+and no reply to us. Then it covers the $62 product
+cost. Post — even late — and it simply expires.
+CTA: Save card &amp; confirm my spot</pre></div>
+    <div class="kcard"><div class="kh"><b>Rev 3 · V2 — the human voice</b><button data-copy>Copy</button></div>
+<pre>Title: Commitment hold
+Subtitle: A deal's a deal: MD Solar Sciences ships
+you $62 of product, you post about it. Your card is
+just the handshake — $0 today.
+Gray box: MD Solar is trusting you with their
+product — the card only comes into it if the
+campaign ends and Katie's team never saw a post or
+heard a word from you. Then it covers their $62.
+Post, or just reply to us, and it's never touched.
+CTA: Save card &amp; confirm my spot</pre></div>
+    <div class="kcard"><div class="kh"><b>Rev 2 · R2·A — "Lock in your spot"</b><button data-copy>Copy</button></div>
 <pre>Title: Lock in your spot
 Subtitle: A card holds your commitment — like a
 restaurant reservation. $0 today, and it expires
@@ -468,7 +469,7 @@ used if the campaign ends with the product kept,
 nothing posted, and no word from you — covering
 the brand's $62 product cost.
 CTA: Add card &amp; lock my spot</pre></div>
-    <div class="kcard"><div class="kh"><b>C · copy</b><button data-copy>Copy</button></div>
+    <div class="kcard"><div class="kh"><b>Rev 2 · C — "The content guarantee" (slim)</b><button data-copy>Copy</button></div>
 <pre>Title: The content guarantee
 Subtitle: Free product is a trade. Your card backs
 your side of it. $0 today.
@@ -477,13 +478,15 @@ keep, on the house. / YOU GIVE — your post by
 Fri, Sep 4 — or the card covers the product.
 Checkbox: I agree to the guarantee — charged only
 if nothing posts and I never reply.
-CTA: Agree &amp; add my card</pre></div>
+CTA: Agree &amp; add my card
+(Note: Tony's adopted title "Content Guarantee"
+came from this route.)</pre></div>
   </div>
 </section>
 
 <footer>
-  <span>The card screen · revision 3 · Aug 18, 2026</span>
-  <span>Part of the creator-ghosting study — <a href="index.html">full research here</a> · supersedes rev 2's four-option exploration (captures in shots/rev2-*)</span>
+  <span>The card screen · revision 4 · Aug 19, 2026</span>
+  <span>Part of the creator-ghosting study — <a href="index.html">research</a> · <a href="payfirst.html">pay-first deep dive</a></span>
   <span>Fixtures: MD Solar Sciences, $62 — swap per campaign</span>
 </footer>
 </div>
