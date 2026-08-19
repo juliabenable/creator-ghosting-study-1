@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pay-First, Up Close</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237a5cfa'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Inter,sans-serif' font-size='18' font-weight='700' fill='white'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c1c1c; --ink-2:#393939; --ink-3:#555; --ink-4:#717171; --ink-5:#8e8e8e;
+  --line:#e3e3e3; --line-soft:#eef0f1; --pane:#f9fafb; --tint:#f8f9fa; --white:#fff;
+  --purple:#7a5cfa; --purple-deep:#5b3fd6; --purple-wash:#f4f1ff;
+  --amber:#f0a32e; --amber-ink:#a85321; --amber-wash:#fdf6ec;
+  --green:#17864f; --green-wash:#eef7f1;
+  --red:#b3402a; --red-wash:#fbf1ee;
+  --r:12px; --r-lg:16px;
+  --shadow:0 4px 24px rgba(0,0,0,.08); --shadow-lg:0 16px 40px rgba(0,0,0,.10);
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:var(--font);background:var(--pane);color:var(--ink);
+     -webkit-font-smoothing:antialiased;font-size:14px;line-height:21px;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer}
+a{color:var(--purple-deep)}
+:focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:4px}
+::selection{background:var(--purple-wash)}
+.topnav{position:sticky;top:0;z-index:50;background:rgba(249,250,251,.92);backdrop-filter:blur(12px);
+        border-bottom:1px solid var(--line);display:flex;align-items:center;gap:6px;
+        padding:12px 24px;overflow-x:auto;white-space:nowrap}
+.topnav .b{font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px;margin-right:14px}
+.topnav .b i{width:20px;height:20px;border-radius:6px;background:var(--purple);color:#fff;display:grid;
+             place-items:center;font-style:normal;font-size:12px;font-weight:700}
+.topnav a{font-size:12.5px;font-weight:500;color:var(--ink-3);text-decoration:none;
+          padding:6px 11px;border-radius:99px;border:1px solid transparent}
+.topnav a:hover{background:var(--white);border-color:var(--line)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 120px}
+.pagenav{display:flex;margin:24px 0 -20px;border:1px solid var(--line);border-radius:12px;overflow:hidden;
+         width:fit-content;max-width:100%;background:var(--white);box-shadow:var(--shadow)}
+.pagenav a{padding:11px 18px;font-size:13.5px;font-weight:600;text-decoration:none;color:var(--ink-3);line-height:18px}
+.pagenav a small{display:block;font-size:11px;line-height:15px;font-weight:400;color:var(--ink-5);margin-top:1px}
+.pagenav a+a{border-left:1px solid var(--line)}
+.pagenav a.on{background:var(--purple-wash);color:var(--purple-deep)}
+.pagenav a.on small{color:var(--purple-deep);opacity:.75}
+.hero{padding:44px 0 6px;max-width:860px}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-deep)}
+.hero h1{font-size:29px;line-height:37px;font-weight:700;letter-spacing:-.45px;margin-top:10px;text-wrap:balance}
+.hero .lede{margin-top:12px;font-size:15px;line-height:23px;color:var(--ink-3);max-width:66ch}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:500;
+      color:var(--ink-4);background:var(--white);border:1px solid var(--line);border-radius:99px;padding:5px 11px}
+.hero .meta{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+section{margin-top:56px}
+.shead{display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.shead .no{font-size:12px;font-weight:700;color:var(--ink-5);letter-spacing:.06em}
+.shead h2{font-size:21px;line-height:28px;font-weight:600;letter-spacing:-.25px}
+.shead .q{margin-left:auto;font-size:12.5px;color:var(--ink-4);font-style:italic}
+.intro{margin-top:14px;font-size:14.5px;line-height:22px;color:var(--ink-3);max-width:76ch}
+.intro b{color:var(--ink)}
+/* flow strips */
+.flows{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:920px){.flows{grid-template-columns:1fr}}
+.flow{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px}
+.flow h3{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px}
+.flow h3 .who{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-5)}
+.fsteps{margin-top:14px;display:flex;flex-direction:column;gap:0}
+.fstep{display:flex;gap:12px;padding:9px 0;align-items:flex-start;position:relative}
+.fstep .fn{width:24px;height:24px;border-radius:50%;background:var(--purple-wash);color:var(--purple-deep);
+           display:grid;place-items:center;font-size:11px;font-weight:700;flex-shrink:0;z-index:1}
+.fstep.money .fn{background:var(--red-wash);color:var(--red)}
+.fstep.back .fn{background:var(--green-wash);color:var(--green)}
+.fstep::before{content:"";position:absolute;left:11.5px;top:32px;bottom:-4px;width:1.5px;background:var(--line-soft)}
+.fstep:last-child::before{display:none}
+.fstep p{font-size:13px;line-height:19px;color:var(--ink-2)}
+.fstep p b{font-weight:600;color:var(--ink)}
+.flow .foot{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:12.5px;line-height:18px;color:var(--ink-4)}
+.flow .foot b{color:var(--ink-2)}
+/* gallery */
+.gal{columns:3 300px;column-gap:14px;margin-top:20px}
+.gshot{break-inside:avoid;margin:0 0 14px;background:var(--white);border:1px solid var(--line);
+       border-radius:var(--r);overflow:hidden}
+.gshot img{width:100%;display:block;border-bottom:1px solid var(--line-soft);background:#fff}
+.gshot figcaption{padding:10px 13px 12px;font-size:12px;line-height:17px;color:var(--ink-2)}
+.gshot figcaption b{color:var(--purple-deep);font-weight:600}
+.gshot .prov{display:block;margin-top:5px;font-size:10px;color:var(--ink-5);text-transform:uppercase;
+             letter-spacing:.06em;font-weight:700}
+/* evidence + implication cards */
+.evgrid{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:14px}
+.ev{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.ev .tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ev .tag.works{color:var(--green)} .ev .tag.warn{color:var(--amber-ink)} .ev .tag.frame{color:var(--purple-deep)}
+.ev h3{font-size:14.5px;line-height:20px;font-weight:600;margin-top:6px;letter-spacing:-.1px}
+.ev p{margin-top:6px;font-size:13px;line-height:19px;color:var(--ink-3)}
+.ev p b{color:var(--ink);font-weight:600}
+.ev .so{margin-top:10px;padding:9px 12px;background:var(--tint);border-radius:8px;
+        font-size:12.5px;line-height:18px;color:var(--ink-2)}
+.ev .so b{color:var(--purple-deep)}
+.ev .cite{display:block;margin-top:8px;font-size:11.5px;color:var(--ink-5)}
+.pending{margin-top:20px;border:1.5px dashed var(--line);border-radius:var(--r);padding:22px;
+         color:var(--ink-5);font-size:13px;text-align:center}
+.caveat{margin-top:18px;background:var(--amber-wash);border:1px solid #f3e2c4;border-radius:var(--r);
+        padding:13px 16px;font-size:12.5px;line-height:19px;color:var(--amber-ink)}
+.caveat b{font-weight:700}
+.takeaway{margin-top:20px;background:var(--purple-wash);border:1px solid #e2d9ff;border-radius:var(--r-lg);padding:18px 22px}
+.takeaway .dh{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple-deep)}
+.takeaway ul{margin:10px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+.takeaway li{font-size:13.5px;line-height:20px;color:var(--ink-2);padding-left:18px;position:relative}
+.takeaway li::before{content:"→";position:absolute;left:0;color:var(--purple-deep);font-weight:700;font-size:12px}
+.takeaway li b{font-weight:600;color:var(--ink)}
+.srcs{margin-top:18px;columns:2;column-gap:32px;font-size:12.5px;line-height:19px}
+@media(max-width:800px){.srcs{columns:1}}
+.srcs li{margin:0 0 8px;color:var(--ink-3);break-inside:avoid}
+footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-5);
+       display:flex;gap:16px;flex-wrap:wrap}
+@media(max-width:480px){.wrap{padding:0 16px 90px}.hero h1{font-size:24px;line-height:31px}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="b"><i>B</i>Pay-first, up close</span>
+  <a href="#models">The two models</a>
+  <a href="#ui">The UI</a>
+  <a href="#works">Does it work?</a>
+  <a href="#lessons">What we take</a>
+  <a href="#sources">Sources</a>
+</nav>
+
+<div class="wrap">
+
+<nav class="pagenav" aria-label="Study pages">
+  <a href="index.html">The ghosting study<small>research · evidence · the test plan</small></a>
+  <a href="screen.html">The card screen &amp; copy<small>decided screen + options, for Tony</small></a>
+  <a class="on" href="payfirst.html">Pay-first, up close<small>Stack Influence &amp; TikTok refundable samples</small></a>
+</nav>
+
+<header class="hero">
+  <div class="kicker">Creator ghosting · the pay-first deep dive</div>
+  <h1>The two platforms where creators pay out of pocket — their UI, and whether it works</h1>
+  <p class="lede">Stack Influence makes creators buy the product with their own money and pays them back after a verified post. TikTok Shop sells "refundable samples" — pay now, refunded when your content produces sales. These are the only production systems with real creator money at risk, which makes them the ceiling for our much gentler card hold. Here's what their screens actually say, and the evidence on how well the mechanic performs.</p>
+  <div class="meta">
+    <span class="chip">Aug 18, 2026</span>
+    <span class="chip">official App Store + TikTok Academy UI</span>
+    <span class="chip">success evidence, verified</span>
+  </div>
+</header>
+
+<section id="models">
+  <div class="shead"><span class="no">01</span><h2>The two models, step by step</h2>
+  <span class="q">who fronts the money, and what earns it back</span></div>
+  <div class="flows">
+    <div class="flow">
+      <h3>Stack Influence <span class="who">micro-influencer gifting</span></h3>
+      <div class="fsteps">
+        <div class="fstep"><span class="fn">1</span><p><b>Creator applies</b> to a campaign in the Stack app (browse by category, "collabs that come to you").</p></div>
+        <div class="fstep money"><span class="fn">$</span><p><b>Creator buys the product</b> from the brand's own store (typically Amazon) with their own card, at full price.</p></div>
+        <div class="fstep"><span class="fn">3</span><p><b>Creator posts</b> per the campaign requirements; Stack verifies the live post.</p></div>
+        <div class="fstep back"><span class="fn">✓</span><p><b>Reimbursement lands via PayPal</b> — product + shipping + fees. Their marketing calls it "100% cash back."</p></div>
+      </div>
+      <div class="foot"><b>No post = no reimbursement.</b> The creator simply ate the purchase; the brand is never charged. The stick isn't a penalty — it's your own money not coming back.</div>
+    </div>
+    <div class="flow">
+      <h3>TikTok Shop refundable samples <span class="who">commerce sample program</span></h3>
+      <div class="fsteps">
+        <div class="fstep"><span class="fn">1</span><p><b>Creator finds the product</b> — the Get Sample sheet offers "Get free sample" (if eligible) or the paid path.</p></div>
+        <div class="fstep money"><span class="fn">$</span><p><b>"Buy first, refund later"</b> — the creator pays for the sample through normal checkout.</p></div>
+        <div class="fstep"><span class="fn">3</span><p><b>Content must perform:</b> the refund unlocks when the creator's shoppable content hits the seller's target (the UI example: "generate 2 sales from content to get refund").</p></div>
+        <div class="fstep back"><span class="fn">✓</span><p><b>Refund issued</b> once the target is met inside the program window.</p></div>
+      </div>
+      <div class="foot"><b>Miss the target = keep the product, eat the cost.</b> Note it's stricter than ours in two ways: money moves upfront, and the exit isn't "post" — it's "post something that sells."</div>
+    </div>
+  </div>
+</section>
+
+<section id="ui">
+  <div class="shead"><span class="no">02</span><h2>The UI — what the screens actually say</h2>
+  <span class="q">official App Store sets + TikTok Shop Academy documentation</span></div>
+  <p class="intro">Three things to notice. <b>① The mechanic is named plainly on the button</b> — TikTok writes "Buy first, refund later" right on the sheet, Stack brands reimbursement as "100% cash back." Nobody hides the money mechanic in fine print, and both still recruit at scale. <b>② The commitment sentence appears at request time</b> — TikTok's sample request screen carries the post-or-consequences line right above Submit, exactly where our card screen sits. <b>③ The states are a machine</b> — expired, not approved, on-hold-30-days, get-it-again. Consequences are lifecycle states in the UI, not angry messages.</p>
+  <div class="gal">
+    <figure class="gshot"><img src="shots/g2-tt-buyfirst.jpg" alt="TikTok Get sample sheet with Buy first refund later option: generate 2 sales from content to get refund"><figcaption><b>The hero receipt.</b> TikTok's Get Sample sheet names the paid path in five words — "Buy first, refund later" — with the exact unlock condition ("generate 2 sales from content to get refund") as the subtitle. Plain naming of a money mechanic, shipped at TikTok scale.<span class="prov">TikTok Shop Academy · Guide to Samples · official doc image</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g2-tt-commitline.jpg" alt="TikTok request free sample screen with agreement line above the submit button"><figcaption><b>The commitment sentence, at request time.</b> Above Submit: you agree to post with the product link within the window "or it may be harder to get samples in the future." The consequence is disclosed at the moment of asking — the exact slot our card screen occupies.<span class="prov">TikTok Shop Academy · official doc image</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g2-tt-refundtab.jpg" alt="TikTok Sample order screen with Free sample and Refundable sample tabs"><figcaption><b>Refundable samples are a first-class tab</b> in Manage Samples — alongside states like "Temporarily unavailable · on hold for 30 days." The penalty for flaking is rendered as a calm lifecycle state, not a scolding.<span class="prov">TikTok Shop Academy · official doc image</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g2-tt-3days.jpg" alt="TikTok modal saying 3 days left to post content with view details button"><figcaption><b>The countdown nudge:</b> "3 days left to post content… post a video or go LIVE within 3 days to earn commission." Deadline pressure framed as opportunity ("to earn"), not threat — carrot grammar on a hard clock.<span class="prov">TikTok Shop Academy · official doc image</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g2-tt-expired.jpg" alt="TikTok sample request expired state"><figcaption><b>"Request expired"</b> — miss the review window and the request dies quietly; re-request after 30 days. States do the enforcing.<span class="prov">TikTok Shop Academy · official doc image</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g2-stack-3step.jpg" alt="Stack Influence App Store screenshot showing the three step process: purchase on Amazon, post on Instagram, receive payment"><figcaption><b>Stack sells the pay-first flow openly</b> — App Store screenshot #4 is literally the 3-step process: "1 Purchase on Amazon · 2 Post on Instagram · 3 Receive Payment (PayPal)." The money mechanic IS the marketing.<span class="prov">App Store listing · official screenshots via iTunes API</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g2-stack-cashback.jpg" alt="Stack Influence App Store screenshot: 100 percent cash back for top beauty and fashion products"><figcaption><b>"100% cash back"</b> — reimbursement rebranded as a shopping perk. The same mechanic our research calls "creator money at risk," framed as a deal.<span class="prov">App Store listing</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g2-stack-instant.jpg" alt="Stack Influence App Store screenshot: simple easy requirements, fast shipping, instant payments, no approvals no holds"><figcaption><b>They pre-answer the fear:</b> "instant payments · no approvals · no holds." When creators front the money, reimbursement speed is the entire trust question — so it goes on the poster.<span class="prov">App Store listing</span></figcaption></figure>
+    <figure class="gshot"><img src="shots/g2-stack-trust.jpg" alt="Stack Influence App Store screenshot: top rated app, no hidden fees"><figcaption><b>"Top rated app · no hidden fees"</b> — trust badges as the closing argument, because the model's objection is always "will I really get paid back?"<span class="prov">App Store listing</span></figcaption></figure>
+  </div>
+</section>
+
+<section id="works">
+  <div class="shead"><span class="no">03</span><h2>Does it work? The success evidence</h2>
+  <span class="q">scale · post rates · what creators say about paying first</span></div>
+  <div class="fill-works">
+  <p class="intro"><b>Stack Influence — the verdict first:</b> the pay-first model demonstrably works at their tier. Eight years of operation, six-figure creator counts, $17M+ reimbursed lifetime, three straight Inc. 5000 appearances (473% three-year revenue growth) — and creators rate them 4.6 on Trustpilot (542 reviews), 4.4 on the App Store, 4.2 on Play. Nano and micro creators accept fronting their own money in volume, when the alternative is no brand deals at all. The fine print below is where it gets instructive.</p>
+  <div class="evgrid">
+    <div class="ev"><span class="tag works">Scale · verified</span>
+      <h3>Small company, big supply — the model recruits fine</h3>
+      <p>Founded 2018, ~32 staff, just $1.3M raised — sustained by the model itself. Site claims <b>340–410k vetted creators</b> (an Aug 2026 press release says "11M+"; ~27× the on-site number — treat as reach inflation). Entry bar is deliberately tiny: <b>100–200 followers</b>, approved within 24h. "Stop DMing brands — collabs come to you."</p>
+      <div class="so"><b>Read:</b> pay-first filters for creators with spare cash and no better offers — and at the nano tier, that pool is effectively bottomless. No acceptance-rate data is published anywhere.</div>
+      <span class="cite">stackinfluence.com / about / pricing · Crunchbase · Tracxn · Inc. 5000 press release (self-published)</span>
+    </div>
+    <div class="ev"><span class="tag works">Economics · verified</span>
+      <h3>Brands literally pay only on completion</h3>
+      <p>~$30–39 flat per <i>completed</i> post, $0 if the creator never posts — and the brand isn't billed reimbursement either: "influencers who do not complete a post will not receive a reimbursement, and you will not be charged." The whole business is priced on the no-post risk landing on the creator.</p>
+      <div class="so"><b>Gap worth knowing:</b> they publish no completion-rate number at all. "100% guaranteed" describes the brand's bill, not the post rate.</div>
+      <span class="cite">stackinfluence.com/pricing · intercom.help/stackinfluence (cost + reimbursement articles)</span>
+    </div>
+    <div class="ev"><span class="tag warn">Creator sentiment · verified</span>
+      <h3>4.6 stars — with a telling 5–7% tail</h3>
+      <p>Positives repeat one word: <b>fast</b> — "paid back almost immediately as soon as they post." The negative tail is almost entirely reimbursement failure: never reimbursed after purchase, partial reimbursement (taxes shorted), opaque "AI email" post rejections where the creator eats 100%, and a PayPal-only payout rail that permanently banned at least one creator's account.</p>
+      <div class="so"><b>Read:</b> nobody complains that money is at risk — they complain when the platform's side of the trade wobbles. Trust in the release, not the stake, is the entire acceptance question.</div>
+      <span class="cite">Trustpilot 4.6/542 (via indexed snippets; page 403s) · App Store 4.4/389 · Google Play 4.2/182 · r/UGCcreators Jan 2025</span>
+    </div>
+    <div class="ev"><span class="tag warn">Failure modes · verified</span>
+      <h3>The float, and fraud flowing backwards</h3>
+      <p>Creators carry product + shipping + tax for a <b>multi-week float</b> (posting "typically occurs a few weeks after receiving the product"); "instant" applies only to the moment after approval. And money-at-risk invites gaming in reverse: reimburse-then-return "double dipping" (keep the refund, return the product to Amazon) got bad enough that Stack shipped a zero-tolerance returns policy with screenshot-evidence investigations; one G2 brand reported high refund rates on $25k+ of spend.</p>
+      <div class="so"><b>Read:</b> every pay-first sharp edge is something our hold doesn't have — no cash outflow, no float, no payout rail, no return to game. The card sits still unless everything else already failed.</div>
+      <span class="cite">intercom.help/stackinfluence returns-policy + reimbursement articles · G2 (39 reviews)</span>
+    </div>
+  </div>
+  <p class="intro" style="margin-top:26px"><b>TikTok refundable samples — the verdict first:</b> launched Nov 20, 2024 as a pay-first commitment device, and TikTok's own Feb–Mar 2025 analysis claims sellers see <b>25% higher ROI than free samples</b> — against a free-sample baseline where agencies report fewer than ~30% of gifted creators post at all. Most telling: within five months TikTok <i>tightened</i> the mechanic. And the creator-sentiment tail ("refundable sample jail") maps exactly onto where the trust scaffolding thins.</p>
+  <div class="evgrid">
+    <div class="ev"><span class="tag works">Mechanics · verified</span>
+      <h3>Full price upfront, refund on 1–3 sales, 120 days</h3>
+      <p>Creator pays retail + shipping + tax at checkout. Seller sets the release target: <b>1–3 orders, default 1</b> (self-purchases never count). Window: <b>120 days</b> from receipt (recommended target-by-90, so orders clear the 30-day return period). Refund is <b>automatic</b> — 5–10 business days to the original payment method once each qualifying order clears returns. Miss the target: keep the product, eat the cost.</p>
+      <div class="so"><b>Note the default:</b> one sale. The platform keeps the release condition as low and legible as it can while still being about performance.</div>
+      <span class="cite">TikTok Shop Academy: Guide to Samples · How to use refundable samples · Creator T&amp;C (Jul 28, 2026) · Seller T&amp;C (May 14, 2026)</span>
+    </div>
+    <div class="ev"><span class="tag frame">The pivot · verified</span>
+      <h3>Apr 3, 2025: "post a video" stopped earning the refund</h3>
+      <p>At launch, sellers could release refunds for content creation alone. Five months in, TikTok killed that: "refunds will only be issued when creators meet sales thresholds… Refunds for content creation alone will no longer be available." Creators would buy, post minimum-effort content, collect the refund.</p>
+      <div class="so"><b>Crucial nuance for us:</b> TikTok's goal is sales, so post-as-release leaked. <i>Our</i> goal is the post itself — so post-as-release is exactly right for a gifted collab, and it's the achievable, creator-controlled trigger their creators wish they had.</div>
+      <span class="cite">Official "How to use refundable samples" changelog · Lindsey Gamble (Nov 20, 2024 launch coverage)</span>
+    </div>
+    <div class="ev"><span class="tag works">Trust scaffolding · verified</span>
+      <h3>What it takes to make "hold my money" palatable</h3>
+      <p>Automatic refunds (no claim step) · a dedicated <b>progress-tracking page</b> toward the target · <b>"Fast Refunds"</b> for proven creators, which TikTok funds by keeping the seller's commission — the platform literally pays to speed up trust · auto-refund if the product is delisted or the shop closes · coupon restored for reuse.</p>
+      <div class="so"><b>Read:</b> the mechanic only survives wrapped in guarantees that the release is low, legible, and instant. Our equivalents: "$0 today," "expires the moment you post," Katie-manual-only, post-and-refund.</div>
+      <span class="cite">Seller + Creator T&amp;C · Refundable Sample at Checkout doc (US) · SG variant doc</span>
+    </div>
+    <div class="ev"><span class="tag warn">Sentiment + the baseline · mixed verification</span>
+      <h3>"Refundable sample jail" — and why free samples needed fixing</h3>
+      <p>Complaints cluster on three things: money stuck pending targets, the SG checkout toggle defaulting to ON, and new creators seeing <i>only</i> refundable offers (free samples require recent sales history — pay-first is the de-facto on-ramp). The baseline it fixes: agency-reported free-gifting post rates of <b>12–34%</b>, with only 5–10% of content worth promoting (third-party, methodology unpublished).</p>
+      <div class="so"><b>Read:</b> nobody riots about skin-in-the-game per se — they riot about defaults they didn't choose and money that feels stuck. Disclosure and release speed are the whole fight.</div>
+      <span class="cite">TikTok discover threads (snippet-level) · Growi / Dropified / KOLSprite seeding guides · polici.net</span>
+    </div>
+  </div>
+  <div class="caveat"><b>Verification notes.</b> The 25%-ROI figure is TikTok's own unpublished-methodology analysis (cited on its official seller docs). Free-sample post-rate baselines (12–34%, &lt;30%) are agency-published, not audited. No platform publishes an adoption split of refundable vs free samples. Trustpilot's page blocks fetches — Stack's 4.6/542 comes from consistently indexed snippets. Reddit sentiment for both platforms is thin and snippet-verified only.</div>
+  </div>
+</section>
+
+<section id="lessons">
+  <div class="shead"><span class="no">04</span><h2>What this buys our commitment hold</h2>
+  <span class="q">the argument this page hands Tony</span></div>
+  <div class="takeaway">
+    <div class="dh">Four takeaways for the card-hold test</div>
+    <ul>
+      <li><b>Our hold is the gentle end of a proven spectrum.</b> Two production systems already put real creator money at risk — full purchase price, upfront — and recruit fine. A $0-today card that's only ever used on total silence is strictly milder than what thousands of creators already accept.</li>
+      <li><b>Name the mechanic on the button.</b> TikTok writes "Buy first, refund later"; Stack writes "100% cash back." Plain naming didn't kill either program — which validates "Commitment hold" as a literal title over something euphemistic.</li>
+      <li><b>Reimbursement trust is the whole game.</b> Stack's posters lead with "instant payments, no approvals, no holds" because the fear is never the rule — it's whether the platform honors its side. Our equivalents: "$0 today," "expires the moment you post," and the post-and-refund door if a charge ever fires.</li>
+      <li><b>States beat scolding.</b> TikTok renders consequences as calm lifecycle states (expired · on hold 30 days · get it again). Our ladder should keep that grammar: the hold "kicks in" as a dated state change, never as a mood.</li>
+      <li><b>Post-as-release is our structural advantage.</b> TikTok had to abandon content-based refunds because their goal is sales and low-effort posts leaked through. Our goal IS the post — so our release trigger ("post — even late — and it expires") is both achievable and un-gameable in exactly the way their creators wish theirs were. Where their money sits stuck for up to 120 days, ours never leaves the creator's account at all.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="shead"><span class="no">05</span><h2>Sources</h2></div>
+  <div class="fill-sources">
+  <ul class="srcs">
+    <li><b>TikTok Shop Academy (official, seller-us.tiktok.com):</b> Guide to Samples: Free and Refundable (doc dated Jul 28, 2026 — source of the creator-flow UI images above) · How to use refundable samples (25%-ROI claim; Apr 3, 2025 sales-threshold pivot) · How to set up and manage samples · Refundable Sample at Checkout · Sample Integrity Policy (14-day rule) · Creator T&amp;C (Jul 28, 2026) · Seller T&amp;C (May 14, 2026, Fast Refunds carve-out) · SG refundable-samples variant doc.</li>
+    <li><b>Stack Influence (official):</b> stackinfluence.com home / about / pricing / creators / campaign-FAQ · intercom.help/stackinfluence articles: cost ("you will not be charged"), product-reimbursement process, returns zero-tolerance policy · App Store listing id6481402069 (official screenshot set via iTunes API — source of the Stack UI above) · Google Play listing.</li>
+    <li><b>Stack scale &amp; reception (secondary):</b> Crunchbase ($1.3M seed, Nov 2023) · Tracxn (founded 2018, headcount) · Inc. 5000 press release (Aug 15, 2026, self-published; the "11M influencers" claim appears only here — treat as reach inflation) · Trustpilot 4.6/542 via indexed snippets (page 403s) · G2 (39 brand reviews; double-dipping complaints) · r/UGCcreators (PayPal-ban report, Jan 2025).</li>
+    <li><b>TikTok context (secondary):</b> Lindsey Gamble (Nov 20, 2024 launch) · BigSeller (Jul 2025, 60-day-window discrepancy, flagged) · Hubfluence · Dropified ("filters out sample collectors"; 10% content rule) · Growi / KOLSprite / MomentIQ (free-gifting post-rate baselines 12–34%, &lt;30%) · polici.net · TikTok discover threads ("refundable sample jail", default-on complaints — snippet-level).</li>
+  </ul>
+  </div>
+</section>
+
+<footer>
+  <span>Pay-first, up close · Aug 18, 2026</span>
+  <span>Part of the creator-ghosting study</span>
+  <span>UI: official App Store screenshot sets (iTunes API) + TikTok Shop Academy doc images</span>
+</footer>
+</div>
+</body>
+</html>
