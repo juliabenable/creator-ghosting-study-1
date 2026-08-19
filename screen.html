@@ -274,6 +274,29 @@ section{margin-top:56px}
 .sheet.plain h4{font-size:19px;font-weight:700;letter-spacing:-.3px}
 .sheet.plain p{font-size:12.5px;line-height:18.5px;color:var(--ink-3);margin-top:6px}
 .cardbox .filled{color:var(--ink);font-size:14px;letter-spacing:.04em}
+
+.stp{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.stp-lbl{font-size:13px;color:#30313d;margin-bottom:5px}
+.stp-in{height:44px;border:1px solid #e6e6e6;border-radius:4px;background:#fff;
+        box-shadow:0 1px 3px rgba(0,0,0,.04);padding:0 12px;font-size:15px;color:#30313d;
+        display:flex;align-items:center;gap:8px}
+.stp-in .ph{color:#757680}
+.stp-in.focus{border-color:transparent;box-shadow:0 0 0 3px rgba(5,112,222,.28),0 1px 3px rgba(0,0,0,.04)}
+.stp-in.err{border-color:#df1b41;box-shadow:none}
+.stp-errtx{font-size:12.5px;color:#df1b41;margin-top:5px}
+.stp-row{display:flex;gap:12px}
+.stp-row>div{flex:1;min-width:0}
+.stp-brands{margin-left:auto;display:flex;gap:3px}
+.stp-brands i{width:24px;height:16px;border-radius:3px;display:grid;place-items:center;
+              font-style:normal;font-weight:800;font-size:6.5px;color:#fff;letter-spacing:.02em}
+.stp-chev{margin-left:auto;color:#6a7383;font-size:11px}
+.stp-link{display:flex;align-items:center;gap:8px;padding:11px 12px;border:1px solid #e6e6e6;border-radius:5px;
+          background:#f7fafc;font-size:12.5px;color:#30313d}
+.stp-link .lgo{background:#00d66f;color:#011e0f;font-weight:800;font-size:10px;border-radius:4px;padding:2px 5px;font-style:normal}
+.themed .stp-lbl{font-family:var(--font);color:var(--ink-3);font-size:12.5px}
+.themed .stp-in{font-family:var(--font);border-radius:11px;border-color:#e3e3e3;box-shadow:none;height:46px}
+.themed .stp-in.focus{box-shadow:0 0 0 3px rgba(122,92,250,.25);border-color:transparent}
+.stripefacts{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:14px}
 footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-5);
        display:flex;gap:16px;flex-wrap:wrap}
 @media(max-width:480px){.wrap{padding:0 16px 90px}.hero h1{font-size:24px;line-height:31px}}
@@ -290,6 +313,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
   
   <span style="flex:0 0 8px"></span>
   <a href="#screens">Tony's screens</a>
+  <a href="#stripe">With Stripe</a>
   <a href="#states">Edge states — designed</a>
   <a href="#edges">The audit</a>
   <a href="#stubhub">StubHub voice</a>
@@ -382,6 +406,137 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
   </div>
 </section>
 
+<section id="stripe">
+  <div class="shead"><span class="no">02</span><h2>With Stripe implementation</h2>
+  <span class="q">what the package ships vs. what stays ours — verified against Stripe's docs</span></div>
+  <p class="intro" data-stripe-intro>Saving a card for a later off-session charge is Stripe's <b>SetupIntent</b> flow, and the packaged UI for it on our web portal is the <b>Payment Element</b> (fields) plus the <b>Express Checkout Element</b> (the Apple&nbsp;Pay button). Two things change versus Tony's mock the moment the package renders: fields become <b>separately labeled inputs</b> (Stripe's structure, not styleable away), and the <b>submit button stays ours</b> — Stripe ships everything above it. S·A is the untouched default; S·B is the same component pushed as close to Tony's design as the Appearance API allows.</p>
+
+  <div class="variants">
+    <div class="variant">
+      <div class="vhead"><span class="vletter">S·A</span><h3>Out of the box — default "stripe" theme</h3></div>
+      <p class="vsub">Payment Element + Express Checkout untouched: system font, 4px radii (the docs’ own example values), Stripe-blue focus, and the Link prompt that ships on by default. This is what renders if we do nothing.</p>
+      <div class="phone stp" role="img" aria-label="Card screen with default Stripe Payment Element">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp2" style="margin-left:auto;font-size:12px;color:var(--ink-5);font-weight:500">Step 3 of 3</span></div>
+        <div class="pbody" style="gap:16px">
+          <div class="ptitle" style="font-family:var(--font)">Credit or debit card</div>
+          <p class="psub" style="font-family:var(--font)">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today — and you'll always receive a final warning first. <a style="color:var(--purple-deep);font-weight:600;text-decoration:none">Learn more</a></p>
+          <button class="appay" style="height:48px;border-radius:6px"> Pay</button>
+          <div class="ordv" data-stripe-divider>Or use a card</div>
+          <div>
+            <div class="stp-lbl">Card number</div>
+            <div class="stp-in"><span class="ph">1234 1234 1234 1234</span><span class="stp-brands"><i style="background:#1434cb">VISA</i><i style="background:#252525">MC</i><i style="background:#2e77bc">AMEX</i></span></div>
+          </div>
+          <div class="stp-row">
+            <div><div class="stp-lbl">Expiration date</div><div class="stp-in"><span class="ph">MM / YY</span></div></div>
+            <div><div class="stp-lbl">Security code</div><div class="stp-in"><span class="ph">CVC</span></div></div>
+          </div>
+          <div class="stp-row">
+            <div><div class="stp-lbl">Country</div><div class="stp-in">United States<span class="stp-chev">▼</span></div></div>
+            <div><div class="stp-lbl">ZIP</div><div class="stp-in"><span class="ph">12345</span></div></div>
+          </div>
+          <div class="stp-link"><span style="width:15px;height:15px;border:1.5px solid #b5b8c0;border-radius:4px;flex-shrink:0"></span>Save my info for secure 1-click checkout<span class="lgo" style="margin-left:auto">Link</span></div>
+          <button class="pcta" data-stripe-cta>Save card</button>
+          <p class="plegal" style="font-family:var(--font)">🔒 Payments secured by Stripe. Benable never sees your card number.</p>
+        </div>
+      </div>
+      <div class="winrisk">
+        <span class="w">Free with the package: brand detection, per-field validation, 40+ locales, and the 3DS challenge at save (E-7) rendered by Stripe in-flow.</span>
+        <span class="r">Default look drifts from the design system — system font, 4px corners, Stripe-blue focus, a Link checkbox we didn't ask for — and the Country row appears whether Tony's mock wants it or not.</span>
+      </div>
+    </div>
+
+    <div class="variant rec">
+      <div class="vhead"><span class="vletter">S·B</span><h3>Appearance API — tuned to Benable</h3><span class="rectag">Recommended</span></div>
+      <p class="vsub">Same component, themed: Inter via custom fonts, 11px radii, our borders, purple focus ring. Structure stays Stripe's — labels and all.</p>
+      <div class="phone stp themed" role="img" aria-label="Card screen with Benable-themed Stripe Payment Element">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span style="margin-left:auto;font-size:12px;color:var(--ink-5);font-weight:500">Step 3 of 3</span></div>
+        <div class="pbody" style="gap:16px">
+          <div class="ptitle" style="font-family:var(--font)">Credit or debit card</div>
+          <p class="psub" style="font-family:var(--font)">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today — and you'll always receive a final warning first. <a style="color:var(--purple-deep);font-weight:600;text-decoration:none">Learn more</a></p>
+          <button class="appay"> Pay</button>
+          <div class="ordv" data-stripe-divider>Or use a card</div>
+          <div>
+            <div class="stp-lbl">Card number</div>
+            <div class="stp-in focus"><span style="color:var(--ink)">4242 4242 4242 4</span><span class="stp-brands"><i style="background:#1434cb">VISA</i></span></div>
+          </div>
+          <div class="stp-row">
+            <div><div class="stp-lbl">Expiration date</div><div class="stp-in"><span class="ph">MM / YY</span></div></div>
+            <div><div class="stp-lbl">Security code</div><div class="stp-in"><span class="ph">CVC</span></div></div>
+          </div>
+          <div class="stp-row">
+            <div><div class="stp-lbl">Country</div><div class="stp-in">United States<span class="stp-chev">▼</span></div></div>
+            <div><div class="stp-lbl">ZIP</div><div class="stp-in"><span class="ph">94110</span></div></div>
+          </div>
+          <button class="pcta" data-stripe-cta>Save card</button>
+          <p class="plegal" style="font-family:var(--font)">🔒 Payments secured by Stripe. Benable never sees your card number.</p>
+        </div>
+      </div>
+      <div class="winrisk">
+        <span class="w">Close enough to Tony's mock that nobody but us notices — while keeping every packaged behavior (shown: Visa detected + our purple focus ring).</span>
+        <span class="r">The one structural surrender: separate labeled fields instead of Tony's compact combined box. That's the Element's anatomy — you theme it, you don't rearrange it.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="kit stripefacts" data-stripe-facts>
+    <div class="kcard"><div class="kh"><b>In the box</b></div>
+<pre>The whole card form: number w/ inline brand
+icons, Expiration + CVC, Country + ZIP
+Per-field validation + localized decline
+copy (card_declined, expired_card,
+incorrect_cvc, incorrect_zip…)
+Apple Pay / Google Pay, device-conditional
+(shown only where actually set up)
+Link 1-click prompt — ON by default
+3DS challenge modal at save (bank-styled)
+40+ locales · automatic card updater
+(payment_method.automatically_updated)
+Native app later: PaymentSheet bottom
+sheet w/ built-in "Set up" CTA + iOS
+camera card-scan; CustomerSheet =
+packaged saved-card settings</pre></div>
+    <div class="kcard"><div class="kh"><b>Still ours to build</b></div>
+<pre>Everything around the Element:
+Title, Content Guarantee copy, Learn
+more sheet — the consent layer
+The submit button + loading/disabled
+states (their doc form is literally
+&lt;div id="payment-element"&gt; + YOUR button)
+The confirmation-error container +
+success/return state after confirmSetup
+The legal line under the CTA
+Web settings display of the saved card
+(native CustomerSheet covers it later)
+All the edge-state flows below —
+warning, waiver, receipt, console</pre></div>
+    <div class="kcard"><div class="kh"><b>The levers (Appearance API)</b></div>
+<pre>Themes: stripe · night · flat
+Variables: colorPrimary, borderRadius,
+fontFamily (Inter via cssSrc), colorText,
+colorDanger, spacingUnit, focusBoxShadow
+Rules: .Input / .Label / .Error / .Tab
+selectors (allowlisted properties)
+Labels: above (default) or floating
+Layout: tabs vs accordion
+Wallets: auto / always / never per wallet
+Express Checkout buttonHeight: 40–55px
+(Apple sets its own logo + colors)
+Link: on/off in Dashboard settings
+Billing collection: country+ZIP default,
+expandable to full address</pre></div>
+  </div>
+
+  <div class="dnote" data-stripe-notes style="margin-top:18px">
+    <div class="dn"><span class="nd">1</span><span><b>E-7 comes free:</b> stripe.confirmSetup renders the 3DS challenge itself (pop-up modal, bank-controlled styling — not themeable), so our S·2 edge-state phone is Stripe's to draw, not ours. Test card 4000 0025 0000 3155 exercises it.</span></div>
+    <div class="dn"><span class="nd">2</span><span><b>E-14 comes free too:</b> the card account updater refreshes expired/reissued US cards automatically (webhook payment_method.automatically_updated) — our no-nag settings state just listens.</span></div>
+    <div class="dn"><span class="nd">3</span><span><b>E-6 resolved by a default:</b> SetupIntent usage defaults to off_session — exactly what a later Katie-initiated charge needs; the future charge runs with off_session: true, confirm: true.</span></div>
+    <div class="dn"><span class="nd">4</span><span><b>The zero-work fallback exists:</b> hosted Checkout supports mode=setup (whole page Stripe-hosted, branding limited to logo/colors/font). Fine for a hack-week test; wrong for shipping — the Content Guarantee copy IS the product on this screen.</span></div>
+    <div class="dn"><span class="nd">5</span><span><b>Recommendation:</b> S·B — embedded Payment Element + Express Checkout in setup mode, Appearance-tuned, Link off, our button and copy. It keeps Tony's screen ours while Stripe eats validation, wallets, 3DS, and card freshness.</span></div>
+  </div>
+</section>
+
 <section id="states" style="margin-top:56px">
   <div class="shead"><span class="no">—</span><h2>Below: the edge cases, designed</h2>
   <span class="q">11 of the 31 have a user-facing surface — here they are in Tony's grammar</span></div>
@@ -389,7 +544,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="save">
-  <div class="shead"><span class="no">02</span><h2>Save-card failures</h2>
+  <div class="shead"><span class="no">03</span><h2>Save-card failures</h2>
   <span class="q">E-6 · E-7 — the moment must never feel like a rejection of the person</span></div>
   <p class="intro">Three failure shapes: a field the creator can fix, a decline the bank made, and a 3DS challenge the bank demands. Rule: <b>errors name the card, never the creator</b> ("this card was declined," not "you were declined"), and every error keeps the spot safe — the reservation never dies on a payment hiccup.</p>
 
@@ -466,7 +621,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="portal">
-  <div class="shead"><span class="no">03</span><h2>Stall, waiver &amp; the release moments</h2>
+  <div class="shead"><span class="no">04</span><h2>Stall, waiver &amp; the release moments</h2>
   <span class="q">E-9 · E-10 · E-16 — the card step as a portal state, not a wall</span></div>
   <p class="intro">The card step never blocks what's already done — product picked, spot held. It appears in the portal as <b>one finishable row</b>, and every way it resolves (saved, waived, released, exited) gets its own calm confirmation. The waiver is Katie's move; the portal simply reflects it without drama.</p>
 
@@ -513,7 +668,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="settings">
-  <div class="shead"><span class="no">04</span><h2>The Guarantee at rest — settings</h2>
+  <div class="shead"><span class="no">05</span><h2>The Guarantee at rest — settings</h2>
   <span class="q">E-12 · E-14 · E-15 — one block, four states, zero nagging</span></div>
   <p class="intro">The card needs a home the creator can find without asking — otherwise "where's my card info?" becomes a support thread. One settings block: what's on file, what it's backing, and the two actions. The states below it are the same block wearing E-12, E-14 and E-15.</p>
 
@@ -559,7 +714,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="warning">
-  <div class="shead"><span class="no">05</span><h2>The final warning — Katie's moment, on every channel</h2>
+  <div class="shead"><span class="no">06</span><h2>The final warning — Katie's moment, on every channel</h2>
   <span class="q">E-18 · E-20 · E-21 — the spec from rev 4, now with faces</span></div>
   <p class="intro">Three renderings of one message: the text (Katie's number, TCPA-clean per E-20), the email (the legally load-bearing copy with the facts table), and the portal banner (where both buttons live). All three repeat the same escape sentence — <b>"one reply is enough"</b> — because E-18 says the likeliest ghost is someone who already posted and never told us.</p>
 
@@ -615,7 +770,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="charged">
-  <div class="shead"><span class="no">06</span><h2>Charged — and the way back</h2>
+  <div class="shead"><span class="no">07</span><h2>Charged — and the way back</h2>
   <span class="q">E-24 — the receipt is restitution with a door, StubHub minus the fee</span></div>
   <p class="intro">If the charge ever fires, two surfaces carry it: the receipt email (facts timeline, money's destination, the refund door above the fold) and the portal state (countdown to the refund deadline, one button). The refunded state closes the loop with the same calm the release states use.</p>
 
@@ -661,7 +816,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="console">
-  <div class="shead"><span class="no">07</span><h2>Katie's charge console</h2>
+  <div class="shead"><span class="no">08</span><h2>Katie's charge console</h2>
   <span class="q">E-23 · E-25 — the fairness spec as a UI that physically gates the button</span></div>
   <p class="intro">The rev-4 rule was "no cron job ever charges a card." This is what that looks like: the fairness checklist rendered as rows with auto-filled evidence, and a charge button that stays dead until every row is green. The unchecked row below is doing its job — this creator can't be charged yet, because the extension question is unresolved.</p>
 
@@ -692,7 +847,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="edges">
-  <div class="shead"><span class="no">08</span><h2>The edge-case audit — all 31, before polish</h2>
+  <div class="shead"><span class="no">09</span><h2>The edge-case audit — all 31, before polish</h2>
   <span class="q">31 cases · 6 groups · tagged by status</span></div>
   <p class="intro">Organized by where in the lifecycle each one bites. <span class="tg dec">Decided</span> means the Aug 18 call or the fairness spec already answers it — polish just has to implement the answer. <span class="tg open">Needs decision</span> is genuinely open — flagged for you, Tony, or Katie by name. <span class="tg eng">Eng</span> / <span class="tg ops">Ops</span> / <span class="tg legal">Legal</span> are execution details that will bite if nobody owns them.</p>
 
@@ -801,7 +956,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="stubhub">
-  <div class="shead"><span class="no">09</span><h2>What StubHub actually says — the voice for receipts &amp; warnings</h2>
+  <div class="shead"><span class="no">10</span><h2>What StubHub actually says — the voice for receipts &amp; warnings</h2>
   <span class="q">"process, not personal," dissected</span></div>
   <div class="sh">
     <div class="shcard">
@@ -831,7 +986,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="archive">
-  <div class="shead"><span class="no">10</span><h2>Copy archive — the rounds that got us here</h2>
+  <div class="shead"><span class="no">11</span><h2>Copy archive — the rounds that got us here</h2>
   <span class="q">rev 1–3, kept for reference</span></div>
   <p class="intro">Superseded by Tony's direction but kept reviewable: Julia's decided rev-3 assembly ("Commitment hold" + her subtitle), the human-voice twin, and the three earlier framings. Screens for all of these live in the chat captures and rev-3 deploy history.</p>
   <div class="kit">
