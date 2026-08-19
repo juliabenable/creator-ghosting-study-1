@@ -189,6 +189,90 @@ section{margin-top:56px}
 .kcard pre{padding:13px 15px;font-family:var(--font);font-size:12.5px;line-height:19px;color:var(--ink-2);
            white-space:pre-wrap;overflow-x:auto}
 
+.pcard{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.pcard .ph{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.pcard .ph .ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:15px;flex-shrink:0}
+.pcard h4{font-size:14.5px;font-weight:700;letter-spacing:-.15px}
+.pcard .sub{font-size:12px;color:var(--ink-4);margin-top:1px}
+.pcard p{font-size:12.5px;line-height:18.5px;color:var(--ink-2)}
+.pcard .row{display:flex;gap:8px;margin-top:12px}
+.pcard .row .pcta{height:40px;font-size:13.5px;border-radius:10px;flex:1}
+.statechip{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;letter-spacing:.06em;
+           text-transform:uppercase;padding:3px 8px;border-radius:6px}
+.statechip.amb{background:var(--amber-wash);color:var(--amber-ink)}
+.statechip.grn{background:var(--green-wash);color:var(--green)}
+.statechip.red{background:var(--red-wash);color:var(--red)}
+.statechip.mut{background:var(--tint);color:var(--ink-4)}
+.pgrid{margin-top:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr));gap:16px;align-items:start}
+.pslot .cap{margin-top:10px;font-size:12px;line-height:17px;color:var(--ink-4)}
+.pslot .cap b{color:var(--ink-2);font-weight:600}
+
+.emailf{background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.emailf .eh{padding:13px 18px;border-bottom:1px solid var(--line-soft);background:var(--tint)}
+.emailf .eh .esub{font-size:13.5px;font-weight:700}
+.emailf .eh .emeta{font-size:11.5px;color:var(--ink-4);margin-top:3px}
+.emailf .ebody{padding:18px;font-size:13px;line-height:19.5px;color:var(--ink-2)}
+.emailf .ebody p{margin-bottom:11px}
+.emailf .ebody p b{font-weight:600;color:var(--ink)}
+.tl{border:1px solid var(--line-soft);border-radius:10px;overflow:hidden;margin:12px 0}
+.tl .tr{display:flex;gap:10px;padding:9px 13px;font-size:12.5px;border-bottom:1px solid var(--line-soft);background:var(--white)}
+.tl .tr:last-child{border-bottom:none}
+.tl .tr .d{min-width:64px;color:var(--ink-5);font-weight:600;font-size:11.5px;padding-top:1px}
+.tl .tr .v{color:var(--ink-2)}
+.btnrow{display:flex;gap:10px;margin:14px 0}
+.ebtn{flex:1;height:42px;border-radius:10px;border:none;font-size:13.5px;font-weight:600;display:grid;place-items:center;text-align:center}
+.ebtn.p{background:var(--purple);color:#fff}
+.ebtn.s{background:var(--white);color:var(--ink-2);border:1px solid var(--line)}
+.chargebox{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0;background:var(--tint)}
+.chargebox .cr{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0}
+.chargebox .cr span:first-child{color:var(--ink-4)}
+.chargebox .cr span:last-child{font-weight:600}
+.esig{font-size:12.5px;color:var(--ink-3);margin-top:14px}
+
+.thread{background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.thread .th{padding:11px 16px;border-bottom:1px solid var(--line-soft);background:var(--tint);
+            font-size:12px;font-weight:700;color:var(--ink-3);display:flex;gap:8px;align-items:center}
+.thread .tb{padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--pane)}
+.bub{max-width:88%;padding:10px 13px;border-radius:16px;font-size:13px;line-height:18.5px;position:relative}
+.bub.in{background:var(--white);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:5px}
+.bub.out{background:var(--purple);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.bub .bt{display:block;font-size:10px;opacity:.65;margin-top:5px}
+
+.console{margin-top:24px;background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);
+         box-shadow:var(--shadow);overflow:hidden;max-width:860px}
+.console .ch{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;background:var(--tint)}
+.console .ch .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#e8b4b8,#d49fa6);
+                     display:grid;place-items:center;font-size:12px;font-weight:700;color:#7a3b44}
+.console .ch h4{font-size:14.5px;font-weight:700}
+.console .ch .sub{font-size:11.5px;color:var(--ink-4)}
+.console .ch .statechip{margin-left:auto}
+.clist{padding:6px 0}
+.crow{display:flex;gap:12px;padding:11px 20px;border-bottom:1px solid var(--line-soft);align-items:flex-start}
+.crow:last-child{border-bottom:none}
+.crow .ck{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:1px}
+.crow .ck.y{background:var(--green-wash);color:var(--green)}
+.crow .ck.n{background:var(--amber-wash);color:var(--amber-ink)}
+.crow .cl{flex:1}
+.crow .cl b{font-size:13px;font-weight:600;display:block}
+.crow .cl span{font-size:12px;color:var(--ink-4);line-height:17px;display:block;margin-top:1px}
+.crow .ev{font-size:11px;color:var(--ink-5);text-align:right;min-width:120px}
+.cfoot{padding:14px 20px;border-top:1px solid var(--line);display:flex;align-items:center;gap:12px;background:var(--tint)}
+.cfoot .chargebtn{height:42px;padding:0 22px;border-radius:10px;border:none;background:var(--red);color:#fff;
+                  font-size:13.5px;font-weight:700;opacity:.45;cursor:not-allowed}
+.cfoot .chargebtn.armed{opacity:1;cursor:pointer}
+.cfoot .note{font-size:11.5px;color:var(--ink-4);line-height:16px}
+.auditline{padding:9px 20px;font-size:11px;color:var(--ink-5);border-top:1px dashed var(--line);background:var(--white);font-family:ui-monospace,monospace}
+
+.dnote{margin-top:16px;display:flex;flex-direction:column;gap:8px;max-width:860px}
+.dn{display:flex;gap:10px;font-size:12.5px;line-height:18px;color:var(--ink-2)}
+.dn .nd{width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;display:grid;
+        place-items:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.dn b{font-weight:600}
+
+
+.sheet.plain h4{font-size:19px;font-weight:700;letter-spacing:-.3px}
+.sheet.plain p{font-size:12.5px;line-height:18.5px;color:var(--ink-3);margin-top:6px}
+.cardbox .filled{color:var(--ink);font-size:14px;letter-spacing:.04em}
 footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-5);
        display:flex;gap:16px;flex-wrap:wrap}
 @media(max-width:480px){.wrap{padding:0 16px 90px}.hero h1{font-size:24px;line-height:31px}}
@@ -202,10 +286,11 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
   <a href="index.html">The research</a>
   <a class="on" href="screen.html">The card screen</a>
   <a href="payfirst.html">Pay-first, up close</a>
-  <a href="states.html">The edge states</a>
+  
   <span style="flex:0 0 8px"></span>
   <a href="#screens">Tony's screens</a>
-  <a href="#edges">Edge cases</a>
+  <a href="#states">Edge states — designed</a>
+  <a href="#edges">The audit</a>
   <a href="#stubhub">StubHub voice</a>
   <a href="#archive">Copy archive</a>
 </nav>
@@ -294,8 +379,317 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
   </div>
 </section>
 
+<section id="states" style="margin-top:56px">
+  <div class="shead"><span class="no">—</span><h2>Below: the edge cases, designed</h2>
+  <span class="q">11 of the 31 have a user-facing surface — here they are in Tony's grammar</span></div>
+  <p class="intro">Everything from here to the audit reuses the shipped voice: errors name the card, never the person; the mercy door is visible in every state; and the happy path says out loud that the card did nothing. The remaining 20 cases are policy, rules, or plumbing — they live in the audit further down.</p>
+</section>
+
+<section id="save">
+  <div class="shead"><span class="no">02</span><h2>Save-card failures</h2>
+  <span class="q">E-6 · E-7 — the moment must never feel like a rejection of the person</span></div>
+  <p class="intro">Three failure shapes: a field the creator can fix, a decline the bank made, and a 3DS challenge the bank demands. Rule: <b>errors name the card, never the creator</b> ("this card was declined," not "you were declined"), and every error keeps the spot safe — the reservation never dies on a payment hiccup.</p>
+
+  <div class="variants">
+    <div class="variant">
+      <div class="vhead"><span class="vletter">S·1</span><h3>Declined at save</h3></div>
+      <p class="vsub">Bank said no. The card box goes red, the message blames the card, and the spot is explicitly untouched.</p>
+      <div class="phone" role="img" aria-label="Card declined state">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="ptitle">Credit or debit card</div>
+          <p class="psub">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today…</p>
+          <div class="cardbox err">
+            <div class="row1"><span class="ccicon"></span><span class="filled">•••• •••• •••• 4029</span></div>
+            <div class="row2"><div class="filled" style="color:var(--ink)">08 / 27</div><div class="filled" style="color:var(--ink)">•••</div><div class="filled" style="color:var(--ink)">94110</div></div>
+          </div>
+          <p class="fielderr">This card was declined by your bank — no charge was attempted. Try another card, or use Apple Pay above.</p>
+          <button class="pcta">Try again</button>
+          <p class="plegal">Your spot is safe — this step just needs a working card. Stuck? Text Katie at (XXX) XXX-XXXX.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="vhead"><span class="vletter">S·2</span><h3>The 3DS challenge</h3></div>
+      <p class="vsub">Some banks (esp. EU) demand verification at save — which is exactly where we want it, so the future charge never needs one (E-7).</p>
+      <div class="phone" role="img" aria-label="3DS bank verification sheet">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="ptitle">Credit or debit card</div>
+          <p class="psub">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file…</p>
+          <div class="cardbox">
+            <div class="row1"><span class="ccicon"></span><span class="filled">•••• •••• •••• 8814</span></div>
+            <div class="row2"><div class="filled" style="color:var(--ink)">11 / 28</div><div class="filled" style="color:var(--ink)">•••</div><div class="filled" style="color:var(--ink)">SW1A</div></div>
+          </div>
+        </div>
+        <div class="sheetdim"></div>
+        <div class="sheet plain">
+          <div class="grab"></div>
+          <h4>Your bank wants to confirm it's you</h4>
+          <p>Chase sent a verification to your banking app. Approve it there and we'll finish saving your card — this is a one-time check, and it means no verification will ever interrupt anything later.</p>
+          <div style="display:flex;align-items:center;gap:10px;margin:16px 0 6px">
+            <span style="width:22px;height:22px;border:2.5px solid var(--purple);border-top-color:transparent;border-radius:50%;display:inline-block"></span>
+            <span style="font-size:12.5px;color:var(--ink-4)">Waiting for your bank…</span>
+          </div>
+          <button class="pcta sec" style="margin-top:10px">Use a different card</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="vhead"><span class="vletter">S·3</span><h3>Field errors &amp; the no-Apple-Pay fallback</h3></div>
+      <p class="vsub">Fixable mistakes stay at the field. And on Android/web the black button simply never renders — manual entry is the whole screen (E-6).</p>
+      <div class="phone" role="img" aria-label="Field error and no Apple Pay variant">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
+        <div class="pbody">
+          <div class="ptitle">Credit or debit card</div>
+          <p class="psub">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today. Charges are reserved for the rare case where a campaign ends with the product kept and no content posted — and you'll always receive a final warning first. <a style="color:var(--purple-deep);font-weight:600;text-decoration:none">Learn more</a></p>
+          <div class="cardbox err">
+            <div class="row1"><span class="ccicon"></span><span class="filled">•••• •••• •••• 4242</span></div>
+            <div class="row2"><div class="filled" style="color:var(--red)">03 / 24</div><div class="filled" style="color:var(--ink)">•••</div><div class="filled" style="color:var(--ink)">94110</div></div>
+          </div>
+          <p class="fielderr">This card's expiry date has passed — check the date or use a current card.</p>
+          <button class="pcta">Save card</button>
+          <p class="plegal">🔒 Payments secured by Stripe. Benable never sees your card number.</p>
+        </div>
+      </div>
+      <p class="vsub" style="margin-top:14px">Note the missing Apple Pay button and divider — the layout collapses cleanly rather than showing a dead button.</p>
+    </div>
+  </div>
+</section>
+
+<section id="portal">
+  <div class="shead"><span class="no">03</span><h2>Stall, waiver &amp; the release moments</h2>
+  <span class="q">E-9 · E-10 · E-16 — the card step as a portal state, not a wall</span></div>
+  <p class="intro">The card step never blocks what's already done — product picked, spot held. It appears in the portal as <b>one finishable row</b>, and every way it resolves (saved, waived, released, exited) gets its own calm confirmation. The waiver is Katie's move; the portal simply reflects it without drama.</p>
+
+  <div class="pgrid">
+    <div class="pslot">
+      <div class="pcard">
+        <div class="ph"><span class="ico" style="background:var(--purple-wash)">💳</span><div><h4>One step left — save your card</h4><div class="sub">MD Solar Sciences · your products are reserved</div></div></div>
+        <p>Your Full Protection SPF 44 set is picked and your spot is held. Finish the Content Guarantee step to confirm shipping.</p>
+        <div class="row"><button class="pcta">Save card — takes a minute</button></div>
+        <p style="margin-top:9px;font-size:11.5px;color:var(--ink-5)">$0 today · questions? The <b style="color:var(--ink-3)">Content Guarantee</b> explainer is one tap away.</p>
+      </div>
+      <p class="cap"><b>Re-entry row (E-10).</b> Killed the app mid-entry, or tapped ‹ — the portal home shows exactly one action, with the reservation reassured in the subline.</p>
+    </div>
+
+    <div class="pslot">
+      <div class="pcard">
+        <div class="ph"><span class="ico" style="background:var(--green-wash)">✓</span><div><h4>You're all set — card step removed</h4><div class="sub">MD Solar Sciences · updated by Katie, today</div></div></div>
+        <p>We've taken the card step off your list for this campaign. Nothing else needed — your order ships as planned. Watch for tracking in a day or two.</p>
+      </div>
+      <p class="cap"><b>Waiver state (E-9).</b> After 24h of stall, Katie's waiver email fires and the portal row flips to this — "forget you ever saw that screen," as decided on the call. No card language survives on the happy path.</p>
+    </div>
+
+    <div class="pslot">
+      <div class="pcard">
+        <div class="ph"><span class="ico" style="background:var(--green-wash)">🎉</span><div><h4>Content Guarantee complete</h4><div class="sub">MD Solar Sciences · post approved Aug 21</div></div></div>
+        <p>Your post is live and approved — your card was never charged, and it's now released from this campaign. That's how this is supposed to go. 🤝</p>
+        <div class="row"><button class="pcta sec">See your wrap-up</button></div>
+      </div>
+      <p class="cap"><b>The happy release (E-16's twin).</b> The trust-builder almost every platform forgets: say out loud that the card did nothing. This line is what makes campaign #2's card step a non-event.</p>
+    </div>
+
+    <div class="pslot">
+      <div class="pcard">
+        <div class="ph"><span class="ico" style="background:var(--tint)">↩</span><div><h4>You've left this campaign</h4><div class="sub">MD Solar Sciences · card released</div></div></div>
+        <p>Your card was never charged and is no longer attached to this campaign. If the order already shipped, keep or return it — Katie will follow up either way.</p>
+      </div>
+      <p class="cap"><b>Backed out (E-16).</b> The release line fires on every exit path — no creator should ever wonder whether a card is still "out there" on a campaign they left.</p>
+    </div>
+  </div>
+
+  <div class="dnote">
+    <div class="dn"><span class="nd">✉</span><span><b>Katie's waiver email (E-9), verbatim for the templates file:</b> "Hi [name] — Katie from Benable. One less thing: I've removed the card step from your [brand] campaign, so you're fully confirmed as-is. Your products are on the way. Any questions, just reply — I read these."</span></div>
+  </div>
+</section>
+
+<section id="settings">
+  <div class="shead"><span class="no">04</span><h2>The Guarantee at rest — settings</h2>
+  <span class="q">E-12 · E-14 · E-15 — one block, four states, zero nagging</span></div>
+  <p class="intro">The card needs a home the creator can find without asking — otherwise "where's my card info?" becomes a support thread. One settings block: what's on file, what it's backing, and the two actions. The states below it are the same block wearing E-12, E-14 and E-15.</p>
+
+  <div class="pgrid">
+    <div class="pslot">
+      <div class="pcard">
+        <div class="ph"><span class="ico" style="background:var(--purple-wash)">💳</span><div><h4>Content Guarantee</h4><div class="sub">Settings · Payments</div></div><span class="statechip grn" style="margin-left:auto">Active</span></div>
+        <div style="border:1px solid var(--line-soft);border-radius:10px;padding:11px 13px;margin:8px 0 10px">
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:600">Visa •••• 4242</span><span style="color:var(--ink-4)">exp 11/28</span></div>
+          <div style="font-size:12px;color:var(--ink-4);margin-top:4px">Backing: MD Solar Sciences — ends Sep 4 · $62</div>
+        </div>
+        <p style="font-size:12px;color:var(--ink-4)">Only ever charged if a campaign ends with nothing posted and no reply — with a final warning first. <a style="font-weight:600;text-decoration:none;color:var(--purple-deep)">How it works</a></p>
+        <div class="row"><button class="pcta sec">Replace card</button><button class="pcta sec">Remove…</button></div>
+      </div>
+      <p class="cap"><b>The resting state.</b> "Remove…" opens a Katie handoff, not a delete button — per E-15's recommendation it's always granted, logged as a signal, never a fight.</p>
+    </div>
+
+    <div class="pslot">
+      <div class="pcard">
+        <div class="ph"><span class="ico" style="background:var(--amber-wash)">💳</span><div><h4>Content Guarantee</h4><div class="sub">Settings · Payments</div></div><span class="statechip amb" style="margin-left:auto">Card expired</span></div>
+        <div style="border:1px solid var(--line-soft);border-radius:10px;padding:11px 13px;margin:8px 0 10px">
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:600">Visa •••• 4242</span><span style="color:var(--amber-ink);font-weight:600">expired 03/26</span></div>
+          <div style="font-size:12px;color:var(--ink-4);margin-top:4px">No active campaigns backed by this card</div>
+        </div>
+        <p style="font-size:12px;color:var(--ink-4)">No action needed right now — you'll be asked for a current card the next time you join a campaign.</p>
+        <div class="row"><button class="pcta sec">Replace now</button></div>
+      </div>
+      <p class="cap"><b>Expired (E-14), the no-nag version.</b> Discovered here or at next campaign join — never via a push notification, which would read as "we're planning to charge you."</p>
+    </div>
+
+    <div class="pslot">
+      <div class="pcard">
+        <div class="ph"><span class="ico" style="background:var(--purple-wash)">💳</span><div><h4>Content Guarantee</h4><div class="sub">Settings · Payments</div></div><span class="statechip grn" style="margin-left:auto">Active</span></div>
+        <div style="border:1px solid var(--line-soft);border-radius:10px;padding:11px 13px;margin:8px 0 10px">
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:600">Visa •••• 4242</span><span style="color:var(--ink-4)">exp 11/28</span></div>
+          <div style="font-size:12px;color:var(--ink-4);margin-top:4px">Backing: MD Solar Sciences — ends Sep 4 · <b style="color:var(--green)">now $48</b> <span style="text-decoration:line-through">$62</span></div>
+        </div>
+        <div style="background:var(--green-wash);border-radius:8px;padding:8px 11px;font-size:12px;color:var(--ink-2)">Your product selection changed, so your Guarantee amount went down. It can never go up without you re-confirming.</div>
+      </div>
+      <p class="cap"><b>Amount re-disclosure (E-12).</b> Decreases apply silently with this note; an <i>increase</i> re-opens the consent sheet — the one-way ratchet is the legal spine (E-13).</p>
+    </div>
+  </div>
+</section>
+
+<section id="warning">
+  <div class="shead"><span class="no">05</span><h2>The final warning — Katie's moment, on every channel</h2>
+  <span class="q">E-18 · E-20 · E-21 — the spec from rev 4, now with faces</span></div>
+  <p class="intro">Three renderings of one message: the text (Katie's number, TCPA-clean per E-20), the email (the legally load-bearing copy with the facts table), and the portal banner (where both buttons live). All three repeat the same escape sentence — <b>"one reply is enough"</b> — because E-18 says the likeliest ghost is someone who already posted and never told us.</p>
+
+  <div class="pgrid">
+    <div class="pslot">
+      <div class="thread">
+        <div class="th">💬 Text · from Katie's line</div>
+        <div class="tb">
+          <div class="bub in">Hi Maya, it's Katie at Benable. MD Solar's campaign has closed and I still don't see a post or draft from you — and I haven't been able to reach you. Per the Content Guarantee you agreed to, your card ending 4242 will be charged the $62 product cost on <b>Fri, Aug 28</b> unless you post or reply before then.<span class="bt">Tue 10:04 AM</span></div>
+          <div class="bub in">Already posted? Send me the link and you're all set. Need more time? Just tell me — one reply is enough. 🙏<span class="bt">Tue 10:04 AM</span></div>
+        </div>
+      </div>
+      <p class="cap"><b>The text (E-20).</b> Sent automatically to SMS-opted-in creators; Katie sends it by hand to everyone else — same words, so the record is identical either way.</p>
+    </div>
+
+    <div class="pslot">
+      <div class="emailf">
+        <div class="eh">
+          <div class="esub">Final notice before your card is charged — MD Solar Sciences</div>
+          <div class="emeta">Katie Scalzo &lt;kscalzo@benable.com&gt; · to Maya · Tue, Aug 25</div>
+        </div>
+        <div class="ebody">
+          <p>Hi Maya — this is the final notice I promised you'd always get before any charge.</p>
+          <div class="tl">
+            <div class="tr"><span class="d">Aug 12</span><span class="v">Your MD Solar products were delivered (courier-confirmed)</span></div>
+            <div class="tr"><span class="d">Aug 22</span><span class="v">Content deadline passed — nothing submitted</span></div>
+            <div class="tr"><span class="d">Aug 12–25</span><span class="v">7 attempts to reach you — text, email, and Instagram</span></div>
+          </div>
+          <div class="btnrow"><span class="ebtn p">I posted — here's my link</span><span class="ebtn s">I need more time</span></div>
+          <div class="chargebox">
+            <div class="cr"><span>Unless we hear from you by</span><span>Fri, Aug 28</span></div>
+            <div class="cr"><span>Your card ending</span><span>4242</span></div>
+            <div class="cr"><span>Will be charged</span><span>$62 — MD Solar's product cost, no fees</span></div>
+            <div class="cr"><span>If you post within 7 days after</span><span>Full refund</span></div>
+          </div>
+          <p>Any reply stops this — this email, a text to (XXX) XXX-XXXX, or a DM. One reply is enough.</p>
+          <p class="esig">— Katie</p>
+        </div>
+      </div>
+      <p class="cap"><b>The email (E-21's clock).</b> The date is always a weekday, never inside a holiday window. This message is also the chargeback evidence (E-25) — which is why it's a facts table, not prose.</p>
+    </div>
+
+    <div class="pslot">
+      <div class="pcard" style="border-color:var(--amber);border-width:1.5px">
+        <div class="ph"><span class="ico" style="background:var(--amber-wash)">⚠️</span><div><h4>Final notice — action needed</h4><div class="sub">MD Solar Sciences · charge scheduled Fri, Aug 28</div></div></div>
+        <p>The campaign closed with nothing posted, and we haven't been able to reach you. Unless we hear from you, your card ending 4242 will be charged <b>$62</b> (MD Solar's product cost — no fees).</p>
+        <div class="row"><button class="pcta">I posted — submit link</button><button class="pcta sec">I need more time</button></div>
+        <p style="margin-top:9px;font-size:11.5px;color:var(--ink-5)">Or just text Katie — one reply stops everything.</p>
+      </div>
+      <p class="cap"><b>The portal banner (E-18).</b> Pinned to portal home from T+0 until resolution. Both buttons are one tap; "I need more time" opens the extension picker and voids the clock.</p>
+    </div>
+  </div>
+</section>
+
+<section id="charged">
+  <div class="shead"><span class="no">06</span><h2>Charged — and the way back</h2>
+  <span class="q">E-24 — the receipt is restitution with a door, StubHub minus the fee</span></div>
+  <p class="intro">If the charge ever fires, two surfaces carry it: the receipt email (facts timeline, money's destination, the refund door above the fold) and the portal state (countdown to the refund deadline, one button). The refunded state closes the loop with the same calm the release states use.</p>
+
+  <div class="pgrid">
+    <div class="pslot">
+      <div class="emailf">
+        <div class="eh">
+          <div class="esub">Receipt: $62 Content Guarantee charge — and how to get it back</div>
+          <div class="emeta">Katie Scalzo &lt;kscalzo@benable.com&gt; · to Maya · Fri, Aug 28</div>
+        </div>
+        <div class="ebody">
+          <div style="background:var(--green-wash);border-radius:10px;padding:11px 14px;margin-bottom:12px;font-size:13px"><b>Post within 7 days — by Fri, Sep 4 — and this is refunded in full.</b> The goal was always the content, not the money.</div>
+          <div class="tl">
+            <div class="tr"><span class="d">Aug 12</span><span class="v">Products delivered (courier-confirmed)</span></div>
+            <div class="tr"><span class="d">Aug 22</span><span class="v">Deadline passed — nothing submitted, no reply</span></div>
+            <div class="tr"><span class="d">Aug 25</span><span class="v">Final notice sent — text + email</span></div>
+            <div class="tr"><span class="d">Aug 28</span><span class="v">Card ending 4242 charged <b>$62</b> — covers MD Solar Sciences' product cost. No fees.</span></div>
+          </div>
+          <div class="btnrow"><span class="ebtn p">Submit your post &amp; get refunded</span></div>
+          <p>Think this is a mistake — you posted, or something happened on our side? Reply to this email. I read every one, and if we got it wrong the refund is immediate.</p>
+          <p class="esig">— Katie</p>
+        </div>
+      </div>
+      <p class="cap"><b>The receipt (E-24).</b> StubHub's grammar — timeline, destination, mechanics — with the two things they don't have: the refund door on top, and a person who answers.</p>
+    </div>
+
+    <div class="pslot">
+      <div class="pcard" style="border-color:var(--red);border-width:1.5px">
+        <div class="ph"><span class="ico" style="background:var(--red-wash)">💳</span><div><h4>Charged $62 — refundable until Fri, Sep 4</h4><div class="sub">MD Solar Sciences · Content Guarantee</div></div></div>
+        <p>Your card ending 4242 was charged MD Solar's product cost after the campaign closed with no post and no reply. Post within 7 days and it comes back in full.</p>
+        <div class="row"><button class="pcta">Submit post &amp; get refunded</button></div>
+        <p style="margin-top:9px;font-size:11.5px;color:var(--ink-5)">Receipt in your email · think it's a mistake? Reply there — Katie reads every one.</p>
+      </div>
+      <p class="cap"><b>Charged state.</b> Red border, but the headline leads with the refund deadline, not the charge — the door stays bigger than the wall.</p>
+
+      <div class="pcard" style="margin-top:16px">
+        <div class="ph"><span class="ico" style="background:var(--green-wash)">✓</span><div><h4>Refunded in full</h4><div class="sub">MD Solar Sciences · $62 → your card, Aug 30</div></div></div>
+        <p>Your post is live and your $62 is on its way back (3–5 business days). Thanks for closing the loop — this campaign now counts as completed.</p>
+      </div>
+      <p class="cap"><b>Refunded state.</b> "Counts as completed" matters: post-and-refund ends clean, protecting the relationship math in E-27.</p>
+    </div>
+  </div>
+</section>
+
+<section id="console">
+  <div class="shead"><span class="no">07</span><h2>Katie's charge console</h2>
+  <span class="q">E-23 · E-25 — the fairness spec as a UI that physically gates the button</span></div>
+  <p class="intro">The rev-4 rule was "no cron job ever charges a card." This is what that looks like: the fairness checklist rendered as rows with auto-filled evidence, and a charge button that stays dead until every row is green. The unchecked row below is doing its job — this creator can't be charged yet, because the extension question is unresolved.</p>
+
+  <div class="console" role="img" aria-label="Admin charge console with gated checklist">
+    <div class="ch">
+      <span class="avatar">MR</span>
+      <div><h4>Maya Rodriguez — @mayarodz</h4><div class="sub">MD Solar Sciences · closed Aug 22 · Guarantee $62 on Visa ••••4242</div></div>
+      <span class="statechip amb">1 check remaining</span>
+    </div>
+    <div class="clist">
+      <div class="crow"><span class="ck y">✓</span><div class="cl"><b>Delivery confirmed</b><span>Courier-confirmed Aug 12 (UPS 1Z…884) — not just "shipped"</span></div><span class="ev">auto · Shopify</span></div>
+      <div class="crow"><span class="ck y">✓</span><div class="cl"><b>Nothing submitted</b><span>No draft, no link — draft-in-review would void this row (E-19)</span></div><span class="ev">auto · portal</span></div>
+      <div class="crow"><span class="ck y">✓</span><div class="cl"><b>No reply on any channel</b><span>7 touches: 4 texts, 2 emails, 1 IG DM — story views ≠ replies, logged anyway</span></div><span class="ev">auto · comms log</span></div>
+      <div class="crow"><span class="ck y">✓</span><div class="cl"><b>Amount matches disclosure</b><span>$62 charged = $62 disclosed at save · never higher (E-12/13)</span></div><span class="ev">auto · consent record</span></div>
+      <div class="crow"><span class="ck n">!</span><div class="cl"><b>Extension offered in writing</b><span>Final notice offered "I need more time" — but it went out Sunday during the holiday pause window. Re-send on a weekday to satisfy E-21, then this row greens.</span></div><span class="ev">needs action</span></div>
+    </div>
+    <div class="cfoot">
+      <button class="chargebtn">Charge $62</button>
+      <p class="note">Button arms only at 5/5 · second admin confirms (two-person rule, first 10 charges) · receipt email fires automatically · evidence pack (E-25) exports on charge.</p>
+    </div>
+    <div class="auditline">audit — 2026-08-25 · warning sent (text+email) by kscalzo · 2026-08-26 · IG DM by kscalzo · charge blocked: E-21 weekday rule</div>
+  </div>
+
+  <div class="dnote">
+    <div class="dn"><span class="nd">1</span><span><b>Every row is evidence.</b> The console view exports as the chargeback pack (E-25) — designing the checklist and the evidence file as the same object means Katie never assembles a dispute response by hand.</span></div>
+    <div class="dn"><span class="nd">2</span><span><b>The gate teaches the policy.</b> New admin sees why a charge can't happen yet without reading a doc — the blocked row explains itself. The fairness spec's "if we can't print every line, we shouldn't collect the card" made literal.</span></div>
+  </div>
+</section>
+
 <section id="edges">
-  <div class="shead"><span class="no">02</span><h2>The edge cases — all of them, before polish</h2>
+  <div class="shead"><span class="no">08</span><h2>The edge-case audit — all 31, before polish</h2>
   <span class="q">31 cases · 6 groups · tagged by status</span></div>
   <p class="intro">Organized by where in the lifecycle each one bites. <span class="tg dec">Decided</span> means the Aug 18 call or the fairness spec already answers it — polish just has to implement the answer. <span class="tg open">Needs decision</span> is genuinely open — flagged for you, Tony, or Katie by name. <span class="tg eng">Eng</span> / <span class="tg ops">Ops</span> / <span class="tg legal">Legal</span> are execution details that will bite if nobody owns them.</p>
 
@@ -404,7 +798,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="stubhub">
-  <div class="shead"><span class="no">03</span><h2>What StubHub actually says — the voice for receipts &amp; warnings</h2>
+  <div class="shead"><span class="no">09</span><h2>What StubHub actually says — the voice for receipts &amp; warnings</h2>
   <span class="q">"process, not personal," dissected</span></div>
   <div class="sh">
     <div class="shcard">
@@ -434,7 +828,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 </section>
 
 <section id="archive">
-  <div class="shead"><span class="no">04</span><h2>Copy archive — the rounds that got us here</h2>
+  <div class="shead"><span class="no">10</span><h2>Copy archive — the rounds that got us here</h2>
   <span class="q">rev 1–3, kept for reference</span></div>
   <p class="intro">Superseded by Tony's direction but kept reviewable: Julia's decided rev-3 assembly ("Commitment hold" + her subtitle), the human-voice twin, and the three earlier framings. Screens for all of these live in the chat captures and rev-3 deploy history.</p>
   <div class="kit">
