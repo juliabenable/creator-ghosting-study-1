@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do we need the Content Guarantee Terms? — decision brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..800,50&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f7f4ec;
+    --card: #fffdf8;
+    --ink: #211c31;
+    --ink-soft: #4c4560;
+    --muted: #837c93;
+    --hairline: #ddd6c8;
+    --purple: #6d4ef0;
+    --purple-soft: #efeaff;
+    --red: #c22f2f;
+    --red-soft: #fbeeea;
+    --amber: #b26a05;
+    --amber-soft: #faf1de;
+    --green: #14775a;
+    --green-soft: #e8f3ec;
+    --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --sans: "Instrument Sans", -apple-system, "Segoe UI", sans-serif;
+    --mono: "Fragment Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans);
+    background:
+      radial-gradient(1200px 500px at 85% -5%, rgba(109,78,240,0.07), transparent 60%),
+      radial-gradient(900px 420px at -10% 12%, rgba(194,47,47,0.05), transparent 55%),
+      var(--paper);
+    color: var(--ink);
+    line-height: 1.62;
+    font-size: 15.5px;
+    padding: clamp(24px, 5vw, 72px) 20px 90px;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.025 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .page { max-width: 880px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .masthead { border-top: 3px solid var(--ink); padding-top: 14px; }
+  .mast-row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .mast-row .dot { color: var(--purple); }
+  h1 {
+    font-family: var(--serif); font-size: clamp(34px, 5.6vw, 54px); font-weight: 620;
+    font-variation-settings: "opsz" 120, "SOFT" 50;
+    letter-spacing: -0.015em; line-height: 1.06; margin: 24px 0 16px; max-width: 18ch;
+  }
+  h1 em { font-style: italic; font-weight: 480; color: var(--purple); }
+  .standfirst { font-size: 16.5px; color: var(--ink-soft); max-width: 62ch; }
+  .standfirst b { color: var(--ink); }
+  .byline {
+    display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 20px; padding-top: 13px;
+    border-top: 1px solid var(--hairline);
+    font-family: var(--mono); font-size: 11.5px; color: var(--muted);
+  }
+  .byline b { color: var(--ink); font-weight: 400; }
+
+  section { margin-top: 50px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+  .sec-num { font-family: var(--mono); font-size: 12px; color: var(--purple); letter-spacing: 0.1em; white-space: nowrap; }
+  .sec-head h2 {
+    font-family: var(--serif); font-size: clamp(22px, 3.2vw, 28px); font-weight: 600;
+    letter-spacing: -0.01em; line-height: 1.15;
+  }
+  .sec-head::after { content: ""; flex: 1; height: 1px; background: var(--hairline); align-self: center; }
+  .lede { max-width: 64ch; color: var(--ink-soft); margin-bottom: 18px; }
+  .lede strong, p strong { color: var(--ink); }
+
+  .stack { display: grid; gap: 10px; }
+  .row {
+    display: grid; grid-template-columns: 168px 1fr; gap: 18px; align-items: start;
+    background: var(--card); border: 1px solid var(--hairline); border-radius: 13px;
+    padding: 17px 20px; box-shadow: 0 1px 2px rgba(33,28,49,0.05);
+  }
+  .row-tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.11em; text-transform: uppercase; padding-top: 4px; color: var(--muted); }
+  .row-tag .big {
+    display: block; font-family: var(--serif); font-size: 17.5px; font-weight: 620;
+    text-transform: none; letter-spacing: -0.005em; margin-top: 2px; line-height: 1.2; color: var(--ink);
+  }
+  .row p { font-size: 14.5px; color: var(--ink-soft); }
+  .row p + p { margin-top: 8px; }
+  .row p b { color: var(--ink); }
+  .row.ok    { border-left: 4px solid var(--green); }
+  .row.ok .row-tag .big { color: var(--green); }
+  .row.gap   { border-left: 4px solid var(--red); }
+  .row.gap .row-tag .big { color: var(--red); }
+  .row.half  { border-left: 4px solid var(--amber); }
+  .row.half .row-tag .big { color: var(--amber); }
+
+  .keyfact {
+    margin-top: 18px; background: var(--purple-soft); border: 1px solid #ddd2ff;
+    border-radius: 13px; padding: 16px 20px; max-width: 66ch;
+    font-size: 14.5px; color: var(--ink-soft);
+  }
+  .keyfact b { color: var(--purple); font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; display: block; margin-bottom: 5px; }
+  .keyfact strong { color: var(--ink); }
+
+  .ladder { display: grid; gap: 10px; counter-reset: rung; }
+  .rung {
+    display: grid; grid-template-columns: 44px 1fr 128px; gap: 16px; align-items: start;
+    background: var(--card); border: 1px solid var(--hairline); border-radius: 13px;
+    padding: 16px 20px;
+  }
+  .rung::before {
+    counter-increment: rung; content: counter(rung);
+    font-family: var(--serif); font-size: 24px; font-weight: 620; color: var(--hairline);
+    line-height: 1;
+  }
+  .rung h3 { font-family: var(--sans); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .rung p { font-size: 14px; color: var(--ink-soft); }
+  .rung p b { color: var(--ink); }
+  .odds {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    text-align: right; line-height: 1.7;
+  }
+  .odds .o1 { color: var(--muted); display: block; }
+  .odds .o2 { display: block; font-size: 12px; }
+  .rung.calm .o2 { color: var(--green); }
+  .rung.sting .o2 { color: var(--amber); }
+  .rung.tail .o2 { color: var(--red); }
+  .rung.tail { border-left: 4px solid var(--red); }
+
+  .lanes { display: grid; gap: 12px; }
+  .lane {
+    display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: start;
+    background: var(--card); border: 1px solid var(--hairline); border-radius: 14px;
+    padding: 19px 22px; border-left-width: 4px; box-shadow: 0 1px 2px rgba(33,28,49,0.05);
+  }
+  .lane-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding-top: 5px; }
+  .lane-tag .verdict {
+    display: block; font-family: var(--serif); font-size: 22px; font-weight: 640;
+    text-transform: none; margin-top: 3px; line-height: 1.15;
+  }
+  .lane p { font-size: 14.5px; color: var(--ink-soft); }
+  .lane p + p { margin-top: 9px; padding-top: 9px; border-top: 1px dashed var(--hairline); }
+  .lane p b { color: var(--ink); }
+  .lane.yes { border-left-color: var(--green); background: linear-gradient(90deg, var(--green-soft) 0, var(--card) 34%); }
+  .lane.yes .lane-tag { color: var(--green); }
+  .lane.no  { border-left-color: var(--amber); background: linear-gradient(90deg, var(--amber-soft) 0, var(--card) 34%); }
+  .lane.no .lane-tag { color: var(--amber); }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+  .step {
+    background: var(--card); border: 1px solid var(--hairline); border-radius: 13px; padding: 15px 17px;
+  }
+  .step .k { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.11em; text-transform: uppercase; color: var(--purple); }
+  .step h3 { font-size: 14.5px; font-weight: 700; margin: 5px 0 4px; }
+  .step p { font-size: 13.5px; color: var(--ink-soft); }
+  .footnote { margin-top: 16px; font-size: 13px; color: var(--muted); max-width: 66ch; }
+  .footnote b { color: var(--ink-soft); }
+  footer {
+    margin-top: 64px; padding-top: 16px; border-top: 1px solid var(--hairline);
+    font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em;
+    display: flex; flex-wrap: wrap; gap: 6px 20px;
+  }
+  footer a { color: var(--purple); text-decoration: none; }
+  @media (max-width: 620px) {
+    .row, .lane { grid-template-columns: 1fr; gap: 8px; }
+    .rung { grid-template-columns: 30px 1fr; }
+    .odds { grid-column: 2; text-align: left; margin-top: 6px; }
+    .odds .o1, .odds .o2 { display: inline; margin-right: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <div class="mast-row">
+      <span>Benable <span class="dot">·</span> card launch · legal wiring</span>
+      <span>decision brief · Aug 20, 2026</span>
+    </div>
+    <h1>Do we actually <em>need</em> the Content Guarantee Terms?</h1>
+    <p class="standfirst">The card screen already explains the charge, and people tick a box. So this brief asks the honest version of the question: <b>if we launch without a terms page and one day charge someone, what is the worst that can happen?</b> Then it prices the fix against that worst case.</p>
+    <div class="byline">
+      <span>For: <b>the terms conversation</b></span>
+      <span>Verified against: <b>ToS full text · live Privacy Policy · backend schema</b></span>
+      <span>Companion: <b>Content Guarantee Terms v1 draft</b></span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">§1</span><h2>The thing we're deciding, from the top</h2></div>
+    <p class="lede">For anyone landing here cold — two definitions and one honest doubt.</p>
+    <div class="stack">
+      <div class="row ok">
+        <div class="row-tag">the feature<span class="big">The Content Guarantee</span></div>
+        <div>
+          <p>Benable guarantees brands that every collab ends in content. To back that, creators joining a gifted campaign save a credit or debit card when they sign up (the rev-4 "Credit or debit card" screen). <b>Nothing is charged today, or ever on the happy path.</b> A charge can only happen if a campaign closes with the product kept, nothing posted, and no reply from the creator — always after a final warning — and posting within 7 days of a charge refunds it in full. It's a commitment device against ghosting, not a revenue line: the plan is to almost never charge anyone.</p>
+        </div>
+      </div>
+      <div class="row half">
+        <div class="row-tag">the document<span class="big">The Guarantee Terms</span></div>
+        <div>
+          <p>A one-page legal document behind that screen — this feature's equivalent of benable.com/terms. The sheet's "Learn more" would link to it, and ticking the existing checkbox would count as agreeing to it. It states, in contract language, the charge conditions, the amount rule, the refund window, and the authorization to charge the saved card. <b>A v1 is already drafted.</b> The question is whether to wire it in.</p>
+        </div>
+      </div>
+      <div class="row gap">
+        <div class="row-tag">the doubt<span class="big">Why we're even asking</span></div>
+        <div>
+          <p>Because the screen already explains everything in plain English, people tick a box agreeing to it, and we barely intend to charge. So is a formal terms page real protection, or just legal ceremony? <b>That's the question this brief prices.</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">§2</span><h2>What we already have, and the one thing we don't</h2></div>
+    <p class="lede">The protection is not zero today. It comes in three layers, and only one of them is missing.</p>
+    <div class="stack">
+      <div class="row ok">
+        <div class="row-tag">the screen<span class="big">Built, and good</span></div>
+        <div>
+          <p>Rev 4 already does what most companies' lawyers beg for: it names the conditions ("product kept, nothing posted, no reply"), shows the exact amount, promises a final warning, and puts a checkbox under it. <b>The screen is the consent.</b> That is most of the protection, and it ships either way.</p>
+        </div>
+      </div>
+      <div class="row gap">
+        <div class="row-tag">the contract<span class="big">Silent</span></div>
+        <div>
+          <p>Our Terms of Use never mention charging anyone's card, for anything. The only money language is "the Services are free but we may charge for them someday." So when a creator's bank asks <b>"show us the terms the cardholder agreed to,"</b> there is no document to hand over — just a screenshot of an app screen that may have changed since.</p>
+        </div>
+      </div>
+      <div class="row half">
+        <div class="row-tag">the record<span class="big">Half-built</span></div>
+        <div>
+          <p>As of Aug 20 we log SMS consent properly (verbatim copy, version, timestamp, IP). The guarantee checkbox doesn't write a record yet. Pixels on a screen are ephemeral; <b>a consent row with the amount in it is what you can produce two years later.</b></p>
+        </div>
+      </div>
+    </div>
+    <div class="keyfact"><b>The point in one line</b>The terms page doesn't create the consent — the screen does that. The terms page makes the consent <strong>provable, durable, and linkable</strong> when someone hostile asks about it.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">§3</span><h2>Charging without it: the worst that can happen</h2></div>
+    <p class="lede">A severity ladder, honestly weighted. Remember the design intent: we barely ever charge, we warn first, one reply cancels, and posting within 7 days refunds. That intent shrinks every rung below.</p>
+    <div class="ladder">
+      <div class="rung calm">
+        <div>
+          <h3>Nothing happens</h3>
+          <p>The overwhelming case. The card deters, the content ships or Katie waives, nobody is charged. A terms page changes nothing here.</p>
+        </div>
+        <div class="odds"><span class="o1">likelihood</span><span class="o2">Almost always</span></div>
+      </div>
+      <div class="rung sting">
+        <div>
+          <h3>A charged creator disputes with their bank</h3>
+          <p>People call their bank, not us — a chargeback often arrives with no warning, so "we'd have refunded anyway" never gets the chance. Stripe asks for evidence of the cardholder's agreement. Without terms + a logged consent, it's a coin flip at best: <b>lose the $62 and a ~$15 dispute fee.</b> Annoying, capped, survivable.</p>
+        </div>
+        <div class="odds"><span class="o1">per charge</span><span class="o2">The common bad path</span></div>
+      </div>
+      <div class="rung tail">
+        <div>
+          <h3>The dispute ratio poisons the Stripe account</h3>
+          <p>This is the rung that costs more than money. Dispute rates are measured against charge volume, and our charge volume is tiny — <b>a small number of disputes can equal a scary percentage.</b> Elevated ratios trigger monitoring programs and account review; the far end is a restricted account, which breaks the payments rail for everything, not just the guarantee. Same shape as the carrier risk in the SMS brief: the platform enforcer moves faster than any law.</p>
+        </div>
+        <div class="odds"><span class="o1">the expensive tail</span><span class="o2">Low odds, high cost</span></div>
+      </div>
+      <div class="rung sting">
+        <div>
+          <h3>The group-chat thread</h3>
+          <p>A charged creator posts the screenshot: "Benable took $62 — where does it say they can do that?" With a terms page, Katie answers with one link and the thread dies. Without it, the answer is "a screen you saw once in onboarding," <b>which reads as an admission.</b> This is E-30's skeptic test applied to the charge itself.</p>
+        </div>
+        <div class="odds"><span class="o1">reputational</span><span class="o2">One screenshot away</span></div>
+      </div>
+      <div class="rung calm">
+        <div>
+          <h3>The legal tail</h3>
+          <p>Most saved cards will be debit, and an unauthorized debit charge touches federal consumer protections (EFTA / Reg E), plus state consumer-protection statutes. Individually it's a $62 problem; as a pattern it's complaint-and-regulator territory. At our scale and charge frequency: <b>unlikely, not zero.</b> The ToS arbitration clause probably still reaches these disputes either way.</p>
+        </div>
+        <div class="odds"><span class="o1">smallest rung</span><span class="o2">Tail of the tail</span></div>
+      </div>
+    </div>
+    <p class="footnote"><b>Minors footnote:</b> none of this is fixed by a terms page. A charge to a 17-year-old is voidable with or without one — that's handled by the ops rule (never charge anyone known or claimed to be under 18; instant refund if it surfaces) plus the existing waiver path. No birthdate collection needed.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">§4</span><h2>The honest verdict</h2></div>
+    <div class="lanes">
+      <div class="lane no">
+        <div class="lane-tag">skip it<span class="verdict">Defensible, barely</span></div>
+        <div>
+          <p>Launching without terms is not illegal. If we near-never charge, and auto-refund anyone who pushes back, the realistic exposure is small: some coin-flip chargebacks, the ratio tail, and threads with no link to answer them.</p>
+          <p><b>What we'd be accepting:</b> every dispute argued from screenshots, the Stripe account carrying the ratio risk unprotected, and the deterrent resting on copy we can't produce later.</p>
+        </div>
+      </div>
+      <div class="lane yes">
+        <div class="lane-tag">add it<span class="verdict">Recommended</span></div>
+        <div>
+          <p>Because the price is an afternoon. The ToS already has an "Additional Terms" hook, so nothing in the main ToS changes and nobody re-accepts anything. The v1 draft is written. The consent-log pattern shipped this week for SMS.</p>
+          <p><b>What it buys:</b> disputes answered with an evidence pack (terms version + amount + timestamp + IP) instead of a coin flip, the ratio tail defused by winning or deterring disputes, and every "where does it say that?" answered with one link.</p>
+        </div>
+      </div>
+    </div>
+    <div class="keyfact"><b>So: do we need it?</b>"Need" is the wrong word — it's not a legal prerequisite for launch. It's <strong>cheap insurance against the two outcomes that cost more than the charge itself</strong> (the Stripe account and the public thread), priced at roughly zero because the hook, the draft, and the logging pattern all exist already.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">§5</span><h2>If we add it: the whole wiring</h2></div>
+    <div class="steps">
+      <div class="step"><span class="k">1 · host</span><h3>Publish the terms</h3><p>Content Guarantee Terms v1 at a versioned URL, like the ToS PDF pattern. Tony's legal pass first.</p></div>
+      <div class="step"><span class="k">2 · link</span><h3>Point the screen at it</h3><p>The sheet's "Learn more" and a line by the checkbox link to the terms. Copy on screen stays exactly as designed.</p></div>
+      <div class="step"><span class="k">3 · log</span><h3>Write the consent row</h3><p>On save: copy shown, terms version, amount, timestamp, IP. Same append-only pattern engineering shipped for SMS consent.</p></div>
+      <div class="step"><span class="k">4 · batch</span><h3>One-line privacy tweak</h3><p>Extend "necessary to process your payment" to cover cards kept on file. Batch with the planned SMS policy update.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">§6</span><h2>One more thing we checked: the 18+ question</h2></div>
+    <p class="lede">Benable's Terms allow creators from age 16, and contracts with minors are voidable — a 17-year-old (or their parent) can undo the guarantee agreement at will. So we explored whether the card step needs an age gate. Findings first, then the decision.</p>
+    <div class="stack">
+      <div class="row half">
+        <div class="row-tag">checked<span class="big">Stripe doesn't check age</span></div>
+        <div>
+          <p>Stripe validates the card, not the person: network checks, CVC and ZIP, a bank verification if the bank demands one. None of that involves age — Stripe's own 18+ rules bind the merchant (us), not cardholders. And teen debit cards are an entire banking category (Greenlight, Step, authorized-user cards on a parent's account), so a 16-year-old passes every check with a card that is genuinely theirs.</p>
+        </div>
+      </div>
+      <div class="row half">
+        <div class="row-tag">checked<span class="big">No law requires an age gate</span></div>
+        <div>
+          <p>There is no legal requirement to verify age before storing a payment card, and storing a minor's card is not illegal — minors hold and use cards everywhere. Age has exactly one legal effect here: contract capacity. An under-18's agreement is voidable, <b>which only matters at the moment we actually charge them</b> — and the whole design intent is to almost never charge anyone.</p>
+        </div>
+      </div>
+      <div class="row ok">
+        <div class="row-tag">decided<span class="big">No birthdate collection</span></div>
+        <div>
+          <p>We don't collect birthdates today (verified: no such field anywhere in the backend) and we're keeping it that way — collecting less PII is also the privacy-friendlier posture. Instead, three cheap layers: <b>an 18+ attestation line</b> in the terms and on the card screen, <b>an ops rule</b> (never charge anyone known or claimed to be under 18, and instantly refund if it surfaces after a charge), and <b>the existing waiver path</b> when Katie knows a creator is a minor. Worst case under this setup is one refunded product cost. This closes edge case E-3 from the audit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Part of the creator-ghosting study</span>
+    <a href="/screen.html">the card screen · rev 4</a>
+    <a href="/index.html">study home</a>
+    <span>Companion doc: content-guarantee-terms.md (v1 draft)</span>
+  </footer>
+
+</div>
+</body>
+</html>
