@@ -2,7 +2,7 @@
 
 Version 1.0 · Effective [Month DD, 2026] · DRAFT for legal review
 
-These are Additional Terms under the [Benable Terms of Use](https://benable.com/terms_of_use_240909.pdf). They apply when you join a brand campaign on Benable that asks you to save a payment card as part of our Content Guarantee. By checking the agreement box when you save your card, you agree to these terms. If anything here conflicts with the Terms of Use, these terms control for the Content Guarantee; everything else in the Terms of Use (including how disputes are resolved) still applies.
+These are Additional Terms under the [Benable Terms of Use](https://benable.com/terms_of_use_240909.pdf). They apply when you join a brand campaign on Benable that asks you to save a payment card as part of our Content Guarantee. You agree to these terms by saving your card for such a campaign (including when you save it with Apple Pay); the card screen says so where you save it. If anything here conflicts with the Terms of Use, these terms control for the Content Guarantee; everything else in the Terms of Use (including how disputes are resolved) still applies.
 
 ## What is the Content Guarantee?
 
