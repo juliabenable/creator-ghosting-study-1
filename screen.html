@@ -339,6 +339,21 @@ section{margin-top:56px}
 .oq p{font-size:13.5px;line-height:20px;color:#59616e}
 .oq p b{color:var(--ink);font-weight:700}
 .supersede{margin-top:20px;background:var(--amber-wash);border:1px solid #ecd9b4;border-radius:var(--r);padding:12px 16px;font-size:12.5px;line-height:18px;color:var(--ink-2)}
+
+.pmhead{display:flex;align-items:center;padding:12px 16px;position:relative;justify-content:center}
+.pmhead .bk2{position:absolute;left:12px}
+.pmhead .pmt{font-size:16.5px;font-weight:700;letter-spacing:-.2px}
+.pmbody{background:#f6f7f8;padding:20px;display:flex;flex-direction:column;gap:16px;min-height:600px}
+.pmintro{font-size:15px;line-height:22px;color:#59616e}
+.pmintro .lm{color:var(--purple);font-weight:600;text-decoration:none}
+.pmcard{background:var(--white);border:1px solid #e6e8ec;border-radius:14px;padding:15px 16px;display:flex;align-items:center;gap:12px}
+.visab{width:40px;height:26px;background:#1434cb;border-radius:5px;color:#fff;font-weight:800;font-size:9px;
+       display:grid;place-items:center;font-style:italic;letter-spacing:.03em;flex-shrink:0}
+.pmname{font-size:16.5px;font-weight:700;letter-spacing:-.2px}
+.pmsub{font-size:13px;color:#8e8e93;margin-top:2px}
+.pmedit{margin-left:auto;color:var(--purple);font-weight:600;font-size:15px}
+.addrow{display:flex;gap:14px;align-items:center;font-size:15.5px;font-weight:600;padding:2px 2px}
+.addrow .plus{font-size:22px;font-weight:400;line-height:1}
 footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-5);
        display:flex;gap:16px;flex-wrap:wrap}
 @media(max-width:480px){.wrap{padding:0 16px 90px}.hero h1{font-size:24px;line-height:31px}}
@@ -385,7 +400,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
       <li><b>Card entry:</b> single-line number + EXP + CVC, plus Name on card and Country/ZIP</li>
       <li><b>CTA "Save and Continue"</b> with a disabled state until fields complete</li>
       <li><b>Sheet redesigned:</b> caps masthead, gradient icon cards, warning promised by text and email</li>
-      <li><b>Settings surface removed</b>; card management at save time and via support (§05 kept as record)</li>
+      <li><b>Settings = a clean Payment method page</b> (card + Edit + Add, amount-free by design) — §05 rebuilt to Tony's screen</li>
       <li><b>No refund timeline promised</b> anywhere: "refunded in full," period (Julia, Aug 20)</li>
     </ul>
   </div>
@@ -394,7 +409,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 <section id="screens">
   <div class="shead"><span class="no">01</span><h2>The screens — rev 5, Tony's latest design</h2>
   <span class="q">Pikora fixture · real collab stepper · consent line landed</span></div>
-  <p class="intro">The Aug 20 pass reshapes the card step around the real collab flow: brand header with the product name, the four-stage stepper, a single-line card field with <b>Name on card</b> and <b>Country/ZIP</b>, and a disabled-until-complete CTA. Two load-bearing additions: <b>the consent line above the CTA now links the Content Guarantee Terms</b> (closing the legal gap from the terms review), and the sheet's charge answer commits to the final warning arriving <b>by text and email</b>. The settings surface is gone from this direction: card management happens at save time and through support.</p>
+  <p class="intro">The Aug 20 pass reshapes the card step around the real collab flow: brand header with the product name, the four-stage stepper, a single-line card field with <b>Name on card</b> and <b>Country/ZIP</b>, and a disabled-until-complete CTA. Two load-bearing additions: <b>the consent line above the CTA now links the Content Guarantee Terms</b> (closing the legal gap from the terms review), and the sheet's charge answer commits to the final warning arriving <b>by text and email</b>. Settings is a clean Payment method page: the card, Edit, Add — and deliberately no amounts.</p>
 
   <div class="variants">
 
@@ -455,7 +470,7 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
 
   <div class="notes" style="max-width:880px">
     <div class="note"><span class="nd">1</span><span><b>The consent line closes the terms gap.</b> "By saving your card, you agree to the Content Guarantee Terms" is the sentence the terms document depends on ("the card screen says so where you save it"). As of this rev, that claim is true. The link must point at the published terms URL.</span></div>
-    <div class="note"><span class="nd">2</span><span><b>One wording fork to close: "product price" vs "product cost."</b> The sheet says the charge covers <i>the product price</i>; the terms say <i>the brand's product cost</i>. Cost is the legally safer frame (restitution, not penalty). Either align the sheet to "cost" or define the Guarantee Amount in the terms as "the product price shown for your campaign." One word, Tony's call.</span></div>
+    <div class="note"><span class="nd">2</span><span><b>Wording decided (Julia, Aug 20): "product price."</b> The sheet's wording wins; the terms now define the Guarantee Amount as the brand's product price for your campaign. Contact decided too: <b>kscalzo@benable.com</b> everywhere. And experiences confirmed non-chargeable — the charge conditions stay product-only.</span></div>
     <div class="note"><span class="nd">3</span><span><b>Em dashes swapped out.</b> Tony's mock copy had two ("today — and", "email — with"); both render here with commas per the house copy rule. Flag if he wants them back.</span></div>
     <div class="note"><span class="nd">4</span><span><b>Stepper placement:</b> the card step renders inside the <b>Content</b> stage of Product · Delivery · Content · Publish. If it should sit at the end of Product instead (right after selection, per the Aug 18 decision), only the stepper state changes, not the screen.</span></div>
     <div class="note"><span class="nd">5</span><span><b>Figma holds rev 4.</b> The <a href="https://www.figma.com/design/UJznpC8V7WialhZPyUbySg/Content-Guarantee-%E2%80%94-Card-Screen?node-id=2-2" target="_blank" rel="noopener">Figma file</a> still shows the previous design; a rev-5 sync is pending. This page stays the copy source of truth.</span></div>
@@ -725,49 +740,67 @@ expandable to full address</pre></div>
 </section>
 
 <section id="settings">
-  <div class="shead"><span class="no">05</span><h2>The Guarantee at rest — settings</h2>
-  <span class="q">E-12 · E-14 · E-15 — one block, four states, zero nagging</span></div>
-  <div class="supersede"><b>Superseded in rev 5 (Aug 20):</b> the latest design direction removes the settings surface entirely. The Guarantee amount is disclosed on the card screen’s sheet, and card replacement/removal routes through support (kscalzo@ / text). This section stays as the record of the explored direction, and as the fallback if a settings home returns. The terms no longer reference Settings.</div>
-  <p class="intro">The card needs a home the creator can find without asking — otherwise "where's my card info?" becomes a support thread. One settings block: what's on file, what it's backing, and the two actions. The states below it are the same block wearing E-12, E-14 and E-15.</p>
+  <div class="shead"><span class="no">05</span><h2>The Guarantee at rest — the Payment method page</h2>
+  <span class="q">E-12 · E-14 · E-15 — Tony's settings design, plus the two states it needs</span></div>
+  <p class="intro">The settings surface in the latest design is a clean <b>Payment method</b> page: the Guarantee explainer up top, the card with an <b>Edit</b> action, and <b>Add payment method</b>. Deliberately absent: the Guarantee amount and any campaign linkage — disclosure lives on the card screen's sheet at consent time, and amount changes travel by email. P·A is Tony's screen as shipped; P·B is the same pattern answering the two edge cases that live here: an expired card, and removing the only card while it backs an active campaign.</p>
 
-  <div class="pgrid">
-    <div class="pslot">
-      <div class="pcard">
-        <div class="ph"><span class="ico" style="background:var(--purple-wash)">💳</span><div><h4>Content Guarantee</h4><div class="sub">Settings · Payments</div></div><span class="statechip grn" style="margin-left:auto">Active</span></div>
-        <div style="border:1px solid var(--line-soft);border-radius:10px;padding:11px 13px;margin:8px 0 10px">
-          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:600">Visa •••• 4242</span><span style="color:var(--ink-4)">exp 11/28</span></div>
-          <div style="font-size:12px;color:var(--ink-4);margin-top:4px">Backing: MD Solar Sciences — ends Sep 4 · $62</div>
+  <div class="variants">
+    <div class="variant rec">
+      <div class="vhead"><span class="vletter">P·A</span><h3>Payment method — Tony's design</h3></div>
+      <p class="vsub">Explainer + Learn more, the saved card with Edit, and Add payment method. No amounts, no campaign rows, no nagging.</p>
+      <div class="phone" role="img" aria-label="Payment method settings page">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pmhead"><button class="bk2" aria-hidden="true">‹</button><span class="pmt">Payment method</span></div>
+        <div class="pmbody">
+          <p class="pmintro">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today<br><a class="lm">Learn more</a></p>
+          <div class="pmcard">
+            <span class="visab">VISA</span>
+            <div><div class="pmname">Visa ...3452</div><div class="pmsub">Expiration: 04/2028</div></div>
+            <span class="pmedit">Edit</span>
+          </div>
+          <div class="addrow"><span class="plus">+</span>Add payment method</div>
+          <div style="flex:1"></div>
+          <div class="hbar"></div>
         </div>
-        <p style="font-size:12px;color:var(--ink-4)">Only ever charged if a campaign ends with nothing posted and no reply — with a final warning first. <a style="font-weight:600;text-decoration:none;color:var(--purple-deep)">How it works</a></p>
-        <div class="row"><button class="pcta sec">Replace card</button><button class="pcta sec">Remove…</button></div>
       </div>
-      <p class="cap"><b>The resting state.</b> "Remove…" opens a Katie handoff, not a delete button — per E-15's recommendation it's always granted, logged as a signal, never a fight.</p>
     </div>
 
-    <div class="pslot">
-      <div class="pcard">
-        <div class="ph"><span class="ico" style="background:var(--amber-wash)">💳</span><div><h4>Content Guarantee</h4><div class="sub">Settings · Payments</div></div><span class="statechip amb" style="margin-left:auto">Card expired</span></div>
-        <div style="border:1px solid var(--line-soft);border-radius:10px;padding:11px 13px;margin:8px 0 10px">
-          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:600">Visa •••• 4242</span><span style="color:var(--amber-ink);font-weight:600">expired 03/26</span></div>
-          <div style="font-size:12px;color:var(--ink-4);margin-top:4px">No active campaigns backed by this card</div>
+    <div class="variant">
+      <div class="vhead"><span class="vletter">P·B</span><h3>The two states this page needs</h3></div>
+      <p class="vsub">Proposed inside Tony's pattern: the expired card stays quiet (E-14), and Edit on the only backing card offers Replace freely but routes Remove through Katie (E-15).</p>
+      <div class="phone" style="height:760px" role="img" aria-label="Payment method edge states — expired card and edit sheet">
+        <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
+        <div class="pmhead"><button class="bk2" aria-hidden="true">‹</button><span class="pmt">Payment method</span></div>
+        <div class="pmbody">
+          <p class="pmintro">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today<br><a class="lm">Learn more</a></p>
+          <div class="pmcard">
+            <span class="visab">VISA</span>
+            <div><div class="pmname">Visa ...3452</div><div class="pmsub" style="color:var(--amber-ink);font-weight:600">Expired: 04/2026</div></div>
+            <span class="pmedit">Edit</span>
+          </div>
+          <div class="addrow"><span class="plus">+</span>Add payment method</div>
         </div>
-        <p style="font-size:12px;color:var(--ink-4)">No action needed right now — you'll be asked for a current card the next time you join a campaign.</p>
-        <div class="row"><button class="pcta sec">Replace now</button></div>
+        <div class="sheetdim"></div>
+        <div class="sheet plain">
+          <div class="grab"></div>
+          <h4>Edit card</h4>
+          <p style="margin-top:2px">Visa ...3452 · Expired 04/2026</p>
+          <button class="pcta" style="margin-top:14px;border-radius:13px">Replace card</button>
+          <div style="margin-top:12px;background:var(--tint);border:1px solid var(--line-soft);border-radius:11px;padding:12px 14px">
+            <p style="font-size:13px;font-weight:600;color:var(--ink);margin:0">Remove card</p>
+            <p style="margin-top:3px">This card backs your Pikora campaign, so it can't be removed here. Message Katie and we'll sort it out — replacing it works anytime.</p>
+          </div>
+          <button class="pcta sec" style="margin-top:12px;border-radius:13px">Cancel</button>
+        </div>
       </div>
-      <p class="cap"><b>Expired (E-14), the no-nag version.</b> Discovered here or at next campaign join — never via a push notification, which would read as "we're planning to charge you."</p>
     </div>
+  </div>
 
-    <div class="pslot">
-      <div class="pcard">
-        <div class="ph"><span class="ico" style="background:var(--purple-wash)">💳</span><div><h4>Content Guarantee</h4><div class="sub">Settings · Payments</div></div><span class="statechip grn" style="margin-left:auto">Active</span></div>
-        <div style="border:1px solid var(--line-soft);border-radius:10px;padding:11px 13px;margin:8px 0 10px">
-          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:600">Visa •••• 4242</span><span style="color:var(--ink-4)">exp 11/28</span></div>
-          <div style="font-size:12px;color:var(--ink-4);margin-top:4px">Backing: MD Solar Sciences — ends Sep 4 · <b style="color:var(--green)">now $48</b> <span style="text-decoration:line-through">$62</span></div>
-        </div>
-        <div style="background:var(--green-wash);border-radius:8px;padding:8px 11px;font-size:12px;color:var(--ink-2)">Your product selection changed, so your Guarantee amount went down. It can never go up without you re-confirming.</div>
-      </div>
-      <p class="cap"><b>Amount re-disclosure (E-12).</b> Decreases apply silently with this note; an <i>increase</i> re-opens the consent sheet — the one-way ratchet is the legal spine (E-13).</p>
-    </div>
+  <div class="dnote">
+    <div class="dn"><span class="nd">1</span><span><b>Amount-free by design (E-12).</b> The Guarantee amount is disclosed on the card screen's sheet at consent time and lives in the consent record. If a selection change lowers it, the creator gets an email; an increase re-opens consent. This page never shows money, so it never contradicts the record.</span></div>
+    <div class="dn"><span class="nd">2</span><span><b>Expired stays quiet (E-14).</b> The sub-line flips to "Expired," amber, and nothing else happens — no push, no email. The next campaign join asks for a current card. Stripe's automatic card updater will silently fix most expirations before anyone sees this state.</span></div>
+    <div class="dn"><span class="nd">3</span><span><b>Replace is free, Remove is a conversation (E-15).</b> Edit always offers Replace (a fresh SetupIntent behind the same screen — the campaign re-binds to the new card). Removing the only card while it backs an active campaign routes to Katie: always granted, logged as a churn signal, never a fight.</span></div>
+    <div class="dn"><span class="nd">4</span><span><b>Multiple cards, one binding.</b> "Add payment method" implies more than one card can exist — but each campaign's consent record binds to exactly one card at save time. Replacing re-binds explicitly; nothing ever silently switches which card a Guarantee can charge.</span></div>
   </div>
 </section>
 
@@ -781,7 +814,7 @@ expandable to full address</pre></div>
       <div class="thread">
         <div class="th">💬 Text · from Katie's line</div>
         <div class="tb">
-          <div class="bub in">Hi Maya, it's Katie at Benable. MD Solar's campaign has closed and I still don't see a post or draft from you — and I haven't been able to reach you. Per the Content Guarantee you agreed to, your card ending 4242 will be charged the $62 product cost on <b>Fri, Aug 28</b> unless you post or reply before then.<span class="bt">Tue 10:04 AM</span></div>
+          <div class="bub in">Hi Maya, it's Katie at Benable. MD Solar's campaign has closed and I still don't see a post or draft from you — and I haven't been able to reach you. Per the Content Guarantee you agreed to, your card ending 4242 will be charged the $62 product price on <b>Fri, Aug 28</b> unless you post or reply before then.<span class="bt">Tue 10:04 AM</span></div>
           <div class="bub in">Already posted? Send me the link and you're all set. Need more time? Just tell me — one reply is enough. 🙏<span class="bt">Tue 10:04 AM</span></div>
         </div>
       </div>
@@ -805,7 +838,7 @@ expandable to full address</pre></div>
           <div class="chargebox">
             <div class="cr"><span>Unless we hear from you by</span><span>Fri, Aug 28</span></div>
             <div class="cr"><span>Your card ending</span><span>4242</span></div>
-            <div class="cr"><span>Will be charged</span><span>$62 — MD Solar's product cost, no fees</span></div>
+            <div class="cr"><span>Will be charged</span><span>$62 — MD Solar's product price, no fees</span></div>
             <div class="cr"><span>If you post within 7 days after</span><span>Full refund</span></div>
           </div>
           <p>Any reply stops this — this email, a text to (XXX) XXX-XXXX, or a DM. One reply is enough.</p>
@@ -818,7 +851,7 @@ expandable to full address</pre></div>
     <div class="pslot">
       <div class="pcard" style="border-color:var(--amber);border-width:1.5px">
         <div class="ph"><span class="ico" style="background:var(--amber-wash)">⚠️</span><div><h4>Final notice — action needed</h4><div class="sub">MD Solar Sciences · charge scheduled Fri, Aug 28</div></div></div>
-        <p>The campaign closed with nothing posted, and we haven't been able to reach you. Unless we hear from you, your card ending 4242 will be charged <b>$62</b> (MD Solar's product cost — no fees).</p>
+        <p>The campaign closed with nothing posted, and we haven't been able to reach you. Unless we hear from you, your card ending 4242 will be charged <b>$62</b> (MD Solar's product price — no fees).</p>
         <div class="row"><button class="pcta">I posted — submit link</button><button class="pcta sec">I need more time</button></div>
         <p style="margin-top:9px;font-size:11.5px;color:var(--ink-5)">Or just text Katie — one reply stops everything.</p>
       </div>
@@ -845,7 +878,7 @@ expandable to full address</pre></div>
             <div class="tr"><span class="d">Aug 12</span><span class="v">Products delivered (courier-confirmed)</span></div>
             <div class="tr"><span class="d">Aug 22</span><span class="v">Deadline passed — nothing submitted, no reply</span></div>
             <div class="tr"><span class="d">Aug 25</span><span class="v">Final notice sent — text + email</span></div>
-            <div class="tr"><span class="d">Aug 28</span><span class="v">Card ending 4242 charged <b>$62</b> — covers MD Solar Sciences' product cost. No fees.</span></div>
+            <div class="tr"><span class="d">Aug 28</span><span class="v">Card ending 4242 charged <b>$62</b> — covers MD Solar Sciences' product price. No fees.</span></div>
           </div>
           <div class="btnrow"><span class="ebtn p">Submit your post &amp; get refunded</span></div>
           <p>Think this is a mistake — you posted, or something happened on our side? Reply to this email. I read every one, and if we got it wrong the refund is immediate.</p>
@@ -858,7 +891,7 @@ expandable to full address</pre></div>
     <div class="pslot">
       <div class="pcard" style="border-color:var(--red);border-width:1.5px">
         <div class="ph"><span class="ico" style="background:var(--red-wash)">💳</span><div><h4>Charged $62 — refundable until Fri, Sep 4</h4><div class="sub">MD Solar Sciences · Content Guarantee</div></div></div>
-        <p>Your card ending 4242 was charged MD Solar's product cost after the campaign closed with no post and no reply. Post within 7 days and it comes back in full.</p>
+        <p>Your card ending 4242 was charged MD Solar's product price after the campaign closed with no post and no reply. Post within 7 days and it comes back in full.</p>
         <div class="row"><button class="pcta">Submit post &amp; get refunded</button></div>
         <p style="margin-top:9px;font-size:11.5px;color:var(--ink-5)">Receipt in your email · think it's a mistake? Reply there — Katie reads every one.</p>
       </div>
@@ -920,7 +953,7 @@ expandable to full address</pre></div>
       <div class="edge"><div class="eh"><b>E-3 · Minors</b><span class="tg legal">legal</span></div>
         <p>A card agreement with a 17-year-old is voidable. If any creators are under 18 (ToS minimum is 18 — verify enforcement), the card arm must exclude them at eligibility, not at the charge.</p></div>
       <div class="edge"><div class="eh"><b>E-4 · Experience campaigns</b><span class="tg open">needs decision</span></div>
-        <p>"$62 product cost" works for serums. For hotel-stay collabs (Trilogy-style), the "product" is a room night — is that chargeable, at what value, and does a no-show change the trigger? Recommend: <b>exclude experience campaigns from the card arm for now.</b></p></div>
+        <p>"$62 product price" works for serums. For hotel-stay collabs (Trilogy-style), the "product" is a room night — is that chargeable, at what value, and does a no-show change the trigger? Recommend: <b>exclude experience campaigns from the card arm for now.</b> <mark>DECIDED (Julia, Aug 20): confirmed — experiences are never chargeable; the terms' charge conditions stay product-only.</mark></p></div>
       <div class="edge"><div class="eh"><b>E-5 · Des's collective</b><span class="tg dec">decided</span></div>
         <p>The beauty-sub cohort gets its own messaging and should ghost near 0% — keep them out of the A/B so their numbers don't pollute either arm.</p></div>
     </div>
@@ -1008,7 +1041,7 @@ expandable to full address</pre></div>
     </div>
     <div class="warnbub">
       <div class="from">Draft — the warning text/email body</div>
-      "Hi [name], it's Katie at Benable. [Brand]'s campaign has closed and I still don't see a post or a draft from you — and I haven't been able to reach you. Per the Content Guarantee you agreed to, your card will be charged [brand]'s $62 product cost on [date] unless you post or just reply to me before then. Already posted? Send me the link and you're all set. Need more time? Tell me — one reply is enough."
+      "Hi [name], it's Katie at Benable. [Brand]'s campaign has closed and I still don't see a post or a draft from you — and I haven't been able to reach you. Per the Content Guarantee you agreed to, your card will be charged [brand]'s $62 product price on [date] unless you post or just reply to me before then. Already posted? Send me the link and you're all set. Need more time? Tell me — one reply is enough."
     </div>
   </div>
 </section>

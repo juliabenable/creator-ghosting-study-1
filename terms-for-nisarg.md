@@ -1,6 +1,14 @@
+# Content Guarantee Terms — handoff for Nisarg
+
+Status: draft v1.0. All wording decisions are closed (Aug 20: contact = kscalzo@, amount wording = product price, experiences non-chargeable); the legal pass is with Julia. Copy below matches the rev 5 card screen (Pikora design) and the Payment method settings page. Live page: https://juliabenable.github.io/creator-ghosting-study-1/content-guarantee-terms.html (needs a permanent benable.com URL before launch, see notes).
+
+Contact: Julia. Design + copy source of truth: the card-screen page, https://juliabenable.github.io/creator-ghosting-study-1/screen.html
+
+---
+
 # Benable Content Guarantee Terms
 
-Version 1.0 · Effective [Month DD, 2026] · DRAFT for legal review
+Version 1.0 · Effective [Month DD, 2026]
 
 These are Additional Terms under the [Benable Terms of Use](https://benable.com/terms_of_use_240909.pdf). They apply when you join a brand campaign on Benable that asks you to save a payment card as part of our Content Guarantee. You agree to these terms by saving your card for such a campaign (including when you save it with Apple Pay); the card screen says so where you save it. If anything here conflicts with the Terms of Use, these terms control for the Content Guarantee; everything else in the Terms of Use (including how disputes are resolved) still applies.
 
@@ -50,3 +58,27 @@ If we change these terms, the new version applies to campaigns you join after th
 ## Questions
 
 Write to kscalzo@benable.com and a real person will answer.
+
+---
+
+## Implementation notes (not part of the terms)
+
+**Consent record.** The card screen's consent line ("By saving your card, you agree to the Content Guarantee Terms") links this page. On save, store: creator id, campaign id, terms version ("1.0"), guarantee amount in cents, timestamp, and the Stripe SetupIntent id. The "Changes to these terms" section makes this load-bearing: any later charge is governed by the stored version and stored amount, never by current values. Same pattern as the ToS-URL-as-version on the users table, but per campaign, and old versions must stay retrievable.
+
+**Stripe.** Save = SetupIntent, usage stays off_session (the default). 3DS at save is handled by the Element; because verification happens at save, the later charge should not need it. Charge = PaymentIntent with off_session true and confirm true, amount = the stored amount.
+
+**Amount ratchet.** Product selection changes that lower the amount: update the stored amount and notify the creator. Any increase requires the creator to re-confirm (a new consent record). A charge above the stored disclosed amount must be impossible at the API level, not just policy.
+
+**Charges are manual only.** No cron ever charges a card. The four conditions in "When can my card be charged?" map to Katie's charge-console checklist: delivery means courier-confirmed (not shipped); "no content" includes drafts in review (a draft voids the charge); "no reply" counts every channel including Instagram DMs; the final warning names amount + date, and the date must land on a weekday outside holiday windows. Charge fires only when all rows are green, second-admin confirm for the first ten.
+
+**Refund path.** Post within 7 days of a charge = full refund to the same card. Do not promise a refund timeline anywhere in comms (Julia, Aug 20). The receipt email carries the timeline of facts and the refund door.
+
+**Release events.** Three events end a campaign's permission to charge, irreversibly: post live and approved, creator leaves before products ship, or the card step is waived. Each release should also trigger the "your card was never charged" message; that line is the trust engine for campaign #2.
+
+**Hosting + versioning.** This page needs a permanent URL (benable.com/content-guarantee-terms or similar) before launch; the consent line must link it. Keep each published version addressable (v1.0, v1.1, ...) since consent records reference the version accepted.
+
+**Settings surface.** The Payment method page (creator settings) shows the explainer, the saved card with Edit, and Add payment method — deliberately no amounts and no campaign linkage. Edit's Replace runs a fresh SetupIntent behind the same screen and re-binds the active campaign's consent record to the new card; removing the only card while it backs an active campaign routes to support (always granted, logged). If multiple cards exist, each campaign's consent record binds to exactly one card at save; nothing silently switches which card a Guarantee can charge.
+
+**Open items:**
+1. Permanent hosting URL for this page (consent line must link it; keep each version addressable).
+2. Legal pass: with Julia — wiring can proceed, publication waits on her go.
