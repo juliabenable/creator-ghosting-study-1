@@ -25,7 +25,7 @@ Posting your content, or a single reply to the final warning, is enough to stop 
 
 ## How much?
 
-The Guarantee Amount is the brand's product cost for your campaign. It is shown to you on the screen where you save your card and stays visible in your settings.
+The Guarantee Amount is the brand's product cost for your campaign. It is shown in the Content Guarantee details on the screen where you save your card, and in your Settings for as long as it backs an active campaign.
 
 - We will never charge more than the amount disclosed to you, and nothing is ever added to it: no fees, no shipping, no taxes, no administrative charges.
 - If your product selection changes and the amount goes down, the lower amount applies automatically and we tell you.
