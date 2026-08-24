@@ -1,52 +1,23 @@
 # Benable Content Guarantee Terms
 
-Version 1.0 · Effective [Month DD, 2026]
+Version 2.0 · Effective [Month DD, 2026]
 
-These are Additional Terms under the [Benable Terms of Use](https://benable.com/terms_of_use_240909.pdf). They apply when you join a brand campaign on Benable that asks you to save a payment card as part of our Content Guarantee. You agree to these terms by saving your card for such a campaign (including when you save it with Apple Pay); the card screen says so where you save it. If anything here conflicts with the Terms of Use, these terms control for the Content Guarantee; everything else in the Terms of Use (including how disputes are resolved) still applies.
+**1. Incorporation; Acceptance.** These Content Guarantee Terms (the "Guarantee Terms") are Additional Terms under the [Benable Terms of Use](https://benable.com/terms_of_use_240909.pdf) (the "Terms of Use") and are incorporated into them. By saving a payment method in connection with a Campaign that requires the Content Guarantee (including by Apple Pay), Creator accepts these Guarantee Terms. In the event of a conflict between these Guarantee Terms and the Terms of Use, these Guarantee Terms control with respect to the Content Guarantee; all other provisions of the Terms of Use, including those governing dispute resolution and governing law, remain in effect.
 
-## What is the Content Guarantee?
+**2. Definitions.** "Campaign" means a brand collaboration offered through the Benable platform. "Content Obligations" means the content deliverables and related requirements for a Campaign as presented to Creator in the Campaign details. "Guarantee Amount" means the product price for the Campaign as disclosed to Creator at the time the Payment Method is saved, as adjusted under Section 5. "Payment Method" means the credit card, debit card, or other payment method saved by Creator.
 
-Brands on Benable spend real money providing creators with products and experiences, and Benable guarantees them that every collaboration results in content. Your card on file is what backs that guarantee. Saving a card is required to join campaigns that carry the Content Guarantee, and backing that guarantee is the only thing your card is used for.
+**3. Payment Method on File; Authorization.** Creator must be at least 18 years of age to accept these Guarantee Terms. Creator authorizes Benable, acting through its payment processor, to store the Payment Method and to initiate charges to the Payment Method in accordance with these Guarantee Terms, including charges initiated when Creator is not present (off-session). No amount is charged or placed on hold at the time of saving. Creator represents that Creator is authorized to use the Payment Method. Payment processing is provided by Stripe; Benable does not receive or store full card numbers. Creator's bank may require a one-time verification when the Payment Method is saved.
 
-## Saving your card
+**4. Charges.** If Creator receives a Campaign product and fails to complete the Content Obligations within the time provided for the Campaign, Benable may charge the Payment Method an amount up to the Guarantee Amount. Before initiating any charge, Benable will provide notice to Creator, using contact information associated with Creator's account, stating the amount and the date on or after which the charge may be made. Whether Content Obligations have been completed, and whether any failure has been cured, is determined by Benable in its reasonable discretion. Any charge under this Section constitutes reimbursement for the product provided to Creator and is not a penalty. Benable is under no obligation to initiate any charge, and any delay in charging, or decision not to charge, does not waive Benable's right to charge or any other right or remedy.
 
-Your card is collected and stored by our payment processor, Stripe. Benable never sees or stores your full card number. Your bank may ask you to verify the card once when you save it; that is normal and only happens at save time. You must be 18 or older to save a card under these terms.
+**5. Amount.** Charges under these Guarantee Terms will not exceed the Guarantee Amount, and Benable will not add fees, shipping, taxes, or other amounts to it. If Creator's product selection changes such that the product price decreases, the Guarantee Amount is reduced accordingly. An increase to the Guarantee Amount is effective only upon Creator's confirmation.
 
-## When can my card be charged?
+**6. Cure; Refunds.** If Creator completes the Content Obligations for the Campaign within seven (7) days after a charge, Benable will refund the charge in full to the original Payment Method. Any other refund is at Benable's discretion. Nothing in these Guarantee Terms limits any rights Creator may have with respect to Creator's card issuer.
 
-By agreeing to these terms, you authorize Benable, through its payment processor, to charge your saved card the Guarantee Amount when, and only when, all of the following are true for a campaign:
+**7. Release; Management of the Payment Method.** A Campaign's charge authorization ends when Benable confirms completion of the Content Obligations for that Campaign, when Creator withdraws from the Campaign before the product ships, or when Benable waives the Content Guarantee requirement for that Campaign. The Payment Method remains saved for use with future Campaigns unless replaced or removed. Creator may replace or edit the Payment Method in account settings at any time; removal of the sole Payment Method backing an active Campaign requires Benable's assistance.
 
-1. The campaign has closed and you received and kept the product.
-2. No content was posted, and no draft was submitted, for that campaign.
-3. You have not replied to us on any channel (text, email, or in-app) despite our reasonable attempts to reach you during the campaign.
-4. We sent you a final warning naming the amount and the charge date, and that date passed with no post and no reply from you.
+**8. Remedies Cumulative.** Benable's rights under these Guarantee Terms are in addition to, and not in substitution for, any other rights or remedies available to Benable under the Terms of Use or at law, including declining to offer Creator future Campaigns or removing Creator from the platform.
 
-Posting your content, or a single reply to the final warning, is enough to stop the charge. Because you approve your card once at save time, a qualifying charge may be processed later without you present.
+**9. Modifications.** Benable may modify these Guarantee Terms from time to time. The version in effect when Creator saves the Payment Method for a Campaign governs charges relating to that Campaign; modified versions apply to Campaigns joined after the modification takes effect.
 
-## How much?
-
-The Guarantee Amount is the brand's product price for your campaign. It is shown in the Content Guarantee details on the screen where you save your card.
-
-- We will never charge more than the amount disclosed to you, and nothing is ever added to it: no fees, no shipping, no taxes, no administrative charges.
-- If your product selection changes and the amount goes down, the lower amount applies automatically and we tell you.
-- The amount can never go up unless you confirm the new amount first.
-
-## What happens after a charge?
-
-You receive a receipt by email with the full timeline of what happened and how to reach us. If you post your content within 7 days of the charge, we refund it in full. The goal was always the content, not the money.
-
-## When is my card released?
-
-"Released" means a campaign's permission to charge is over: once released, that campaign can never result in a charge. Nothing was ever held or frozen on your account in the meantime (saving a card is not a hold, and no amount is reserved on your statement). Your card is released from a campaign when your post is live and approved, if you leave the campaign before products ship, or if Benable removes the card step from your campaign. Your card itself stays saved for future campaigns unless you replace or remove it.
-
-## Can I replace or remove my card?
-
-You can replace or edit your card on the Payment method page at any time. To remove your only card while it is backing an active campaign, contact us and we will help you. If your card expires or is canceled, no action is needed until you join your next campaign with the Content Guarantee, when we may ask for a current card.
-
-## Changes to these terms
-
-If we change these terms, the new version applies to campaigns you join after the change. A charge is always governed by the version you agreed to when you saved your card for that campaign.
-
-## Questions
-
-Write to support@benable.com and a real person will answer.
+**10. Miscellaneous.** If any provision of these Guarantee Terms is held unenforceable, the remaining provisions remain in full force and effect. No failure to enforce any provision constitutes a waiver. Section headings are for convenience only. Questions regarding these Guarantee Terms may be directed to support@benable.com.
