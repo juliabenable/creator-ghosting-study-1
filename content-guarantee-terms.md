@@ -41,7 +41,7 @@ You receive a receipt by email with the full timeline of what happened and how t
 
 ## Can I replace or remove my card?
 
-You can replace your card in settings at any time. To remove it entirely while it is backing an active campaign, contact us and we will help you. If your card expires or is canceled, no action is needed until you join your next campaign with the Content Guarantee, when we may ask for a current card.
+Contact us to replace or remove your card at any time, and we will help you. If your card expires or is canceled, no action is needed until you join your next campaign with the Content Guarantee, when we may ask for a current card.
 
 ## Changes to these terms
 
