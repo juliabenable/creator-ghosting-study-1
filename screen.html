@@ -297,6 +297,48 @@ section{margin-top:56px}
 .themed .stp-in{font-family:var(--font);border-radius:11px;border-color:#e3e3e3;box-shadow:none;height:46px}
 .themed .stp-in.focus{box-shadow:0 0 0 3px rgba(122,92,250,.25);border-color:transparent}
 .stripefacts{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:14px}
+
+.r5head{display:flex;align-items:center;gap:10px;padding:10px 16px 12px}
+.r5head .bk2{width:26px;height:26px;border:none;background:none;color:var(--ink);font-size:19px;display:grid;place-items:center;padding:0}
+.r5head .av{width:40px;height:40px;border-radius:50%;background:#f4ead8;border:1px solid #e8dcc4;display:grid;place-items:center;
+            font-family:Georgia,serif;font-weight:700;font-size:8.5px;letter-spacing:.04em;color:#7a3b2e;text-align:center;line-height:1.05}
+.r5head .bt{font-size:16.5px;font-weight:700;letter-spacing:-.2px}
+.r5head .bs{font-size:12.5px;color:var(--ink-4);margin-top:1px}
+.stepper{display:flex;gap:10px;padding:0 16px 12px;border-bottom:1px solid var(--line-soft)}
+.stepper .st{flex:1}
+.stepper .st i{display:block;height:3px;border-radius:99px;background:var(--line);margin-bottom:7px}
+.stepper .st.done i,.stepper .st.cur i{background:var(--ink)}
+.stepper .st span{font-size:13px;color:var(--ink-5);font-weight:500}
+.stepper .st.done span,.stepper .st.cur span{color:var(--ink);font-weight:600}
+.r5body{background:#f6f7f8;padding:20px 20px 14px;display:flex;flex-direction:column;gap:14px;min-height:600px}
+.cardline{background:var(--white);border:1px solid #e6e8ec;border-radius:13px;height:52px;display:flex;align-items:center;gap:10px;padding:0 16px}
+.cardline .ic{width:22px;height:16px;border:1.7px solid #8e8e93;border-radius:3px;position:relative;flex-shrink:0}
+.cardline .ic::after{content:"";position:absolute;left:2px;right:2px;top:3px;height:2.5px;background:#8e8e93}
+.cardline .phx{color:#8e8e93;font-size:15.5px}
+.cardline .tail{margin-left:auto;display:flex;gap:18px;color:#8e8e93;font-size:15.5px}
+.r5field{background:var(--white);border:1px solid #e6e8ec;border-radius:13px;height:52px;display:flex;align-items:center;padding:0 16px;font-size:15.5px;color:#8e8e93}
+.r5row{display:flex;gap:12px}
+.r5row .r5field{flex:1}
+.r5field .chev{margin-left:auto;color:var(--ink-3);font-size:13px}
+.consent{font-size:12.5px;line-height:18px;color:var(--ink-3);text-align:center;padding:6px 12px 0}
+.consent a{color:var(--purple);font-weight:600;text-decoration:none}
+.pcta.dis{background:#d9d0fa;box-shadow:none;color:#fff}
+.hbar{width:134px;height:5px;border-radius:99px;background:var(--ink);margin:14px auto 8px}
+.sheet2{position:absolute;left:0;right:0;bottom:0;top:64px;z-index:3;background:var(--white);border-radius:26px 26px 0 0;
+        padding:14px 20px 20px;box-shadow:0 -14px 44px rgba(0,0,0,.16);display:flex;flex-direction:column}
+.sheet2 .grab2{width:44px;height:4px;border-radius:99px;background:#d9d3ec;margin:0 auto 16px}
+.sheet2 .capst{font-size:22px;font-weight:800;letter-spacing:-.2px;text-transform:uppercase;margin-bottom:14px}
+.gcard{background:#f5f5f7;border-radius:16px;padding:16px;margin-bottom:12px}
+.gcard .gico{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#d8c7fb 0%,#9b7bf6 100%);
+             display:grid;place-items:center;color:#fff;font-size:17px;margin-bottom:10px}
+.gcard h5{font-size:17px;font-weight:700;letter-spacing:-.2px;margin-bottom:6px}
+.gcard p{font-size:13.5px;line-height:20px;color:#59616e}
+.gcard p b{color:var(--ink);font-weight:700}
+.oq{padding:4px 2px 0}
+.oq h5{font-size:17px;font-weight:700;letter-spacing:-.2px;margin-bottom:6px}
+.oq p{font-size:13.5px;line-height:20px;color:#59616e}
+.oq p b{color:var(--ink);font-weight:700}
+.supersede{margin-top:20px;background:var(--amber-wash);border:1px solid #ecd9b4;border-radius:var(--r);padding:12px 16px;font-size:12.5px;line-height:18px;color:var(--ink-2)}
 footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-5);
        display:flex;gap:16px;flex-wrap:wrap}
 @media(max-width:480px){.wrap{padding:0 16px 90px}.hero h1{font-size:24px;line-height:31px}}
@@ -334,83 +376,96 @@ footer{margin-top:80px;padding-top:16px;border-top:1px solid var(--line);font-si
     <a class="chip" style="text-decoration:none" href="https://www.figma.com/design/UJznpC8V7WialhZPyUbySg/Content-Guarantee-%E2%80%94-Card-Screen?node-id=2-2" target="_blank" rel="noopener">🎨 Figma file ↗</a>
   </div>
   <div class="changes">
-    <div class="dh">What changed in rev 4</div>
+    <div class="dh">Rev 5 · Tony's Aug 20 design pass</div>
     <ul>
-      <li><b>Tony's design adopted</b> — "Credit or debit card" title, Content Guarantee framing, Apple Pay express path, "Save card" CTA (supersedes rev 3's "Commitment hold" assembly; that copy lives in the archive below)</li>
-      <li><b>Katie's edit #1:</b> contact email is now <mark>kscalzo@benable.com</mark></li>
-      <li><b>Katie's edit #2:</b> <mark>final-warning-before-charge language</mark> added on both the screen and the sheet</li>
-      <li><b>New: the edge-case audit</b> — 31 cases across 6 groups, each tagged decided / needs-decision / eng / ops / legal</li>
-      <li><b>New: the final warning specced</b> — trigger, channels, timing, escape hatches, and the message draft</li>
+      <li><b>Real collab chrome:</b> Pikora brand header + Product · Delivery · Content · Publish stepper</li>
+      <li><b>Body copy shortened</b> to required + $0 today + final-warning promise; details live in the sheet</li>
+      <li><b>Consent line with Terms link</b> above the CTA, the legal hook the terms review required</li>
+      <li><b>Card entry:</b> single-line number + EXP + CVC, plus Name on card and Country/ZIP</li>
+      <li><b>CTA "Save and Continue"</b> with a disabled state until fields complete</li>
+      <li><b>Sheet redesigned:</b> caps masthead, gradient icon cards, warning promised by text and email</li>
+      <li><b>Settings surface removed</b>; card management at save time and via support (§05 kept as record)</li>
+      <li><b>No refund timeline promised</b> anywhere: "refunded in full," period (Julia, Aug 20)</li>
     </ul>
   </div>
 </header>
 
 <section id="screens">
-  <div class="shead"><span class="no">01</span><h2>The screens — Tony's design, rebuilt with Katie's edits</h2>
-  <span class="q">highlighted = Katie's Aug 19 additions</span></div>
-  <p class="intro">Faithful to Tony's mock: his title, his body copy, Apple Pay on top, manual entry below, his sheet structure and Q&amp;A voice. Two things changed, both Katie's: the email, and the promise that a charge is never a surprise — <b>a final warning always comes first.</b> The warning language is deliberately in both places: one clause on the screen (where skimmers are), the full sentence on the sheet (where readers are).</p>
+  <div class="shead"><span class="no">01</span><h2>The screens — rev 5, Tony's latest design</h2>
+  <span class="q">Pikora fixture · real collab stepper · consent line landed</span></div>
+  <p class="intro">The Aug 20 pass reshapes the card step around the real collab flow: brand header with the product name, the four-stage stepper, a single-line card field with <b>Name on card</b> and <b>Country/ZIP</b>, and a disabled-until-complete CTA. Two load-bearing additions: <b>the consent line above the CTA now links the Content Guarantee Terms</b> (closing the legal gap from the terms review), and the sheet's charge answer commits to the final warning arriving <b>by text and email</b>. The settings surface is gone from this direction: card management happens at save time and through support.</p>
 
   <div class="variants">
 
     <div class="variant rec">
-      <div class="vhead"><span class="vletter">4·A</span><h3>The card screen</h3></div>
-      <p class="vsub">Tony's copy verbatim, plus the final-warning clause tucked where the eye already is — right after the trigger conditions.</p>
-      <div class="phone" role="img" aria-label="Rev 4 card screen — Tony's design with Katie's edits">
+      <div class="vhead"><span class="vletter">5·A</span><h3>The card screen</h3></div>
+      <p class="vsub">Combined card line (number + EXP + CVC), name and country rows, consent line with the Terms link, and Save and Continue disabled until fields complete.</p>
+      <div class="phone" role="img" aria-label="Rev 5 card screen — Pikora, stepper, consent line">
         <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
-        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
-        <div class="pbody">
-          <div class="ptitle">Credit or debit card</div>
-          <p class="psub">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today. Charges are reserved for the rare case where a campaign ends with the product kept and no content posted, despite every reasonable attempt to reach the creator — <mark>and you'll always receive a final warning first.</mark> <a style="color:var(--purple-deep);font-weight:600;text-decoration:none">Learn more</a></p>
-          <button class="appay"> Pay</button>
-          <div class="ordv">or enter card manually</div>
-          <div class="cardbox">
-            <div class="row1"><span class="ccicon"></span><span class="ph2">Card number</span></div>
-            <div class="row2"><div>MM / YY</div><div>CVC</div><div>ZIP</div></div>
+        <div class="r5head"><button class="bk2" aria-hidden="true">‹</button><span class="av">PIK<br>ORA</span><div><div class="bt">Pikora</div><div class="bs">Instant Beef Bone Broth</div></div></div>
+        <div class="stepper">
+          <div class="st done"><i></i><span>Product</span></div>
+          <div class="st done"><i></i><span>Delivery</span></div>
+          <div class="st cur"><i></i><span>Content</span></div>
+          <div class="st"><i></i><span>Publish</span></div>
+        </div>
+        <div class="r5body">
+          <div class="ptitle" style="font-size:24px">Credit or debit card</div>
+          <p class="psub" style="margin-top:-4px">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today, and you'll always receive a final warning first.<br><a style="color:var(--purple);font-weight:600;text-decoration:none">Learn more</a></p>
+          <button class="appay" style="border-radius:14px"> Continue with  Pay</button>
+          <div class="ordv">Or use a card</div>
+          <div class="cardline"><span class="ic"></span><span class="phx">Card number</span><span class="tail"><span>EXP</span><span>CVC</span></span></div>
+          <div class="r5field">Name on card</div>
+          <div class="r5row">
+            <div class="r5field" style="color:var(--ink)">Country<span class="chev">▾</span></div>
+            <div class="r5field">ZIP</div>
           </div>
-          <button class="pcta">Save card</button>
+          <div style="flex:1"></div>
+          <p class="consent">By saving your card, you agree to the <a href="content-guarantee-terms.html">Content Guarantee Terms</a>.</p>
+          <button class="pcta dis" style="border-radius:14px">Save and Continue</button>
           <p class="plegal">🔒 Payments secured by Stripe. Benable never sees your card number.</p>
+          <div class="hbar"></div>
         </div>
       </div>
     </div>
 
     <div class="variant rec">
-      <div class="vhead"><span class="vletter">4·B</span><h3>The Content Guarantee sheet</h3></div>
-      <p class="vsub">Tony's three Q&amp;As with Katie's email fix and the final-warning promise inside the charge answer, where the anxious reader is looking.</p>
-      <div class="phone" role="img" aria-label="Content Guarantee bottom sheet with Katie's edits">
+      <div class="vhead"><span class="vletter">5·B</span><h3>The Content Guarantee sheet</h3></div>
+      <p class="vsub">Caps masthead, two icon cards for the two questions, contact as a plain block, and Got it. The charge answer now names both warning channels.</p>
+      <div class="phone" style="height:850px" role="img" aria-label="Rev 5 Content Guarantee sheet">
         <div class="status"><span>9:41</span><span class="icons"><i style="width:17px;height:11px;border-radius:2.5px"></i><i style="width:15px;height:11px"></i><i style="width:24px;height:12px;border-radius:3px"></i></span></div>
-        <div class="pahead"><button class="bk" aria-hidden="true">‹</button><span class="t">MD Solar Sciences</span><span class="stp">Step 3 of 3</span></div>
-        <div class="pbody" style="gap:12px">
-          <div class="ptitle">Credit or debit card</div>
-          <p class="psub">To provide brands with our Content Guarantee, all creators are required to have a valid credit or debit card on file. You won't be charged today. Charges are reserved for the rare case where a campaign ends with the product kept…</p>
-        </div>
-        <div class="sheetdim"></div>
-        <div class="sheet">
-          <div class="grab"></div>
-          <div class="sht"><h4>The Content Guarantee</h4><button class="x" aria-hidden="true">✕</button></div>
-          <div class="qa"><h5>What is the Content Guarantee?</h5>
+        <div class="sheetdim" style="top:0"></div>
+        <div class="sheet2">
+          <div class="grab2"></div>
+          <div class="capst">The Content Guarantee</div>
+          <div class="gcard"><span class="gico">✓</span><h5>What is the Content Guarantee?</h5>
             <p>Brands on Benable incur significant costs to provide creators with products and experiences, and Benable guarantees them that every collab results in content. We know each creator who participates is committed to that, and your card on file is what backs that guarantee.</p></div>
-          <div class="qa"><h5>When would my card be charged?</h5>
-            <p>Only if a campaign closes with the product kept, nothing posted, and no reply from you. <mark>Before any charge, you'll receive a final warning by text and email — with time to post or reply and put things right.</mark> It would cover the brand's actual cost, <b>$62 for this campaign</b>, with no additional fees.</p></div>
-          <div class="qa"><h5>Other questions?</h5>
-            <p>Shoot a note to <b><mark>kscalzo@benable.com</mark></b> or text us at <b>(XXX) XXX-XXXX</b> with any questions about the Content Guarantee.</p></div>
-          <button class="pcta" style="margin-top:10px">Got it!</button>
+          <div class="gcard"><span class="gico" style="font-weight:800;font-size:19px">!</span><h5>When would my card be charged?</h5>
+            <p>Only if a campaign closes with the product kept, nothing posted, and no reply from you. Before any charge, you'll receive a final warning by text and email, with time to post or reply and put things right. It would cover the product price, <b>$62 for this campaign,</b> with no additional fees.</p></div>
+          <div class="oq"><h5>Other questions?</h5>
+            <p>Shoot a note to <b>kscalzo@benable.com</b> or text us at <b>(XXX) XXX-XXXX</b> with any questions about the Content Guarantee.</p></div>
+          <div style="flex:1"></div>
+          <button class="pcta" style="border-radius:14px">Got it!</button>
+          <div class="hbar"></div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="notes" style="max-width:880px">
-    <div class="note"><span class="nd">1</span><span><b>Rebuild fidelity:</b> Tony's structure, order, and copy are untouched except the two highlighted Katie edits. His "Learn more" opens the sheet; "Got it!" closes it back to the card screen.</span></div>
-    <div class="note"><span class="nd">2</span><span><b>The phone number placeholder</b> (XXX) XXX-XXXX needs a real decision — see edge case E-29: which number receives replies, and does texting it count as "a reply" that blocks the charge? (It must.)</span></div>
-    <div class="note"><span class="nd">3</span><span><b>In Figma too:</b> both screens are rebuilt as Figma frames (4·A + 4·B, Inter, real  Pay glyph, auto-layout) — <a href="https://www.figma.com/design/UJznpC8V7WialhZPyUbySg/Content-Guarantee-%E2%80%94-Card-Screen?node-id=2-2" target="_blank" rel="noopener">open the Figma file</a>. The copy source of truth stays this page.</span></div>
-    <div class="note"><span class="nd">4</span><span><b>"$62 for this campaign"</b> is the one piece of dynamic copy on the sheet — it must always equal the creator's actual selected product value (edge cases E-12, E-13).</span></div>
+    <div class="note"><span class="nd">1</span><span><b>The consent line closes the terms gap.</b> "By saving your card, you agree to the Content Guarantee Terms" is the sentence the terms document depends on ("the card screen says so where you save it"). As of this rev, that claim is true. The link must point at the published terms URL.</span></div>
+    <div class="note"><span class="nd">2</span><span><b>One wording fork to close: "product price" vs "product cost."</b> The sheet says the charge covers <i>the product price</i>; the terms say <i>the brand's product cost</i>. Cost is the legally safer frame (restitution, not penalty). Either align the sheet to "cost" or define the Guarantee Amount in the terms as "the product price shown for your campaign." One word, Tony's call.</span></div>
+    <div class="note"><span class="nd">3</span><span><b>Em dashes swapped out.</b> Tony's mock copy had two ("today — and", "email — with"); both render here with commas per the house copy rule. Flag if he wants them back.</span></div>
+    <div class="note"><span class="nd">4</span><span><b>Stepper placement:</b> the card step renders inside the <b>Content</b> stage of Product · Delivery · Content · Publish. If it should sit at the end of Product instead (right after selection, per the Aug 18 decision), only the stepper state changes, not the screen.</span></div>
+    <div class="note"><span class="nd">5</span><span><b>Figma holds rev 4.</b> The <a href="https://www.figma.com/design/UJznpC8V7WialhZPyUbySg/Content-Guarantee-%E2%80%94-Card-Screen?node-id=2-2" target="_blank" rel="noopener">Figma file</a> still shows the previous design; a rev-5 sync is pending. This page stays the copy source of truth.</span></div>
+    <div class="note"><span class="nd">6</span><span><b>"$62 for this campaign"</b> stays the one piece of dynamic copy on the sheet — always the creator's actual selected product value (E-12, E-13).</span></div>
   </div>
 </section>
 
 <section id="stripe">
   <div class="shead"><span class="no">02</span><h2>With Stripe implementation</h2>
   <span class="q">what the package ships vs. what stays ours — verified against Stripe's docs</span></div>
-  <p class="intro" data-stripe-intro>Saving a card for a later off-session charge is Stripe's <b>SetupIntent</b> flow, and the packaged UI for it on our web portal is the <b>Payment Element</b> (fields) plus the <b>Express Checkout Element</b> (the Apple&nbsp;Pay button). Two things change versus Tony's mock the moment the package renders: fields become <b>separately labeled inputs</b> (Stripe's structure, not styleable away), and the <b>submit button stays ours</b> — Stripe ships everything above it. S·A is the untouched default; S·B is the same component pushed as close to Tony's design as the Appearance API allows.</p>
+  <p class="intro" data-stripe-intro>Saving a card for a later off-session charge is Stripe's <b>SetupIntent</b> flow, and the packaged UI for it on our web portal is the <b>Payment Element</b> (fields) plus the <b>Express Checkout Element</b> (the Apple&nbsp;Pay button). Two things change versus Tony's mock the moment the package renders: fields become <b>separately labeled inputs</b> (Stripe's structure, not styleable away), and the <b>submit button stays ours</b> — Stripe ships everything above it. S·A is the untouched default; S·B is the same component pushed as close to Tony's design as the Appearance API allows. <b>Note on rev 5:</b> Tony's latest mock draws a single-line card field; that anatomy matches Stripe's older Card Element, while the Payment Element (which brings the wallets, Link, and 3DS handling) renders the separate labeled fields shown below. One to reconcile with Nisarg before build.</p>
 
   <div class="variants">
     <div class="variant">
@@ -671,6 +726,7 @@ expandable to full address</pre></div>
 <section id="settings">
   <div class="shead"><span class="no">05</span><h2>The Guarantee at rest — settings</h2>
   <span class="q">E-12 · E-14 · E-15 — one block, four states, zero nagging</span></div>
+  <div class="supersede"><b>Superseded in rev 5 (Aug 20):</b> the latest design direction removes the settings surface entirely. The Guarantee amount is disclosed on the card screen’s sheet, and card replacement/removal routes through support (kscalzo@ / text). This section stays as the record of the explored direction, and as the fallback if a settings home returns. The terms no longer reference Settings.</div>
   <p class="intro">The card needs a home the creator can find without asking — otherwise "where's my card info?" becomes a support thread. One settings block: what's on file, what it's backing, and the two actions. The states below it are the same block wearing E-12, E-14 and E-15.</p>
 
   <div class="pgrid">
@@ -809,7 +865,7 @@ expandable to full address</pre></div>
 
       <div class="pcard" style="margin-top:16px">
         <div class="ph"><span class="ico" style="background:var(--green-wash)">✓</span><div><h4>Refunded in full</h4><div class="sub">MD Solar Sciences · $62 → your card, Aug 30</div></div></div>
-        <p>Your post is live and your $62 is on its way back (3–5 business days). Thanks for closing the loop — this campaign now counts as completed.</p>
+        <p>Your post is live and your $62 is on its way back to your card in full. Thanks for closing the loop — this campaign now counts as completed.</p>
       </div>
       <p class="cap"><b>Refunded state.</b> "Counts as completed" matters: post-and-refund ends clean, protecting the relationship math in E-27.</p>
     </div>
