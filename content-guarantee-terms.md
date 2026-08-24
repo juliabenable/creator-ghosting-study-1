@@ -49,4 +49,4 @@ If we change these terms, the new version applies to campaigns you join after th
 
 ## Questions
 
-Write to kscalzo@benable.com and a real person will answer.
+Write to support@benable.com and a real person will answer.
